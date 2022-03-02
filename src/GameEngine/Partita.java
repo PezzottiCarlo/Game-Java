@@ -2,17 +2,14 @@ package GameEngine;
 
 import OggettiGioco.Giocatore;
 import OggettiGioco.Moneta;
-
-import java.util.Scanner;
-
 import General.Color;
 import General.Direction;
 import General.Point;
 
 public class Partita {
 
-    public static final int BOARD_SIZE_X = 7;
-    public static final int BOARD_SIZE_Y = 3;
+    public static final int BOARD_SIZE_X = 10;
+    public static final int BOARD_SIZE_Y = 10;
 
     private TavoloDaGioco gameBoard;
     private RappresentazioneTestuale rappresentazioneTestuale;
