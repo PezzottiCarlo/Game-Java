@@ -5,6 +5,7 @@ import General.Point;
 import OggettiGioco.Dado;
 import OggettiGioco.GameObject;
 import OggettiGioco.Giocatore;
+import OggettiGioco.Moneta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,13 @@ public class LogicaDiGioco {
     }
 
     private boolean onCoin(Point coordinate) {
+        for (GameObject gameObject : this.gameObjects) {
+            if (gameObject instanceof Moneta) {
+                if (gameObject.getCoordinate().equals(coordinate)) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }
