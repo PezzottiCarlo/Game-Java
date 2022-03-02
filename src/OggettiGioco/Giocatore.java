@@ -24,4 +24,12 @@ public class Giocatore extends GameObject {
     public String getUsername() {
         return username;
     }
+
+    @Override
+    public String toString() {
+        return "Giocatore{" +
+                "username='" + username + '\'' +
+                ", coins=" + coins +
+                '}';
+    }
 }
