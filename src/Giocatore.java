@@ -1,7 +1,7 @@
 public class Giocatore {
     private String username;
     private Point coordinate;
-    public static final String CHARACTER = "X";
+    public static final char CHARACTER = 'X';
 
     public Giocatore(String username, Point coordinate) {
         setUsername(username);

@@ -3,17 +3,18 @@ class TavoloDaGioco{
     private int gameSize;
     private int[][] board;
 
-
     public TavoloDaGioco(int size){
         setGameSize(size);
     }
 
-    private String getChar(int i){
-        switch(i){
-            case 0: return " ";
-            case 1: return Giocatore.CHARACTER;
-            case 2: return Moneta.CHARACTER;
-            default: return " ";
+
+
+    private char getChar(int i){
+        switch (i) {
+            case 0 : return ' ';
+            case 1 : return Giocatore.CHARACTER;
+            case 2 : return Moneta.CHARACTER;
+            default: return  ' ';
         }
     }
 
@@ -41,5 +42,9 @@ class TavoloDaGioco{
             this.gameSize = size;
             this.board = new int[size][size];
         }
+    }
+
+    public void setValue(Point coordinate, Values value) {
+        board[coordinate.getX()][coordinate.getY()] = value.ordinal();
     }
 }
