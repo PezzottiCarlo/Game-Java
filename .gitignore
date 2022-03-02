@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,netbeans,intellij+all,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,netbeans,intellij+all,visualstudiocode
 
+# For mac users
+.DS_Store
+
 # exclude every .class file
 *.class
 
