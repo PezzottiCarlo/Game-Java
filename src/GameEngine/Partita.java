@@ -1,9 +1,10 @@
 package GameEngine;
 
 import OggettiGioco.Moneta;
-import OggettiGioco.Point;
 
 import java.util.Scanner;
+
+import General.Point;
 
 public class Partita {
     public static final int BOARD_SIZE_X = 7;

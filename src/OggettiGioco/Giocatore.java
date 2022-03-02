@@ -1,5 +1,6 @@
 package OggettiGioco;
 
+import General.Point;
 
 public class Giocatore extends GameObject {
     private String username;

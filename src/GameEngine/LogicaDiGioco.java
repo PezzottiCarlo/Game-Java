@@ -1,10 +1,11 @@
 package GameEngine;
 
 import General.Direction;
+import General.Point;
 import OggettiGioco.Dado;
 import OggettiGioco.GameObject;
 import OggettiGioco.Giocatore;
-import OggettiGioco.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 

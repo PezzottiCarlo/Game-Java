@@ -1,6 +1,6 @@
 package GameEngine;
+import General.Point;
 import OggettiGioco.GameObject;
-import OggettiGioco.Point;
 
 class TavoloDaGioco{
 

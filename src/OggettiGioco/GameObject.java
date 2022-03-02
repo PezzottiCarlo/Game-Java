@@ -1,5 +1,7 @@
 package OggettiGioco;
 
+import General.Point;
+
 public abstract class GameObject{
     private Point coordinate;
     private char character;
