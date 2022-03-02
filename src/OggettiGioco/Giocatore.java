@@ -18,9 +18,8 @@ public class Giocatore extends GameObject {
     public int getCoin() {
         return coins;
     }
-    public void setCoin(int coin) {
-        if (coin >= 0)
-            this.coins = coin;
+    public void setCoin(int coins) {
+        this.coins = coins;
     }
     public String getUsername() {
         return username;

@@ -37,9 +37,11 @@ public class LogicaDiGioco {
         int g1Score = Dado.throwIt();
         int g2Score = Dado.throwIt();
         if (g1Score > g2Score){
-            //aggiungere 1 allo score del primo giocatore e togliere 1 dallo score del secondo
+            g1.setCoin(g1.getCoin()+1);
+            g2.setCoin(g2.getCoin()-1);
         }else{
-            //viceversa
+            g1.setCoin(g1.getCoin()-1);
+            g2.setCoin(g2.getCoin()+1);
         }
     }
 
