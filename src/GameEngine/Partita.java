@@ -15,36 +15,19 @@ public class Partita {
     public static final int BOARD_SIZE_Y = 3;
 
     private TavoloDaGioco gameBoard;
+    private RappresentazioneTestuale rappresentazioneTestuale;
 
-    public void play() {
-        Scanner input = new Scanner(System.in);
-        boolean inGame = true;
-        gameBoard = new TavoloDaGioco(BOARD_SIZE_X, BOARD_SIZE_Y);
+    public Partita() {
+        this.gameBoard = new TavoloDaGioco(BOARD_SIZE_X, BOARD_SIZE_Y);
+        this.rappresentazioneTestuale = new RappresentazioneTestuale();
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
         gameBoard.getLogicaDiGioco()
                 .addGameObject(new Giocatore(new Point(2, 2), "Giocatore1", Color.getRandomColor()));
+    }
 
-        while (inGame) {
-            int choose = RappresentazioneTestuale.askWhatToDo(input);
-            switch (choose) {
-                case 0:
-                    input.close();
-                    inGame = false;
-                    return;
-                case 1:
-                    gameBoard.displayGrid();
-                    break;
-                case 2:
-                    movePlayers();
-                    break;
-                case 3:
-                    showPlayers();
-                    break;
-                default:
-                    System.out.println("Funzionalità ancora non implementata");
-            }
-        }
+    public void play() {
+        rappresentazioneTestuale.ask();
     }
 
     public void showPlayers() {
