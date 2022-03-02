@@ -5,11 +5,12 @@ public class RappresentazioneTestuale {
 
     Menu menu;
 
-    public RappresentazioneTestuale() {
+    public RappresentazioneTestuale(Partita p) {
         menu = new Menu();
-        menu.addMenu(new ShowGridMenu());
-        menu.addMenu(new ShowPlayersMenu());
-        menu.addMenu(new ExitMenu());
+        menu.addMenu(new ShowGridOption(p));
+        menu.addMenu(new MovePlayersOption(p));
+        menu.addMenu(new ExitOption());
+        menu.addMenu(new ShowPlayersOption(p));
     }
 
     public void ask(){

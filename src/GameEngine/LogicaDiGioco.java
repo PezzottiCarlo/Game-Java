@@ -83,14 +83,16 @@ public class LogicaDiGioco {
                 move(g, new Point(getCoordNum(g.getCoordinate().getX() - 1, sizeX), g.getCoordinate().getY()));
                 break;
         }
-        GameObject obj = onObject(g.getCoordinate());
+        GameObject obj = onObject(g.getCoordinate(),g);
         if (obj != null) {
+            //toDo: implementare bene il metodo over tipo tramite una interface (non ho voglia mo)
+            ((Moneta) obj).over(g);
             removeGameObject(obj);
         }
     }
 
     private void move(Giocatore g, Point nextPoint) {
-        if (checkCollision(nextPoint)) {
+        if (!checkCollision(nextPoint)) {
             g.setCoordinate(nextPoint);
         }
     }
@@ -111,10 +113,12 @@ public class LogicaDiGioco {
             return size + n % size;
     }
 
-    private GameObject onObject(Point coordinate) {
+    private GameObject onObject(Point coordinate, GameObject currentGameObj) {
         for (GameObject gameObject : this.gameObjects) {
-            if (gameObject.getCoordinate().equals(coordinate)) {
-                return gameObject;
+            if (!gameObject.equals(currentGameObj)) {
+                if (gameObject.getCoordinate().equals(coordinate)) {
+                    return gameObject;
+                }
             }
         }
         return null;

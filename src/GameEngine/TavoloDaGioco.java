@@ -2,7 +2,7 @@ package GameEngine;
 import General.Point;
 import OggettiGioco.GameObject;
 
-class TavoloDaGioco{
+public class TavoloDaGioco{
 
     private int gameSizeX;
     private int gameSizeY;
