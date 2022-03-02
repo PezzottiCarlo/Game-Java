@@ -1,11 +1,23 @@
 public class Giocatore {
     private String username;
     private Point coordinate;
-    public final String CHARACTER = "X";
+    public static final String CHARACTER = "X";
 
     public Giocatore(String username, Point coordinate) {
-        this.username = username;
-        this.coordinate = coordinate;
+        setUsername(username);
+        setCoordinate(coordinate);
+    }
+
+    public void setCoordinate(Point coordinate) {
+        if(coordinate != null){
+            this.coordinate = coordinate;
+        }
+    }
+
+    public void setUsername(String username) {
+        if(username.matches("[a-zA-Z0-9]+")){
+            this.username = username;
+        }
     }
 
     public String getUsername() {
