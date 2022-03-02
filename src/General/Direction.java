@@ -1,3 +1,5 @@
+package General;
+
 public enum Direction {
     NORTH,
     SOUTH,

@@ -1,3 +1,5 @@
+package GameEngine;
+
 import java.util.Scanner;
 public class RappresentazioneTestuale {
     private static final String[] options = {"Esci", "Mostra Griglia", "Muovi", "Mostra info giocatori"};
