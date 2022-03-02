@@ -68,29 +68,29 @@ public class LogicaDiGioco {
         return giocatori;
     }
 
-    public void move(Giocatore giocatore, Direction direction) {
+    public void move(Giocatore g, Direction direction) {
+
         switch (direction) {
             case NORTH:
-                giocatore.setCoordinate(
-                        new Point(giocatore.getCoordinate().getX(),
-                                (giocatore.getCoordinate().getY() - 1) % sizeY));
+                g.setCoordinate(new Point(g.getCoordinate().getX(),getCoordNum(g.getCoordinate().getY()-1, sizeY)));
                 break;
             case SOUTH:
-                giocatore.setCoordinate(
-                        new Point(giocatore.getCoordinate().getX(),
-                                (giocatore.getCoordinate().getY() + 1) % sizeY));
+                g.setCoordinate(new Point(g.getCoordinate().getX(),getCoordNum(g.getCoordinate().getY()+1, sizeY)));
                 break;
             case EAST:
-                giocatore.setCoordinate(
-                        new Point((giocatore.getCoordinate().getX() + 1) % sizeX,
-                                giocatore.getCoordinate().getY()));
+                g.setCoordinate(new Point(getCoordNum(g.getCoordinate().getX()+1, sizeX),g.getCoordinate().getY()));
                 break;
             case WEST:
-                giocatore.setCoordinate(
-                        new Point((giocatore.getCoordinate().getX() - 1) % sizeX,
-                                giocatore.getCoordinate().getY()));
+                g.setCoordinate(new Point(getCoordNum(g.getCoordinate().getX()-1, sizeX),g.getCoordinate().getY()));
                 break;
         }
+    }
+
+    private int getCoordNum(int n,int size){
+        if(n>=0)
+            return n%size;
+        else
+            return size+n%size;
     }
 
     private boolean onCoin(Point coordinate) {

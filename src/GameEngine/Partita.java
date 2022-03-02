@@ -23,7 +23,7 @@ public class Partita {
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
         gameBoard.getLogicaDiGioco()
-                .addGameObject(new Giocatore(new Point(2, 0), "Giocatore1", Color.getRandomColor()));
+                .addGameObject(new Giocatore(new Point(2, 2), "Giocatore1", Color.getRandomColor()));
 
         while (inGame) {
             int choose = RappresentazioneTestuale.askWhatToDo(input);
@@ -36,7 +36,7 @@ public class Partita {
                     gameBoard.displayGrid();
                     break;
                 case 2:
-                    // TODO: implementare muovere un giocatore
+                    movePlayers();
                     break;
                 case 3:
                     showPlayers();
@@ -53,9 +53,9 @@ public class Partita {
         }
     }
 
-    public void movePlayers(){
+    public void movePlayers() {
         for (Giocatore giocatore : gameBoard.getLogicaDiGioco().getGiocatori()) {
-            gameBoard.getLogicaDiGioco().movePlayer(giocatore, Direction.NORTH);
+            gameBoard.getLogicaDiGioco().move(giocatore, Direction.WEST);
         }
     }
 }
