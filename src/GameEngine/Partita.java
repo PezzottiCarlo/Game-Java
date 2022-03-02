@@ -5,6 +5,8 @@ import OggettiGioco.Moneta;
 
 import java.util.Scanner;
 
+import General.Color;
+import General.Direction;
 import General.Point;
 
 public class Partita {
@@ -20,7 +22,9 @@ public class Partita {
         gameBoard = new TavoloDaGioco(BOARD_SIZE_X, BOARD_SIZE_Y);
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
-        gameBoard.getLogicaDiGioco().addGameObject(new Giocatore(new Point(2, 0), "Giocatore1"));
+        gameBoard.getLogicaDiGioco()
+                .addGameObject(new Giocatore(new Point(2, 0), "Giocatore1", Color.getRandomColor()));
+
         while (inGame) {
             int choose = RappresentazioneTestuale.askWhatToDo(input);
             switch (choose) {
@@ -35,7 +39,7 @@ public class Partita {
                     // TODO: implementare muovere un giocatore
                     break;
                 case 3:
-                    mostraGiocatori();
+                    showPlayers();
                     break;
                 default:
                     System.out.println("Funzionalità ancora non implementata");
@@ -43,9 +47,15 @@ public class Partita {
         }
     }
 
-    public void mostraGiocatori() {
+    public void showPlayers() {
         for (Giocatore giocatore : gameBoard.getLogicaDiGioco().getGiocatori()) {
             System.out.println(giocatore);
+        }
+    }
+
+    public void movePlayers(){
+        for (Giocatore giocatore : gameBoard.getLogicaDiGioco().getGiocatori()) {
+            gameBoard.getLogicaDiGioco().movePlayer(giocatore, Direction.NORTH);
         }
     }
 }

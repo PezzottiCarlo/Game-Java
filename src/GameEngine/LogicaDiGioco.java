@@ -68,19 +68,27 @@ public class LogicaDiGioco {
         return giocatori;
     }
 
-    public void move(Giocatore giocatore, Point coordinate, Direction direction) {
+    public void move(Giocatore giocatore, Direction direction) {
         switch (direction) {
             case NORTH:
-                giocatore.setCoordinate(new Point(coordinate.getX(), (coordinate.getY() - 1) % sizeY));
+                giocatore.setCoordinate(
+                        new Point(giocatore.getCoordinate().getX(),
+                                (giocatore.getCoordinate().getY() - 1) % sizeY));
                 break;
             case SOUTH:
-                giocatore.setCoordinate(new Point(coordinate.getX(), (coordinate.getY() + 1) % sizeY));
+                giocatore.setCoordinate(
+                        new Point(giocatore.getCoordinate().getX(),
+                                (giocatore.getCoordinate().getY() + 1) % sizeY));
                 break;
             case EAST:
-                giocatore.setCoordinate(new Point((coordinate.getX() + 1) % sizeX, coordinate.getY()));
+                giocatore.setCoordinate(
+                        new Point((giocatore.getCoordinate().getX() + 1) % sizeX,
+                                giocatore.getCoordinate().getY()));
                 break;
             case WEST:
-                giocatore.setCoordinate(new Point((coordinate.getX() - 1) % sizeX, coordinate.getY()));
+                giocatore.setCoordinate(
+                        new Point((giocatore.getCoordinate().getX() - 1) % sizeX,
+                                giocatore.getCoordinate().getY()));
                 break;
         }
     }

@@ -8,23 +8,33 @@ public class Giocatore extends GameObject {
     private int coins;
     private Color color;
 
-    public Giocatore(Point coordinate, String username) {
+    public Giocatore(Point coordinate, String username,Color color) {
         super(coordinate,'X');
         setUsername(username);
+        setColor(color);
     }
     public void setUsername(String username) {
         if(username.matches("[a-zA-Z0-9]+")){
             this.username = username;
         }
     }
-    public int getCoin() {
-        return coins;
-    }
     public void setCoin(int coins) {
         this.coins = coins;
     }
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getCoin() {
+        return coins;
+    }
+    
     public String getUsername() {
         return username;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     @Override
