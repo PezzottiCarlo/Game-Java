@@ -69,9 +69,9 @@ public class LogicaDiGioco {
     }
 
     public void move(Giocatore g, Direction direction) {
-
         switch (direction) {
             case NORTH:
+
                 g.setCoordinate(new Point(g.getCoordinate().getX(),getCoordNum(g.getCoordinate().getY()-1, sizeY)));
                 break;
             case SOUTH:
@@ -84,6 +84,19 @@ public class LogicaDiGioco {
                 g.setCoordinate(new Point(getCoordNum(g.getCoordinate().getX()-1, sizeX),g.getCoordinate().getY()));
                 break;
         }
+        GameObject obj = onCoin(g.getCoordinate());
+        if (obj != null) {
+            removeGameObject(obj);
+        }
+    }
+
+    private boolean checkCollision(Point nextPoint) {
+        for (GameObject gameObject : this.gameObjects) {
+            if (gameObject.getCoordinate().equals(nextPoint)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private int getCoordNum(int n,int size){
@@ -93,14 +106,14 @@ public class LogicaDiGioco {
             return size+n%size;
     }
 
-    private boolean onCoin(Point coordinate) {
+    private GameObject onCoin(Point coordinate) {
         for (GameObject gameObject : this.gameObjects) {
             if (gameObject instanceof Moneta) {
                 if (gameObject.getCoordinate().equals(coordinate)) {
-                    return true;
+                    return gameObject;
                 }
             }
         }
-        return false;
+        return null;
     }
 }
