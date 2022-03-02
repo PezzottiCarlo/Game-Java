@@ -46,7 +46,25 @@ public class LogicaDiGioco {
     }
 
     public Giocatore getWinner(){
-        return null;
+        int maxCoin = 0;
+        Giocatore winner = null;
+        for(Giocatore g : getGiocatori()){
+            if(g.getCoin() > maxCoin){
+                maxCoin = g.getCoin();
+                winner = g;
+            }
+        }
+        return winner;
+    }
+
+    public List<Giocatore> getGiocatori(){
+        List<Giocatore> giocatori = new ArrayList<>();
+        for(GameObject gameObject : this.gameObjects){
+            if(gameObject instanceof Giocatore){
+                giocatori.add((Giocatore) gameObject);
+            }
+        }
+        return giocatori;
     }
 
     public void move(Giocatore giocatore, Point coordinate, Direction direction){
