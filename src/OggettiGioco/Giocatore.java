@@ -1,10 +1,12 @@
 package OggettiGioco;
 
+import General.Color;
 import General.Point;
 
 public class Giocatore extends GameObject {
     private String username;
     private int coins;
+    private Color color;
 
     public Giocatore(Point coordinate, String username) {
         super(coordinate,'X');
