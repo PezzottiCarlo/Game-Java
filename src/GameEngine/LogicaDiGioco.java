@@ -68,50 +68,53 @@ public class LogicaDiGioco {
         return giocatori;
     }
 
-    public void move(Giocatore g, Direction direction) {
+    public void update(Giocatore g, Direction direction) {
         switch (direction) {
             case NORTH:
-
-                g.setCoordinate(new Point(g.getCoordinate().getX(),getCoordNum(g.getCoordinate().getY()-1, sizeY)));
+                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() - 1, sizeY)));
                 break;
             case SOUTH:
-                g.setCoordinate(new Point(g.getCoordinate().getX(),getCoordNum(g.getCoordinate().getY()+1, sizeY)));
+                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() + 1, sizeY)));
                 break;
             case EAST:
-                g.setCoordinate(new Point(getCoordNum(g.getCoordinate().getX()+1, sizeX),g.getCoordinate().getY()));
+                move(g, new Point(getCoordNum(g.getCoordinate().getX() + 1, sizeX), g.getCoordinate().getY()));
                 break;
             case WEST:
-                g.setCoordinate(new Point(getCoordNum(g.getCoordinate().getX()-1, sizeX),g.getCoordinate().getY()));
+                move(g, new Point(getCoordNum(g.getCoordinate().getX() - 1, sizeX), g.getCoordinate().getY()));
                 break;
         }
-        GameObject obj = onCoin(g.getCoordinate());
+        GameObject obj = onObject(g.getCoordinate());
         if (obj != null) {
             removeGameObject(obj);
+        }
+    }
+
+    private void move(Giocatore g, Point nextPoint) {
+        if (checkCollision(nextPoint)) {
+            g.setCoordinate(nextPoint);
         }
     }
 
     private boolean checkCollision(Point nextPoint) {
         for (GameObject gameObject : this.gameObjects) {
             if (gameObject.getCoordinate().equals(nextPoint)) {
-                return true;
+                return gameObject.isCollision();
             }
         }
         return false;
     }
 
-    private int getCoordNum(int n,int size){
-        if(n>=0)
-            return n%size;
+    private int getCoordNum(int n, int size) {
+        if (n >= 0)
+            return n % size;
         else
-            return size+n%size;
+            return size + n % size;
     }
 
-    private GameObject onCoin(Point coordinate) {
+    private GameObject onObject(Point coordinate) {
         for (GameObject gameObject : this.gameObjects) {
-            if (gameObject instanceof Moneta) {
-                if (gameObject.getCoordinate().equals(coordinate)) {
-                    return gameObject;
-                }
+            if (gameObject.getCoordinate().equals(coordinate)) {
+                return gameObject;
             }
         }
         return null;

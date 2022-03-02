@@ -9,7 +9,7 @@ public class Giocatore extends GameObject {
     private Color color;
 
     public Giocatore(Point coordinate, String username,Color color) {
-        super(coordinate,'X');
+        super(coordinate,'X',true);
         setUsername(username);
         setColor(color);
     }
