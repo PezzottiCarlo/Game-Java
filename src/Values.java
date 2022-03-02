@@ -1,3 +1,3 @@
 public enum Values {
-    Empty, Player, Coin
+    Empty, Player, Coin, North,
 }

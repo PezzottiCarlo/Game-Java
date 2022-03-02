@@ -45,6 +45,8 @@ class TavoloDaGioco{
     }
 
     public void setValue(Point coordinate, Values value) {
-        board[coordinate.getX()][coordinate.getY()] = value.ordinal();
+        if(coordinate.getX() >= 0 && coordinate.getX() < gameSize && coordinate.getY() >= 0 && coordinate.getY() < gameSize) {
+            board[coordinate.getX()][coordinate.getY()] = value.ordinal();
+        }
     }
 }
