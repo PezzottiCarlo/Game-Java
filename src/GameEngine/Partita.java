@@ -20,6 +20,7 @@ public class Partita {
         gameBoard = new TavoloDaGioco(BOARD_SIZE_X, BOARD_SIZE_Y);
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
+        gameBoard.getLogicaDiGioco().addGameObject(new Giocatore(new Point(2, 0), "Giocatore1"));
         while (inGame) {
             int choose = RappresentazioneTestuale.askWhatToDo(input);
             switch (choose) {
