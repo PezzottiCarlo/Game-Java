@@ -134,8 +134,11 @@ public class GameLogic {
         }
     }
 
-   private int checkPosition(int n, int size) {
-        return size + n % size;
+    private int checkPosition(int n, int size) {
+        if (n >= 0)
+            return n % size;
+        else
+            return size + n % size;
     }
 
     public void gameOver(){
