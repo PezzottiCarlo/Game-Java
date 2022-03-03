@@ -14,11 +14,11 @@ public class Partita {
 
     private boolean inGame = true;
     private GameBoard gameBoard;
-    private RappresentazioneTestuale rappresentazioneTestuale;
+    private TextualRappresentation rappresentazioneTestuale;
 
     public Partita() {
-        this.gameBoard = new GameBoard(BOARD_SIZE_X, BOARD_SIZE_Y);
-        this.rappresentazioneTestuale = new RappresentazioneTestuale(this);
+        gameBoard = new GameBoard(BOARD_SIZE_X, BOARD_SIZE_Y);
+        this.rappresentazioneTestuale = new TextualRappresentation(this);
         gameBoard.getLogicaDiGioco().addGameObject(new Coin(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Coin(new Point(1, 0)));
         gameBoard.getLogicaDiGioco()

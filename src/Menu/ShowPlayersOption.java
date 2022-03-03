@@ -1,17 +1,18 @@
 package Menu;
 
+import GameEngine.GameLogic;
 import GameEngine.Partita;
 import GameObjects.Player;
 
 public class ShowPlayersOption extends Option {
 
-    public ShowPlayersOption(Partita partita) {
-        super(partita);
+    public ShowPlayersOption(GameLogic logic) {
+        super(logic);
     }
 
     @Override
     public void execute(int choice) {
-        for(Player g : partita.getGameBoard().getLogicaDiGioco().getGiocatori()){
+        for(Player g : logic.getGameBoard().getLogicaDiGioco().getGiocatori()){
             System.out.println(g);
         }
     }

@@ -10,6 +10,10 @@ public class Coin extends GameObject{
         super(position, COIN_CHARACTER);
     }
 
+    public Coin(int x, int y){
+        super(new Point(x,y),COIN_CHARACTER);
+    }
+
     public void over(GameObject gameObject) {
         if(gameObject instanceof Player){
             Player g = (Player) gameObject;

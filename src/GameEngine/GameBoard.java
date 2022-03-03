@@ -9,15 +9,11 @@ public class GameBoard{
     private GameLogic logicaDiGioco;
 
     public GameBoard(int sizeX, int sizeY){
-        setBoardSize(sizeX, sizeY);
-        this.logicaDiGioco = new GameLogic(sizeX, sizeY);
-    }
-
-    private void setBoardSize(int sizeX, int sizeY){
         if(sizeX > 0 && sizeY > 0){
             this.boardSizeX = sizeX;
             this.boardSizeY = sizeY;
         }
+        this.logicaDiGioco = new GameLogic(sizeX, sizeY);
     }
 
     public void show(){
@@ -46,6 +42,14 @@ public class GameBoard{
             }
         }
         return ' ';
+    }
+
+    public int getSizeX(){
+        return boardSizeX;
+    }
+
+    public int getSizeY(){
+        return boardSizeY;
     }
 
     public GameLogic getLogicaDiGioco() {

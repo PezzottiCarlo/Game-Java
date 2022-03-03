@@ -1,16 +1,16 @@
 package Menu;
 
-import GameEngine.Partita;
+import GameEngine.GameLogic;
 
 public class ShowGridOption extends Option{
 
-    public ShowGridOption(Partita partita) {
-        super(partita);
+    public ShowGridOption(GameLogic logic) {
+        super(logic);
     }
 
     @Override
     public void execute(int choice) {
-        partita.getGameBoard().show();
+        logic.getGameBoard().show();
     }
 
     @Override
