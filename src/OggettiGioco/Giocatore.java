@@ -39,9 +39,10 @@ public class Giocatore extends GameObject {
 
     @Override
     public String toString() {
-        return "Giocatore{" +
-                "username='" + username + '\'' +
-                ", coins=" + coins +
-                '}';
+        String res = "====================\nPlayer " + username + ":\n";
+        res += "Coins: " + coins +"\nPosition (X,Y3" +
+                "): " + getCoordinate().getX() + ", "  + getCoordinate().getY();
+        res += "\n====================";
+        return res;
     }
 }
