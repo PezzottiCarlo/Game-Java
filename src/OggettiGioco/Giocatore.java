@@ -40,7 +40,7 @@ public class Giocatore extends GameObject {
     @Override
     public String toString() {
         String res = "====================\nPlayer " + username + ":\n";
-        res += "Coins: " + coins +"\nPosition (X,Y3" +
+        res += "Coins: " + coins +"\nPosition (X,Y" +
                 "): " + getCoordinate().getX() + ", "  + getCoordinate().getY();
         res += "\n====================";
         return res;
