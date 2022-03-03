@@ -2,7 +2,7 @@ package Menu;
 
 import GameEngine.Partita;
 
-public class Option implements OptionInterface {
+public class Option implements IOption {
 
     Partita partita;
 
