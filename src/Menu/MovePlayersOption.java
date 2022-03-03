@@ -15,10 +15,13 @@ public class MovePlayersOption extends Option {
     @Override
     public void execute(int choice) {
         List<Giocatore> giocatori = partita.getGameBoard().getLogicaDiGioco().getGiocatori();
+        int move = 0;
         for (Giocatore giocatore : giocatori) {
-            System.out.print("Move "+giocatore.getUsername()+" (N,S,E,W)[1,2,3,4]: ");
-            // ToDo: controllare che sia un numero compreso tra 1 e 4
-            int move = Menu.scanner.nextInt();
+            while(move < 1 || move > 4){
+                System.out.print("Move "+giocatore.getUsername()+" (N,S,E,W)[1,2,3,4]: ");
+                move = Menu.scanner.nextInt();
+                Menu.scanner.nextLine();
+            }
             partita.movePlayer(giocatore, Direction.values()[move-1]);
         }
     }
