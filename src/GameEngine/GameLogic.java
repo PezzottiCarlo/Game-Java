@@ -126,24 +126,66 @@ public class GameLogic {
                     players[index].setYPosition(checkPosition(y++, gameBoard.getSizeY()));
                     break;
                 case EAST:
-                    players[index].setXPosition(checkPosition(x--, gameBoard.getSizeX()));
-                    break;
-                case WEST:
                     players[index].setXPosition(checkPosition(x++, gameBoard.getSizeX()));
                     break;
+                case WEST:
+                    players[index].setXPosition(checkPosition(x--, gameBoard.getSizeX()));
+                    break;
             }
-            checkCoins(index, players[index].getXPosition(), players[index].getYPosition());
+            checkCoins(index);
+            checkPlayers(index);
         }
         System.out.println("Monete raccolte: " + (players[index].getCoins() - coins));
     }
 
-    private void checkCoins(int index, int x, int y){
-        Point position = new Point(x,y);
+    private void checkCoins(int index){
         for(int i = 0; i < coins.length; i++){
             if(coins[i] != null){
-                if(position.equals(coins[i].getPosition())){
+                if(players[index].getPosition().equals(coins[i].getPosition())){
                     coins[i] = null;
                     players[index].incrementCoins();
+                    if(players[index].getCoins() == coins.length){
+                        System.out.println(players[i].getUsername() + " has collected all coins! He/She wins");
+                        gameOver();
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkPlayers(int index){
+        for(int i = 0; i < players.length; i++){
+            if(index != i){
+                if(players[i].getPosition().equals(players[index].getPosition())){
+                    System.out.println("There is a match!!!");
+                    System.out.print(players[index].getUsername() + " --> ");
+                    int a = throwDice();
+                    System.out.print(players[i].getUsername()+ " --> ");
+                    int b = throwDice();
+
+                    if(a > b){
+
+                        if(players[i].getCoins() == 0){
+                            System.out.println(players[index].getUsername() + " wins the game!!");
+                            gameOver();
+                        }else{
+                            players[index].incrementCoins();
+                            players[i].decrementCoins();
+                            System.out.println(players[index].getUsername() + " wins the match!!");
+                        }
+                    }else if(a < b){
+                        if(players[index].getCoins() == 0){
+                            System.out.println(players[index].getUsername() + " wins the game!!");
+                            gameOver();
+                        }else{
+                            players[i].incrementCoins();
+                            players[index].decrementCoins();
+                            System.out.println(players[i].getUsername() + " wins the match!!");
+                        }
+                    }
+
+                    System.out.println(players[i].getUsername() + "'s coins " + players[i].getCoins());
+                    System.out.println(players[index].getUsername() + "'s coins " + players[index].getCoins());
                 }
             }
         }

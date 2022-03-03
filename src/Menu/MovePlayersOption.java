@@ -16,7 +16,7 @@ public class MovePlayersOption extends Option {
     public void execute(int choice) {
         Player[] players = logic.getPlayers();
         int direction = 0;
-        for (int i = 0; i < players.length;) {
+        for (int i = 0; i < 1;) {
             System.out.print("Move "+ players[i].getUsername()+ " (N,S,E,W)[1,2,3,4]: ");
             direction = Menu.scanner.nextInt();
             if(direction >= 1 && direction <= 4){
