@@ -116,7 +116,8 @@ public class GameLogic {
         int moovement = throwDice();
         int x = players[index].getXPosition();
         int y = players[index].getYPosition();
-        for(int i = 0; i < moovement; i++){
+        for(int i = 0; i <= moovement; i++){
+            System.out.println("Muovo");
             switch (direction){
                 case NORTH:
                     players[index].setYPosition(checkPosition(y--, gameBoard.getSizeY()));
