@@ -11,6 +11,7 @@ public class Partita {
     public static final int BOARD_SIZE_X = 10;
     public static final int BOARD_SIZE_Y = 10;
 
+    private boolean inGame = true;
     private TavoloDaGioco gameBoard;
     private RappresentazioneTestuale rappresentazioneTestuale;
 
@@ -24,8 +25,13 @@ public class Partita {
     }
 
     public void play() {
-        while (true)
+        while (inGame){
             rappresentazioneTestuale.ask();
+        }
+    }
+
+    public void gameOver(){
+        this.inGame = false;
     }
 
     public void showPlayers() {

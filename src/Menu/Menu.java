@@ -31,6 +31,7 @@ public class Menu{
             scanner.nextLine();
             if (choice >= 0 && choice < menuItems.size()) {
                 menuItems.get(choice).execute(choice);
+                return;
             } else {
                 System.out.println("Valore fuori dal range [0," + menuItems.size() + "] ");
             }
