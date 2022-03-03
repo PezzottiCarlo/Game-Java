@@ -2,37 +2,37 @@ package GameEngine;
 import General.Point;
 import OggettiGioco.GameObject;
 
-public class TavoloDaGioco{
+public class GameBoard{
 
-    private int gameSizeX;
-    private int gameSizeY;
+    private int boardSizeX = 10;
+    private int boardSizeY = 10;
     private LogicaDiGioco logicaDiGioco;
 
-    public TavoloDaGioco(int sizeX, int sizeY){
-        setGameSize(sizeX, sizeY);
+    public GameBoard(int sizeX, int sizeY){
+        setBoardSize(sizeX, sizeY);
         this.logicaDiGioco = new LogicaDiGioco(sizeX, sizeY);
     }
 
-    private void setGameSize(int sizeX, int sizeY){
+    private void setBoardSize(int sizeX, int sizeY){
         if(sizeX > 0 && sizeY > 0){
-            this.gameSizeX = sizeX;
-            this.gameSizeY = sizeY;
+            this.boardSizeX = sizeX;
+            this.boardSizeY = sizeY;
         }
     }
 
-    public void displayGrid(){
-        for(int i = 0; i < gameSizeX*6+1; i++){
+    public void show(){
+        for(int i = 0; i < boardSizeX*6+1; i++){
             System.out.print("-");
         }
         System.out.println();
-        for(int i = 0; i < gameSizeY; i++){
+        for(int i = 0; i < boardSizeY; i++){
             System.out.print("|  ");
-            for(int j = 0; j < gameSizeX; j++){
+            for(int j = 0; j < boardSizeY; j++){
                 System.out.print(getCellChar(new Point(j, i)));
                 System.out.print("  |  ");
             }
             System.out.println();
-            for(int j = 0; j < gameSizeX*6+1; j++){
+            for(int j = 0; j < boardSizeX*6+1; j++){
                 System.out.print("-");
             }
             System.out.println();
@@ -41,7 +41,7 @@ public class TavoloDaGioco{
 
     public char getCellChar(Point point){
         for(GameObject gameObject : logicaDiGioco.getGameObjects()){
-            if(gameObject.getCoordinate().equals(point)){
+            if(gameObject.getPosition().equals(point)){
                 return gameObject.getCharacter();
             }
         }

@@ -10,7 +10,7 @@ public class ShowGridOption extends Option{
 
     @Override
     public void execute(int choice) {
-        partita.getGameBoard().displayGrid();
+        partita.getGameBoard().show();
     }
 
     @Override

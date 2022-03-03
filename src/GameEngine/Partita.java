@@ -13,11 +13,11 @@ public class Partita {
     public static final int BOARD_SIZE_Y = 10;
 
     private boolean inGame = true;
-    private TavoloDaGioco gameBoard;
+    private GameBoard gameBoard;
     private RappresentazioneTestuale rappresentazioneTestuale;
 
     public Partita() {
-        this.gameBoard = new TavoloDaGioco(BOARD_SIZE_X, BOARD_SIZE_Y);
+        this.gameBoard = new GameBoard(BOARD_SIZE_X, BOARD_SIZE_Y);
         this.rappresentazioneTestuale = new RappresentazioneTestuale(this);
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
         gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
@@ -58,7 +58,7 @@ public class Partita {
         gameBoard.getLogicaDiGioco().update(g, d, moovement);
     }
 
-    public TavoloDaGioco getGameBoard() {
+    public GameBoard getGameBoard() {
         return gameBoard;
     }
 }

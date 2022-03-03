@@ -70,21 +70,20 @@ public class LogicaDiGioco {
 
     public void update(Giocatore g, Direction direction, int moovement) {
         switch (direction) {
-            // To Do: non creare sempre un nuovo punto ma aggiornarlo
             case NORTH:
-                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() - moovement, sizeY)));
+                g.setYPosition(checkPosition(g.getPosition().getY() - moovement, sizeY));
                 break;
             case SOUTH:
-                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() + moovement, sizeY)));
+                g.setYPosition(checkPosition(g.getPosition().getY() + moovement, sizeY));
                 break;
             case EAST:
-                move(g, new Point(getCoordNum(g.getCoordinate().getX() + moovement, sizeX), g.getCoordinate().getY()));
+                g.setXPosition(checkPosition(g.getPosition().getX() + moovement, sizeX));
                 break;
             case WEST:
-                move(g, new Point(getCoordNum(g.getCoordinate().getX() - moovement, sizeX), g.getCoordinate().getY()));
+                g.setXPosition(checkPosition(g.getPosition().getX() - moovement, sizeX));
                 break;
         }
-        GameObject obj = onObject(g.getCoordinate(),g);
+        GameObject obj = onObject(g.getPosition(),g);
         if (obj != null) {
             //toDo: implementare bene il metodo over tipo tramite una interface (non ho voglia mo)
             ((Moneta) obj).over(g);
@@ -94,20 +93,20 @@ public class LogicaDiGioco {
 
     private void move(Giocatore g, Point nextPoint) {
         if (!checkCollision(nextPoint)) {
-            g.setCoordinate(nextPoint);
+            g.setPosition(nextPoint);
         }
     }
 
     private boolean checkCollision(Point nextPoint) {
         for (GameObject gameObject : this.gameObjects) {
-            if (gameObject.getCoordinate().equals(nextPoint)) {
+            if (gameObject.getPosition().equals(nextPoint)) {
                 return gameObject.isCollision();
             }
         }
         return false;
     }
 
-    private int getCoordNum(int n, int size) {
+    private int checkPosition(int n, int size) {
         if (n >= 0)
             return n % size;
         else
@@ -117,7 +116,7 @@ public class LogicaDiGioco {
     private GameObject onObject(Point coordinate, GameObject currentGameObj) {
         for (GameObject gameObject : this.gameObjects) {
             if (!gameObject.equals(currentGameObj)) {
-                if (gameObject.getCoordinate().equals(coordinate)) {
+                if (gameObject.getPosition().equals(coordinate)) {
                     return gameObject;
                 }
             }

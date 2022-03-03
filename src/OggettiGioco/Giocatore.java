@@ -21,6 +21,7 @@ public class Giocatore extends GameObject {
     public void setCoin(int coins) {
         this.coins = coins;
     }
+
     public void setColor(Color color) {
         this.color = color;
     }
@@ -41,7 +42,7 @@ public class Giocatore extends GameObject {
     public String toString() {
         String res = "====================\nPlayer " + username + ":\n";
         res += "Coins: " + coins +"\nPosition (X,Y" +
-                "): " + getCoordinate().getX() + ", "  + getCoordinate().getY();
+                "): " + getPosition().getX() + ", "  + getPosition().getY();
         res += "\n====================";
         return res;
     }
