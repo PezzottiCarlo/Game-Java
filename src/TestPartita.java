@@ -1,8 +1,9 @@
-import GameEngine.Partita;
+import GameEngine.Match;
 
 public class TestPartita {
     public static void main(String[] args) {
-        Partita partita = new Partita();
-        partita.play();
+        Match game = new Match();
+        System.out.println("Prova");
+        game.play();
     }
 }

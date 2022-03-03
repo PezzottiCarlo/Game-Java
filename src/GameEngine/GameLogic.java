@@ -13,6 +13,7 @@ public class GameLogic {
     public static final int NUMBER_OF_COINS = 10;
     public static final int NUMBER_OF_PLAYERS = 2;
 
+    private boolean gameOver = false;
     private GameBoard gameBoard;
     private Player[] players;
     private Coin[] coins;
@@ -25,6 +26,8 @@ public class GameLogic {
         coins = new Coin[NUMBER_OF_COINS];
         generatePlayers();
         generateCoins();
+        gameBoard.setCoins(coins);
+        gameBoard.setPlayers(players);
         options = new TextualRappresentation(this);
     }
 
@@ -38,18 +41,26 @@ public class GameLogic {
     }
 
     private void generateCoins(){
+        boolean isOkay = true;
         int x = 0;
         int y = 0;
-        for(int i = 0; i < NUMBER_OF_COINS;){
-            x = Util.getRandomNumber(0, gameBoard.getSizeX());
-            y = Util.getRandomNumber(0, gameBoard.getSizeY());
+        for(int i = 0; i < coins.length;){
+            x = Util.getRandomNumber(0, gameBoard.getSizeX() - 1);
+            y = Util.getRandomNumber(0, gameBoard.getSizeY() - 1);
+            isOkay = true;
+
             if(x != 0 && y != 0){
-                for(int j = 0; j < NUMBER_OF_COINS; j++){
+                for(int j = 0; j < coins.length; j++){
                     if(coins[j] != null){
-                        if(x != coins[j].getXPosition() && y != coins[j].getXPosition()){
-                            coins[i] = new Coin(x,y);
+                        if(x == coins[j].getXPosition() && y == coins[j].getYPosition()){
+                            isOkay = false;
                         }
                     }
+                }
+                if(isOkay){
+                    System.out.println(i  + " " + x + ", " + y);
+                    coins[i] = new Coin(x,y);
+                    i++;
                 }
             }
         }
@@ -83,6 +94,7 @@ public class GameLogic {
             System.out.print("\b" + moovement);
         }
         System.out.println("\b" + moovement);
+        return moovement;
     }
 
     public void moovePlayer(int index, Direction direction){
@@ -110,6 +122,14 @@ public class GameLogic {
 
    private int checkPosition(int n, int size) {
         return size + n % size;
+    }
+
+    public void gameOver(){
+        gameOver = true;
+    }
+
+    public boolean isGameOver(){
+        return gameOver;
     }
 
 

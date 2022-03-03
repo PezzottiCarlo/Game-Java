@@ -1,16 +1,15 @@
 package Menu;
-import GameEngine.Partita;
+import GameEngine.GameLogic;
 
 public class ExitOption extends Option {
-    private Partita p;
+    private GameLogic logic;
 
-    public ExitOption(Partita p){
-        this.p = p;
+    public ExitOption(GameLogic logic){
+        this.logic = logic;
     }
     @Override
     public void execute(int choice) {
-        System.out.println("Thanks for playing!");
-        p.gameOver();
+        logic.gameOver();
     }
     @Override
     public String toString() {

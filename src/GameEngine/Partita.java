@@ -6,7 +6,7 @@ import General.Color;
 import General.Direction;
 import General.Point;
 import GameObjects.Dice;
-
+/*
 public class Partita {
 
     public static final int BOARD_SIZE_X = 10;
@@ -54,11 +54,11 @@ public class Partita {
             System.out.print("\b" + moovement);
         }
         System.out.println("\b" + moovement);
-
-        gameBoard.getLogicaDiGioco().update(g, d, moovement);
     }
 
     public GameBoard getGameBoard() {
         return gameBoard;
     }
 }
+*/
+

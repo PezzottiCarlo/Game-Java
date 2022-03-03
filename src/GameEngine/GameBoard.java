@@ -1,4 +1,6 @@
 package GameEngine;
+import GameObjects.Coin;
+import GameObjects.Player;
 import General.Point;
 import GameObjects.GameObject;
 
@@ -6,29 +8,37 @@ public class GameBoard{
 
     private int boardSizeX = 10;
     private int boardSizeY = 10;
-    private GameLogic logicaDiGioco;
+    private Player[] players;
+    private Coin[] coins;
 
     public GameBoard(int sizeX, int sizeY){
         if(sizeX > 0 && sizeY > 0){
             this.boardSizeX = sizeX;
             this.boardSizeY = sizeY;
         }
-        this.logicaDiGioco = new GameLogic(sizeX, sizeY);
+    }
+
+    public void setPlayers(Player[] players){
+        this.players = players;
+    }
+
+    public void setCoins(Coin[] coins){
+        this.coins = coins;
     }
 
     public void show(){
-        for(int i = 0; i < boardSizeX*6+1; i++){
+        for(int i = 0; i < boardSizeY*6+1; i++){
             System.out.print("-");
         }
         System.out.println();
-        for(int i = 0; i < boardSizeY; i++){
+        for(int i = 0; i < boardSizeX; i++){
             System.out.print("|  ");
-            for(int j = 0; j < boardSizeY; j++){
+            for(int j = 0; j < boardSizeX; j++){
                 System.out.print(getCellChar(new Point(j, i)));
                 System.out.print("  |  ");
             }
             System.out.println();
-            for(int j = 0; j < boardSizeX*6+1; j++){
+            for(int j = 0; j < boardSizeY*6+1; j++){
                 System.out.print("-");
             }
             System.out.println();
@@ -36,9 +46,15 @@ public class GameBoard{
     }
 
     public char getCellChar(Point point){
-        for(GameObject gameObject : logicaDiGioco.getGameObjects()){
-            if(gameObject.getPosition().equals(point)){
-                return gameObject.getCharacter();
+        for(int i = 0; i < players.length; i++){
+            if(players[i].getPosition().equals(point)){
+                return players[i].getCharacter();
+            }
+        }
+
+        for(int i = 0; i < coins.length; i++){
+            if(coins[i].getPosition().equals(point)){
+                return coins[i].getCharacter();
             }
         }
         return ' ';
@@ -52,7 +68,4 @@ public class GameBoard{
         return boardSizeY;
     }
 
-    public GameLogic getLogicaDiGioco() {
-        return logicaDiGioco;
-    }
 }
