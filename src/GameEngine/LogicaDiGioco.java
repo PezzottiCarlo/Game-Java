@@ -68,19 +68,20 @@ public class LogicaDiGioco {
         return giocatori;
     }
 
-    public void update(Giocatore g, Direction direction) {
+    public void update(Giocatore g, Direction direction, int moovement) {
         switch (direction) {
+            // To Do: non creare sempre un nuovo punto ma aggiornarlo
             case NORTH:
-                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() - 1, sizeY)));
+                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() - moovement, sizeY)));
                 break;
             case SOUTH:
-                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() + 1, sizeY)));
+                move(g, new Point(g.getCoordinate().getX(), getCoordNum(g.getCoordinate().getY() + moovement, sizeY)));
                 break;
             case EAST:
-                move(g, new Point(getCoordNum(g.getCoordinate().getX() + 1, sizeX), g.getCoordinate().getY()));
+                move(g, new Point(getCoordNum(g.getCoordinate().getX() + moovement, sizeX), g.getCoordinate().getY()));
                 break;
             case WEST:
-                move(g, new Point(getCoordNum(g.getCoordinate().getX() - 1, sizeX), g.getCoordinate().getY()));
+                move(g, new Point(getCoordNum(g.getCoordinate().getX() - moovement, sizeX), g.getCoordinate().getY()));
                 break;
         }
         GameObject obj = onObject(g.getCoordinate(),g);

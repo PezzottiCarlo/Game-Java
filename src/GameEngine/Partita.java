@@ -5,6 +5,7 @@ import OggettiGioco.Moneta;
 import General.Color;
 import General.Direction;
 import General.Point;
+import OggettiGioco.Dado;
 
 public class Partita {
 
@@ -42,7 +43,19 @@ public class Partita {
 
     public void movePlayer(Giocatore g, Direction d) {
         System.out.println("Move " + g.getUsername() + " " + d);
-        gameBoard.getLogicaDiGioco().update(g, d);
+        int moovement = 0;
+        System.out.print("Dice result: ");
+        long start = System.currentTimeMillis();
+        long end = 0l;
+        System.out.print("0");
+        while(end - start < 2000){
+            end = System.currentTimeMillis();
+            moovement = Dado.throwIt();
+            System.out.print("\b" + moovement);
+        }
+        System.out.println("\b" + moovement);
+
+        gameBoard.getLogicaDiGioco().update(g, d, moovement);
     }
 
     public TavoloDaGioco getGameBoard() {
