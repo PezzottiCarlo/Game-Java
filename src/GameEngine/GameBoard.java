@@ -1,16 +1,16 @@
 package GameEngine;
 import General.Point;
-import OggettiGioco.GameObject;
+import GameObjects.GameObject;
 
 public class GameBoard{
 
     private int boardSizeX = 10;
     private int boardSizeY = 10;
-    private LogicaDiGioco logicaDiGioco;
+    private GameLogic logicaDiGioco;
 
     public GameBoard(int sizeX, int sizeY){
         setBoardSize(sizeX, sizeY);
-        this.logicaDiGioco = new LogicaDiGioco(sizeX, sizeY);
+        this.logicaDiGioco = new GameLogic(sizeX, sizeY);
     }
 
     private void setBoardSize(int sizeX, int sizeY){
@@ -48,7 +48,7 @@ public class GameBoard{
         return ' ';
     }
 
-    public LogicaDiGioco getLogicaDiGioco() {
+    public GameLogic getLogicaDiGioco() {
         return logicaDiGioco;
     }
 }

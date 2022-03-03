@@ -1,7 +1,7 @@
 package Menu;
 
 import GameEngine.Partita;
-import OggettiGioco.Giocatore;
+import GameObjects.Player;
 
 public class ShowPlayersOption extends Option {
 
@@ -11,7 +11,7 @@ public class ShowPlayersOption extends Option {
 
     @Override
     public void execute(int choice) {
-        for(Giocatore g : partita.getGameBoard().getLogicaDiGioco().getGiocatori()){
+        for(Player g : partita.getGameBoard().getLogicaDiGioco().getGiocatori()){
             System.out.println(g);
         }
     }

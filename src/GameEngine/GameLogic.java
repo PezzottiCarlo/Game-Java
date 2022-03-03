@@ -2,21 +2,21 @@ package GameEngine;
 
 import General.Direction;
 import General.Point;
-import OggettiGioco.Dado;
-import OggettiGioco.GameObject;
-import OggettiGioco.Giocatore;
-import OggettiGioco.Moneta;
+import GameObjects.Dice;
+import GameObjects.GameObject;
+import GameObjects.Player;
+import GameObjects.Coin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogicaDiGioco {
+public class GameLogic {
 
     private int sizeX;
     private int sizeY;
     private List<GameObject> gameObjects;
 
-    public LogicaDiGioco(int sizeX, int sizeY) {
+    public GameLogic(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.gameObjects = new ArrayList<>();
@@ -34,41 +34,41 @@ public class LogicaDiGioco {
         return this.gameObjects;
     }
 
-    public void fight(Giocatore g1, Giocatore g2) {
-        int g1Score = Dado.throwIt();
-        int g2Score = Dado.throwIt();
+    public void fight(Player g1, Player g2) {
+        int g1Score = Dice.throwIt();
+        int g2Score = Dice.throwIt();
         if (g1Score > g2Score) {
-            g1.setCoin(g1.getCoin() + 1);
-            g2.setCoin(g2.getCoin() - 1);
+            g1.incrementCoins();
+            g2.decrementCoins();
         } else {
-            g1.setCoin(g1.getCoin() - 1);
-            g2.setCoin(g2.getCoin() + 1);
+            g1.decrementCoins();
+            g2.incrementCoins();
         }
     }
 
-    public Giocatore getWinner() {
+    public Player getWinner() {
         int maxCoin = 0;
-        Giocatore winner = null;
-        for (Giocatore g : getGiocatori()) {
-            if (g.getCoin() > maxCoin) {
-                maxCoin = g.getCoin();
+        Player winner = null;
+        for (Player g : getGiocatori()) {
+            if (g.getCoins() > maxCoin) {
+                maxCoin = g.getCoins();
                 winner = g;
             }
         }
         return winner;
     }
 
-    public List<Giocatore> getGiocatori() {
-        List<Giocatore> giocatori = new ArrayList<>();
+    public List<Player> getGiocatori() {
+        List<Player> giocatori = new ArrayList<>();
         for (GameObject gameObject : this.gameObjects) {
-            if (gameObject instanceof Giocatore) {
-                giocatori.add((Giocatore) gameObject);
+            if (gameObject instanceof Player) {
+                giocatori.add((Player) gameObject);
             }
         }
         return giocatori;
     }
 
-    public void update(Giocatore g, Direction direction, int moovement) {
+    public void update(Player g, Direction direction, int moovement) {
         switch (direction) {
             case NORTH:
                 g.setYPosition(checkPosition(g.getPosition().getY() - moovement, sizeY));
@@ -86,25 +86,25 @@ public class LogicaDiGioco {
         GameObject obj = onObject(g.getPosition(),g);
         if (obj != null) {
             //toDo: implementare bene il metodo over tipo tramite una interface (non ho voglia mo)
-            ((Moneta) obj).over(g);
+            ((Coin) obj).over(g);
             removeGameObject(obj);
         }
     }
 
-    private void move(Giocatore g, Point nextPoint) {
-        if (!checkCollision(nextPoint)) {
-            g.setPosition(nextPoint);
-        }
+    private void move(Player g, Point nextPoint) {
+      //  if (!checkCollision(nextPoint)) {
+        g.setPosition(nextPoint);
+    //    }
     }
 
-    private boolean checkCollision(Point nextPoint) {
+/*    private boolean checkCollision(Point nextPoint) {
         for (GameObject gameObject : this.gameObjects) {
             if (gameObject.getPosition().equals(nextPoint)) {
                 return gameObject.isCollision();
             }
         }
         return false;
-    }
+    }*/
 
     private int checkPosition(int n, int size) {
         if (n >= 0)

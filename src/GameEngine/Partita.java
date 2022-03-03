@@ -1,11 +1,11 @@
 package GameEngine;
 
-import OggettiGioco.Giocatore;
-import OggettiGioco.Moneta;
+import GameObjects.Player;
+import GameObjects.Coin;
 import General.Color;
 import General.Direction;
 import General.Point;
-import OggettiGioco.Dado;
+import GameObjects.Dice;
 
 public class Partita {
 
@@ -19,10 +19,10 @@ public class Partita {
     public Partita() {
         this.gameBoard = new GameBoard(BOARD_SIZE_X, BOARD_SIZE_Y);
         this.rappresentazioneTestuale = new RappresentazioneTestuale(this);
-        gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(0, 0)));
-        gameBoard.getLogicaDiGioco().addGameObject(new Moneta(new Point(1, 0)));
+        gameBoard.getLogicaDiGioco().addGameObject(new Coin(new Point(0, 0)));
+        gameBoard.getLogicaDiGioco().addGameObject(new Coin(new Point(1, 0)));
         gameBoard.getLogicaDiGioco()
-                .addGameObject(new Giocatore(new Point(2, 0), "Giocatore1", Color.getRandomColor()));
+                .addGameObject(new Player(new Point(2, 0), "Giocatore1", Color.getRandomColor()));
     }
 
     public void play() {
@@ -36,12 +36,12 @@ public class Partita {
     }
 
     public void showPlayers() {
-        for (Giocatore giocatore : gameBoard.getLogicaDiGioco().getGiocatori()) {
+        for (Player giocatore : gameBoard.getLogicaDiGioco().getGiocatori()) {
             System.out.println(giocatore);
         }
     }
 
-    public void movePlayer(Giocatore g, Direction d) {
+    public void movePlayer(Player g, Direction d) {
         System.out.println("Move " + g.getUsername() + " " + d);
         int moovement = 0;
         System.out.print("Dice result: ");
@@ -50,7 +50,7 @@ public class Partita {
         System.out.print("0");
         while(end - start < 2000){
             end = System.currentTimeMillis();
-            moovement = Dado.throwIt();
+            moovement = Dice.throwIt();
             System.out.print("\b" + moovement);
         }
         System.out.println("\b" + moovement);

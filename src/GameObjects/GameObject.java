@@ -1,29 +1,24 @@
-package OggettiGioco;
+package GameObjects;
 
 import General.Point;
 
 public abstract class GameObject{
     public Point position;
     private char character;
-    private boolean collision = false;
 
-    public GameObject(Point position, char character, boolean collision) {
+    public GameObject(Point position, char character) {
         this.position = position;
         this.character = character;
-        this.collision = collision;
     }
 
-    public GameObject(Point coordinate, char character) {
-        this.position = coordinate;
-        this.character = character;
-    }
-
-    public boolean isCollision() {
-        return collision;
-    }
-    
     public Point getPosition(){
         return position;
+    }
+    public int getXPosition(){
+        return position.getX();
+    }
+    public int getYPosition(){
+        return position.getY();
     }
 
     public void setPosition(Point position){
