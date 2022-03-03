@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Menu{
     public static Scanner scanner;
-    private List<OptionInterface> menuItems;
+    private List<IOption> menuItems;
     
     static {
         scanner = new Scanner(System.in);
@@ -38,11 +38,11 @@ public class Menu{
         }
     }
 
-    public void addMenu(OptionInterface menuItem) {
+    public void addMenu(IOption menuItem) {
         menuItems.add(menuItem);
     }
 
-    public void removeMenu(OptionInterface menuItem) {
+    public void removeMenu(IOption menuItem) {
         menuItems.remove(menuItem);
     }
 }
