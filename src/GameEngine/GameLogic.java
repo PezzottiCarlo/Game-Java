@@ -114,23 +114,36 @@ public class GameLogic {
     public void moovePlayer(int index, Direction direction){
         System.out.println("Move " + players[index].getUsername() + " " + direction);
         int moovement = throwDice();
-
         int x = players[index].getXPosition();
         int y = players[index].getYPosition();
-        switch (direction){
-            case NORTH:
-                players[index].setYPosition(checkPosition(y - moovement, gameBoard.getSizeY()));
-                break;
-            case SOUTH:
-                players[index].setYPosition(checkPosition(y + moovement, gameBoard.getSizeY()));
-                break;
-            case EAST:
-                players[index].setXPosition(checkPosition(x - moovement, gameBoard.getSizeX()));
-                break;
-            case WEST:
-                players[index].setXPosition(checkPosition( x + moovement, gameBoard.getSizeX()));
-                break;
+        for(int i = 0; i < moovement; i++){
+            switch (direction){
+                case NORTH:
+                    players[index].setYPosition(checkPosition(y--, gameBoard.getSizeY()));
+                    break;
+                case SOUTH:
+                    players[index].setYPosition(checkPosition(y++, gameBoard.getSizeY()));
+                    break;
+                case EAST:
+                    players[index].setXPosition(checkPosition(x--, gameBoard.getSizeX()));
+                    break;
+                case WEST:
+                    players[index].setXPosition(checkPosition(x++, gameBoard.getSizeX()));
+                    break;
+            }
+            checkCoins(index, players[index].getXPosition(), players[index].getYPosition());
+        }
+    }
 
+    private void checkCoins(int index, int x, int y){
+        Point position = new Point(x,y);
+        for(int i = 0; i < coins.length; i++){
+            if(coins[i] != null){
+                if(position.equals(coins[i].getPosition())){
+                    coins[i] = null;
+                    players[index].incrementCoins();
+                }
+            }
         }
     }
 

@@ -53,9 +53,12 @@ public class GameBoard{
         }
 
         for(int i = 0; i < coins.length; i++){
-            if(coins[i].getPosition().equals(point)){
-                return coins[i].getCharacter();
+            if(coins[i] != null){
+                if(coins[i].getPosition().equals(point)){
+                    return coins[i].getCharacter();
+                }
             }
+
         }
         return ' ';
     }
