@@ -8,8 +8,8 @@ public class Player extends GameObject {
     private int coins = 0;
     private Color color;
 
-    public Player(Point position, String username) {
-        super(position,'X');
+    public Player(Point position, String username, char marker) {
+        super(position,marker);
         setUsername(username);
     }
     public void setUsername(String username) {

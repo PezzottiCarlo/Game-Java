@@ -32,12 +32,27 @@ public class GameLogic {
     }
 
     private void generatePlayers(){
+        players[0] = new Player(
+                new Point(0,0),
+                "Player0",
+                'X'
+        );
+
+        players[1] = new Player(
+                new Point(gameBoard.getSizeX() - 1, gameBoard.getSizeY() - 1),
+                "Player1",
+                'Y'
+        );
+        /*
+        int start = 58;
         for(int i = 0; i < players.length; i++){
             players[i] = new Player(
-                    new Point(i * gameBoard.getSizeX(), i * gameBoard.getSizeY()),
-                    "Player" + i
+                    new Point(i * gameBoard.getSizeX() - 1, i * gameBoard.getSizeY() - 1),
+                    "Player" + i,
+                    (char)(start + i)
             );
         }
+        */
     }
 
     private void generateCoins(){
@@ -58,7 +73,6 @@ public class GameLogic {
                     }
                 }
                 if(isOkay){
-                    System.out.println(i  + " " + x + ", " + y);
                     coins[i] = new Coin(x,y);
                     i++;
                 }
