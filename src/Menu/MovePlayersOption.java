@@ -20,7 +20,6 @@ public class MovePlayersOption extends Option {
             System.out.print("Move "+ players[i].getUsername()+ " (N,S,E,W)[1,2,3,4]: ");
             direction = Menu.scanner.nextInt();
             if(direction >= 1 && direction <= 4){
-                //MUOVERE GIOCATORE
                 logic.moovePlayer(i, Direction.values()[direction-1]);
                 i++;
             }else{

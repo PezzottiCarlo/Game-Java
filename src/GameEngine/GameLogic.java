@@ -114,10 +114,10 @@ public class GameLogic {
     public void moovePlayer(int index, Direction direction){
         System.out.println("Move " + players[index].getUsername() + " " + direction);
         int moovement = throwDice();
+        int coins = players[index].getCoins();
         int x = players[index].getXPosition();
         int y = players[index].getYPosition();
         for(int i = 0; i <= moovement; i++){
-            System.out.println("Muovo");
             switch (direction){
                 case NORTH:
                     players[index].setYPosition(checkPosition(y--, gameBoard.getSizeY()));
@@ -134,6 +134,7 @@ public class GameLogic {
             }
             checkCoins(index, players[index].getXPosition(), players[index].getYPosition());
         }
+        System.out.println("Monete raccolte: " + (players[index].getCoins() - coins));
     }
 
     private void checkCoins(int index, int x, int y){
