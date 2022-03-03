@@ -1,4 +1,4 @@
-package Menu;
+package Menu.Option;
 
 import GameEngine.GameLogic;
 

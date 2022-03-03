@@ -1,5 +1,9 @@
 package GameEngine;
 import Menu.*;
+import Menu.Option.MovePlayersOption;
+import Menu.Option.ShowGridOption;
+import Menu.Option.ShowPlayersOption;
+import Menu.Option.ExitOption;
 
 public class TextualRappresentation {
 
