@@ -9,7 +9,7 @@ public class Match {
     }
 
     public Match(){
-        this(10,10);
+        gameLogic = new GameLogic();
     }
 
     public void play(){

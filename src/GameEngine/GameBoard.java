@@ -2,12 +2,11 @@ package GameEngine;
 import GameObjects.Coin;
 import GameObjects.Player;
 import General.Point;
-import GameObjects.GameObject;
 
 public class GameBoard{
 
-    private int boardSizeX = 10;
-    private int boardSizeY = 10;
+    private int boardSizeX = GameLogic.COLUMNS;
+    private int boardSizeY = GameLogic.ROWS;
     private Player[] players;
     private Coin[] coins;
 
