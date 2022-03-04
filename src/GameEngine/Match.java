@@ -1,24 +1,20 @@
 package GameEngine;
 
 public class Match {
-    private GameLogic gameLogic;
-    private boolean inGame = true;
+    private GameBoard gameBoard;
 
     public Match(int sizeX, int sizeY){
-        gameLogic = new GameLogic(sizeX, sizeY);
+        gameBoard = new GameBoard(sizeX, sizeY);
     }
 
     public Match(){
-        gameLogic = new GameLogic();
+        gameBoard = new GameBoard();
     }
 
     public void play(){
         System.out.println("Let's play!");
-        while(inGame){
-            gameLogic.showOptions();
-            if(gameLogic.isGameOver()){
-                inGame = false;
-            }
+        while(!gameBoard.isGameOver()){
+            gameBoard.showOptions();
         }
         System.out.println("Thanks for playing");
     }

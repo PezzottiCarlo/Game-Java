@@ -13,29 +13,25 @@ public class GameLogic {
     public static final int NUMBER_OF_COINS = 10;
     public static final int NUMBER_OF_PLAYERS = 2;
 
-    public static final int ROWS = 10;
-    public static final int COLUMNS = 10;
-
     private boolean gameOver = false;
-    private GameBoard gameBoard;
-    private Player[] players;
-    private Coin[] coins;
-    private TextualRappresentation options;
+    private final Player[] players;
+    private final Coin[] coins;
+    private final TextualRappresentation options;
+    private final int sizeX;
+    private final int sizeY;
+    private GameLogicInterface gameBoard;
 
 
-    public GameLogic(int sizeX, int sizeY){
-        gameBoard = new GameBoard(sizeX, sizeY);
+    public GameLogic(int sizeX, int sizeY, GameLogicInterface gameBoard){
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+
+        this.gameBoard = gameBoard;
         players = new Player[NUMBER_OF_PLAYERS];
         coins = new Coin[NUMBER_OF_COINS];
         generatePlayers();
         generateCoins();
-        gameBoard.setCoins(coins);
-        gameBoard.setPlayers(players);
         options = new TextualRappresentation(this);
-    }
-
-    public GameLogic(){
-        this(ROWS, COLUMNS);
     }
 
     private void generatePlayers(){
@@ -46,7 +42,7 @@ public class GameLogic {
         );
 
         players[1] = new Player(
-                new Point(gameBoard.getSizeX() - 1, gameBoard.getSizeY() - 1),
+                new Point(sizeX - 1, sizeY - 1),
                 "Player1",
                 'Y'
         );
@@ -63,18 +59,18 @@ public class GameLogic {
     }
 
     private void generateCoins(){
+        int x;
+        int y;
         boolean isOkay = true;
-        int x = 0;
-        int y = 0;
         for(int i = 0; i < coins.length;){
-            x = Util.getRandomNumber(0, gameBoard.getSizeX() - 1);
-            y = Util.getRandomNumber(0, gameBoard.getSizeY() - 1);
+            x = Util.getRandomNumber(0, sizeX - 1);
+            y = Util.getRandomNumber(0, sizeY - 1);
             isOkay = true;
 
             if(x != 0 && y != 0){
-                for(int j = 0; j < coins.length; j++){
-                    if(coins[j] != null){
-                        if(x == coins[j].getXPosition() && y == coins[j].getYPosition()){
+                for (Coin coin : coins) {
+                    if (coin != null) {
+                        if (x == coin.getXPosition() && y == coin.getYPosition()) {
                             isOkay = false;
                         }
                     }
@@ -87,27 +83,23 @@ public class GameLogic {
         }
     }
 
-    public void showGrid(){
-        gameBoard.show();
-    }
-
     public void showOptions(){
         options.ask();
-    }
-
-    public GameBoard getGameBoard(){
-        return gameBoard;
     }
 
     public Player[] getPlayers(){
         return players;
     }
 
+    public Coin[] getCoins(){
+        return coins;
+    }
+
     private int throwDice(){
         int moovement = 0;
         System.out.print("Dice result: ");
         long start = System.currentTimeMillis();
-        long end = 0l;
+        long end = 0L;
         System.out.print("0");
         while(end - start < 2000){
             end = System.currentTimeMillis();
@@ -125,19 +117,11 @@ public class GameLogic {
         int x = players[index].getXPosition();
         int y = players[index].getYPosition();
         for(int i = 0; i <= moovement; i++){
-            switch (direction){
-                case NORTH:
-                    players[index].setYPosition(checkPosition(y--, gameBoard.getSizeY()));
-                    break;
-                case SOUTH:
-                    players[index].setYPosition(checkPosition(y++, gameBoard.getSizeY()));
-                    break;
-                case EAST:
-                    players[index].setXPosition(checkPosition(x++, gameBoard.getSizeX()));
-                    break;
-                case WEST:
-                    players[index].setXPosition(checkPosition(x--, gameBoard.getSizeX()));
-                    break;
+            switch (direction) {
+                case NORTH -> players[index].setYPosition(checkPosition(y--, sizeY));
+                case SOUTH -> players[index].setYPosition(checkPosition(y++, sizeY));
+                case EAST -> players[index].setXPosition(checkPosition(x++, sizeX));
+                case WEST -> players[index].setXPosition(checkPosition(x--, sizeX));
             }
             checkCoins(index);
             checkPlayers(index);
@@ -207,6 +191,9 @@ public class GameLogic {
 
     public void gameOver(){
         gameOver = true;
+    }
+    public void showGrid(){
+        gameBoard.showGrid();
     }
 
     public boolean isGameOver(){
