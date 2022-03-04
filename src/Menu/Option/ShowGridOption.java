@@ -1,4 +1,4 @@
-package Menu;
+package Menu.Option;
 
 import GameEngine.GameLogic;
 
@@ -9,7 +9,7 @@ public class ShowGridOption extends Option{
     }
 
     @Override
-    public void execute(int choice) {
+    public void execute(int choice){
         logic.getGameBoard().show();
     }
 

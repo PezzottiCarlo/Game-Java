@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Menu.Option.IOption;
+
 public class Menu{
     public static Scanner scanner;
     private List<IOption> menuItems;
