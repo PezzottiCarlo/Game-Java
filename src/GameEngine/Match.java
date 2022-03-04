@@ -13,7 +13,7 @@ public class Match {
     }
 
     public void play(){
-        System.out.println("Giochiamo");
+        System.out.println("Let's play!");
         while(inGame){
             gameLogic.showOptions();
             if(gameLogic.isGameOver()){
