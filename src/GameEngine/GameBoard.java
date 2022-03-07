@@ -1,6 +1,7 @@
 package GameEngine;
 import GameObjects.Coin;
 import GameObjects.Player;
+import General.Color;
 import General.Point;
 
 public class GameBoard implements GameLogicInterface{
@@ -9,8 +10,8 @@ public class GameBoard implements GameLogicInterface{
     public static final int DEFAULT_COLUMNS = 10;
 
     private GameLogic gameLogic;
-    private int boardSizeX = 10;
-    private int boardSizeY = 10;
+    private int boardSizeX = DEFAULT_COLUMNS;
+    private int boardSizeY = DEFAULT_ROWS;
 
     public GameBoard(int sizeX, int sizeY){
         gameLogic = new GameLogic(sizeX, sizeY, this);
@@ -47,26 +48,26 @@ public class GameBoard implements GameLogicInterface{
         gameLogic.showOptions();
     }
 
-    public char getCellChar(Point point){
+    public String getCellChar(Point point){
         Player[] players = gameLogic.getPlayers();
         Coin[] coins = gameLogic.getCoins();
 
 
         for(int i = 0; i < players.length; i++){
             if(players[i].getPosition().equals(point)){
-                return players[i].getCharacter();
+                return players[i].getColor().toString()+players[i].getCharacter()+Color.ANSI_RESET;
             }
         }
 
         for(int i = 0; i < coins.length; i++){
             if(coins[i] != null){
                 if(coins[i].getPosition().equals(point)){
-                    return coins[i].getCharacter();
+                    return Color.ANSI_YELLOW+coins[i].getCharacter()+Color.ANSI_RESET;
                 }
             }
 
         }
-        return ' ';
+        return " ";
     }
 
     public boolean isGameOver(){

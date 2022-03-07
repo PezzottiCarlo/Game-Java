@@ -8,14 +8,21 @@ public class Player extends GameObject {
     private int coins = 0;
     private Color color;
 
-    public Player(Point position, String username, char marker) {
+    public Player(Point position, String username, char marker,Color color) {
         super(position,marker);
         setUsername(username);
+        setColor(color);
     }
+
+
     public void setUsername(String username) {
         if(username.matches("[a-zA-Z0-9]+")){
             this.username = username;
         }
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void incrementCoins(){

@@ -1,6 +1,7 @@
 package GameEngine;
 
 import GameObjects.Dice;
+import General.Color;
 import General.Direction;
 import General.Point;
 import GameObjects.Player;
@@ -38,13 +39,15 @@ public class GameLogic {
         players[0] = new Player(
                 new Point(0,0),
                 "Player0",
-                'X'
+                'X',
+                new Color(Color.ANSI_BLUE)
         );
 
         players[1] = new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
-                'Y'
+                'Y',
+                new Color(Color.ANSI_GREEN)
         );
         /*
         int start = 58;
