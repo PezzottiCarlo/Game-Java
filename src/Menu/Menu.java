@@ -14,7 +14,7 @@ public class Menu{
         scanner = new Scanner(System.in);
     }
 
-    public Menu() {
+    public Menu(boolean inline) {
         menuItems = new ArrayList<>();
     }
 

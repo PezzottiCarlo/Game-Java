@@ -11,7 +11,7 @@ public class TextualRappresentation {
     private boolean gameIsOver = false;
 
     public TextualRappresentation(GameLogic gameLogic) {
-        menu = new Menu();
+        menu = new Menu(false);
         menu.addMenu(new ShowGridOption(gameLogic));
         menu.addMenu(new MovePlayersOption(gameLogic));
         menu.addMenu(new ExitOption(gameLogic));

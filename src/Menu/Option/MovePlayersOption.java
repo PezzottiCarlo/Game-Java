@@ -1,6 +1,7 @@
 package Menu.Option;
 
 import GameEngine.GameLogic;
+import GameObjects.Dice;
 import GameObjects.Player;
 import General.Direction;
 import Menu.Menu;
@@ -14,10 +15,12 @@ public class MovePlayersOption extends Option {
     @Override
     public void execute(int choice) {
         Player[] players = logic.getPlayers();
+        
         for (int i = 0; i < players.length; i++) {
+            int movement = Dice.throwDice();
             System.out.println("Player " +players[i].getUsername() + ": ");
             int indexPlayer = i;
-            Menu menu = new Menu();
+            Menu menu = new Menu(true);
             GenericOption north = new GenericOption("North", (n) -> logic.movePlayer(indexPlayer, Direction.NORTH));
             GenericOption south = new GenericOption("South", (n) -> logic.movePlayer(indexPlayer, Direction.SOUTH));
             GenericOption east = new GenericOption("East", (n) -> logic.movePlayer(indexPlayer, Direction.EAST));
@@ -26,7 +29,7 @@ public class MovePlayersOption extends Option {
             menu.addMenu(south);
             menu.addMenu(east);
             menu.addMenu(west);
-            menu.ask();
+            for(int j = 0; j < movement; j++) menu.ask();
         }
     }
 
