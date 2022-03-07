@@ -1,7 +1,7 @@
 package Menu.Option;
 
 import GameEngine.GameLogic;
-import GameObjects.Player;
+import GameObjects.*;
 
 public class ShowPlayersOption extends Option {
 
@@ -11,9 +11,10 @@ public class ShowPlayersOption extends Option {
 
     @Override
     public void execute(int choice){
-        Player[] players = logic.getPlayers();
-        for (Player player : players) {
-            System.out.println(player);
+        for (GameObject gameObject : logic.getGameObjects()) {
+            if (gameObject instanceof Player) {
+                System.out.println(gameObject.toString());
+            }
         }
     }
 

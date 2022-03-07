@@ -6,12 +6,10 @@ import General.Point;
 public class Player extends GameObject {
     private String username;
     private int coins = 0;
-    private Color color;
 
-    public Player(Point position, String username, char marker,Color color) {
-        super(position,marker);
+    public Player(Point position, String username, char marker) {
+        super(position,marker,new Color(Color.ANSI_CYAN));
         setUsername(username);
-        setColor(color);
     }
 
 
@@ -21,8 +19,8 @@ public class Player extends GameObject {
         }
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public int getCoins() {
+        return coins;
     }
 
     public void incrementCoins(){
@@ -35,16 +33,9 @@ public class Player extends GameObject {
         }
     }
 
-    public int getCoins() {
-        return coins;
-    }
     
     public String getUsername() {
         return username;
-    }
-
-    public Color getColor() {
-        return color;
     }
 
     @Override

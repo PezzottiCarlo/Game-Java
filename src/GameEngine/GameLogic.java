@@ -1,6 +1,10 @@
 package GameEngine;
 
 import General.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import GameObjects.*;
 
 /**
@@ -26,15 +30,7 @@ public class GameLogic {
      */
     private boolean gameOver = false;
 
-    /**
-     * Array contenente tutti i giocatori.
-     */
-    private final Player[] players;
-
-    /**
-     * Array contenente tutte le monete.
-     */
-    private final Coin[] coins;
+    private List<GameObject> gameObjects;
 
     /**
      * Rappresentazione testuale delle opzioni.
@@ -59,8 +55,8 @@ public class GameLogic {
     /**
      * Metodo costruttore.
      *
-     * @param sizeX Colonne della tavola da gioco.
-     * @param sizeY Righe della tavola da gioco.
+     * @param sizeX     Colonne della tavola da gioco.
+     * @param sizeY     Righe della tavola da gioco.
      * @param gameBoard Interfaccia tavola da gioco.
      */
     public GameLogic(int sizeX, int sizeY, GameLogicInterface gameBoard) {
@@ -68,8 +64,7 @@ public class GameLogic {
         this.sizeY = sizeY;
 
         this.gameBoard = gameBoard;
-        players = new Player[NUMBER_OF_PLAYERS];
-        coins = new Coin[NUMBER_OF_COINS];
+        gameObjects = new ArrayList<>();
         generatePlayers();
         generateCoins();
         options = new TextualRappresentation(this);
@@ -79,55 +74,41 @@ public class GameLogic {
      * Metodo per generare i giocatori.
      */
     private void generatePlayers() {
-        players[0] = new Player(
+        gameObjects.add(new Player(
                 new Point(0, 0),
                 "Player0",
-                'X',
-                new Color(Color.ANSI_BLUE));
+                'X'));
 
-        players[1] = new Player(
+        gameObjects.add(new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
-                'Y',
-                new Color(Color.ANSI_GREEN));
-        /*
-         * int start = 58;
-         * for(int i = 0; i < players.length; i++){
-         * players[i] = new Player(
-         * new Point(i * gameBoard.getSizeX() - 1, i * gameBoard.getSizeY() - 1),
-         * "Player" + i,
-         * (char)(start + i)
-         * );
-         * }
-         */
+                'Y'));
     }
 
     /**
      * Metodo che genera e posiziona in ordine casuale le monete.
      */
     private void generateCoins() {
-        int x;
-        int y;
-        boolean isOkay;
-        for (int i = 0; i < coins.length;) {
-            x = Util.getRandomNumber(0, sizeX - 1);
-            y = Util.getRandomNumber(0, sizeY - 1);
-            isOkay = true;
+        for (int i = 0; i < NUMBER_OF_COINS; i++)
+            gameObjects.add(new Coin(getRandomFreeCell()));
+    }
 
-            if (x != 0 && y != 0) {
-                for (Coin coin : coins) {
-                    if (coin != null) {
-                        if (x == coin.getXPosition() && y == coin.getYPosition()) {
-                            isOkay = false;
-                        }
-                    }
-                }
-                if (isOkay) {
-                    coins[i] = new Coin(x, y);
-                    i++;
-                }
-            }
+    private Point getRandomFreeCell() {
+        int x =0;
+        int y =0;
+        do {
+            x = (int) (Math.random() * sizeX);
+            y = (int) (Math.random() * sizeY);
+        } while (!isFreeCell(new Point(x, y)));
+        return new Point(x, y);
+    }
+
+    private boolean isFreeCell(Point point) {
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.getPosition().equals(point))
+                return false;
         }
+        return true;
     }
 
     /**
@@ -138,41 +119,22 @@ public class GameLogic {
     }
 
     /**
-     * Metodo getter per i giocatori.
-     *
-     * @return Array di giocatori.
-     */
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    /**
-     * Metodo getter per le monete.
-     *
-     * @return Array di monete.
-     */
-    public Coin[] getCoins() {
-        return coins;
-    }
-
-
-    /**
      * Permette di spostare un giocatore di una sola casella.
      *
-     * @param index Indice del giocatore.
+     * @param index     Indice del giocatore.
      * @param direction Direzione in cui si vuole spostare.
      */
-    public void movePlayer(int index, Direction direction) {
-        int x = players[index].getXPosition();
-        int y = players[index].getYPosition();
+    public void movePlayer(Player player, Direction direction) {
+        int x = player.getXPosition();
+        int y = player.getYPosition();
         switch (direction) {
-            case NORTH -> players[index].setYPosition(checkPosition(--y, sizeY));
-            case SOUTH -> players[index].setYPosition(checkPosition(++y, sizeY));
-            case EAST -> players[index].setXPosition(checkPosition(++x, sizeX));
-            case WEST -> players[index].setXPosition(checkPosition(--x, sizeX));
+            case NORTH -> player.setYPosition(checkPosition(--y, sizeY));
+            case SOUTH -> player.setYPosition(checkPosition(++y, sizeY));
+            case EAST -> player.setXPosition(checkPosition(++x, sizeX));
+            case WEST -> player.setXPosition(checkPosition(--x, sizeX));
         }
-        checkCoins(index);
-        checkPlayers(index);
+        checkCoins(player);
+        checkPlayers(player);
     }
 
     /**
@@ -180,18 +142,19 @@ public class GameLogic {
      *
      * @param index Index che si vuole controllare.
      */
-    private void checkCoins(int index) {
-        for (int i = 0; i < coins.length; i++) {
-            if (coins[i] != null) {
-                if (players[index].getPosition().equals(coins[i].getPosition())) {
-                    coins[i] = null;
-                    players[index].incrementCoins();
-                    if (players[index].getCoins() == coins.length) {
-                        gameOver();
-                    }
+    private void checkCoins(Player player) {
+        boolean found = false;
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Coin) {
+                found = true;
+                if (player.getPosition().equals(gameObject.getPosition())) {
+                    gameObject = null;
+                    player.incrementCoins();
                 }
             }
         }
+        if (!found)
+            gameOver();
     }
 
     /**
@@ -199,49 +162,49 @@ public class GameLogic {
      *
      * @param index Index che si vuole controllare.
      */
-    private void checkPlayers(int index) {
-        for (int i = 0; i < players.length; i++) {
-            if (index != i) {
-                if (players[i].getPosition().equals(players[index].getPosition())) {
-                    System.out.println("There is a match!!!");
-                    System.out.print(players[index].getUsername() + " --> ");
-                    int a = Dice.throwDice();
-                    System.out.print(players[i].getUsername() + " --> ");
-                    int b = Dice.throwDice();
 
-                    if (a > b) {
-
-                        if (players[i].getCoins() == 0) {
-                            System.out.println(players[index].getUsername() + " wins the game!!");
-                            gameOver();
-                        } else {
-                            players[index].incrementCoins();
-                            players[i].decrementCoins();
-                            System.out.println(players[index].getUsername() + " wins the match!!");
-                        }
-                    } else if (a < b) {
-                        if (players[index].getCoins() == 0) {
-                            System.out.println(players[index].getUsername() + " wins the game!!");
-                            gameOver();
-                        } else {
-                            players[i].incrementCoins();
-                            players[index].decrementCoins();
-                            System.out.println(players[i].getUsername() + " wins the match!!");
-                        }
+    private void checkPlayers(Player player) {
+        boolean found = false;
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Player) {
+                if (!gameObject.equals(player)) {
+                    if (player.getPosition().equals(gameObject.getPosition())) {
+                        fight(player, (Player) gameObject);
                     }
-
-                    System.out.println(players[i].getUsername() + "'s coins " + players[i].getCoins());
-                    System.out.println(players[index].getUsername() + "'s coins " + players[index].getCoins());
                 }
             }
         }
     }
 
+    private void fight(Player player1, Player player2) {
+        int a = Dice.throwDice();
+        int b = Dice.throwDice();
+        if (a > b) {
+            if (player1.getCoins() == 0) {
+                System.out.println(player2.getUsername() + " wins the game!!");
+                gameOver();
+            } else {
+                player2.incrementCoins();
+                player1.decrementCoins();
+                System.out.println(player2.getUsername() + " wins the match!!");
+            }
+        } else if (a < b) {
+            if (player2.getCoins() == 0) {
+                System.out.println(player2.getUsername() + " wins the game!!");
+                gameOver();
+            } else {
+                player1.incrementCoins();
+                player2.decrementCoins();
+                System.out.println(player1.getUsername() + " wins the match!!");
+            }
+        }
+    }
 
     /**
-     * Controllo se un numero oltrepassa un altro numero, usato per fare l'effetto 'Pacman'.
+     * Controllo se un numero oltrepassa un altro numero, usato per fare l'effetto
+     * 'Pacman'.
      *
-     * @param n Numero che si vuole controllare.
+     * @param n    Numero che si vuole controllare.
      * @param size Dimensione che non si vuole oltrepassare.
      * @return Il nuovo numero (lo stesso se andava già bene).
      */
@@ -273,5 +236,9 @@ public class GameLogic {
      */
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
     }
 }

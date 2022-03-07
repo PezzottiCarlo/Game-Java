@@ -1,5 +1,6 @@
 package GameEngine;
 import GameObjects.Coin;
+import GameObjects.GameObject;
 import GameObjects.Player;
 import General.Color;
 import General.Point;
@@ -94,23 +95,10 @@ public class GameBoard implements GameLogicInterface{
      * @return Il carattere da stampare a terminale che rappresenta l'oggetto da stampare.
      */
     public String getCellChar(Point point){
-        Player[] players = gameLogic.getPlayers();
-        Coin[] coins = gameLogic.getCoins();
-
-
-        for (Player player : players) {
-            if (player.getPosition().equals(point)) {
-                return player.getColor().toString() + player.getCharacter() + Color.ANSI_RESET;
+        for(GameObject gameObject : gameLogic.getGameObjects()){
+            if(gameObject.getPosition().equals(point)){
+                return gameObject.getColor()+""+gameObject.getCharacter()+Color.ANSI_RESET;
             }
-        }
-
-        for (Coin coin : coins) {
-            if (coin != null) {
-                if (coin.getPosition().equals(point)) {
-                    return Color.ANSI_YELLOW + coin.getCharacter() + Color.ANSI_RESET;
-                }
-            }
-
         }
         return " ";
     }

@@ -1,14 +1,16 @@
 package GameObjects;
 
-import General.Point;
+import General.*;
 
 public abstract class GameObject{
     public Point position;
+    private Color color;
     private final char character;
 
-    public GameObject(Point position, char character) {
+    public GameObject(Point position, char character,Color color) {
         this.position = position;
         this.character = character;
+        this.color = color;
     }
 
     public Point getPosition(){
@@ -19,6 +21,14 @@ public abstract class GameObject{
     }
     public int getYPosition(){
         return position.getY();
+    }
+
+    public char getCharacter(){
+        return character;
+    }
+
+    public Color getColor(){
+        return color;
     }
 
     public void setPosition(Point position){
@@ -36,7 +46,8 @@ public abstract class GameObject{
         position.setY(y);
     }
 
-    public char getCharacter(){
-        return character;
+    public void setColor(Color color){
+        this.color = color;
     }
+    
 }
