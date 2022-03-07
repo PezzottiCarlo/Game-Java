@@ -97,8 +97,6 @@ public class GameLogic {
     
 
     public void movePlayer(int index, Direction direction) {
-        System.out.println("Move " + players[index].getUsername() + " " + direction);
-        int coins = players[index].getCoins();
         int x = players[index].getXPosition();
         int y = players[index].getYPosition();
         switch (direction) {
@@ -109,7 +107,6 @@ public class GameLogic {
         }
         checkCoins(index);
         checkPlayers(index);
-        System.out.println("Monete raccolte: " + (players[index].getCoins() - coins));
     }
 
     private void checkCoins(int index) {
@@ -119,7 +116,6 @@ public class GameLogic {
                     coins[i] = null;
                     players[index].incrementCoins();
                     if (players[index].getCoins() == coins.length) {
-                        System.out.println(players[i].getUsername() + " has collected all coins! He/She wins");
                         gameOver();
                     }
                 }

@@ -15,10 +15,8 @@ public class MovePlayersOption extends Option {
     @Override
     public void execute(int choice) {
         Player[] players = logic.getPlayers();
-        
         for (int i = 0; i < players.length; i++) {
             int movement = Dice.throwDice();
-            System.out.println("Player " +players[i].getUsername() + ": ");
             int indexPlayer = i;
             Menu menu = new Menu(true);
             GenericOption north = new GenericOption("U", (n) -> logic.movePlayer(indexPlayer, Direction.NORTH));
@@ -29,7 +27,9 @@ public class MovePlayersOption extends Option {
             menu.addMenu(south);
             menu.addMenu(east);
             menu.addMenu(west);
-            for(int j = 0; j < movement; j++) menu.ask();
+            for (int j = 0; j < movement; j++) {
+                menu.ask();
+            }
         }
     }
 
