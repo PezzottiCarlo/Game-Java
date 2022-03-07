@@ -2,8 +2,8 @@ package Menu.Option;
 
 public class GenericOption implements IOption {
     
-    private IOption option;
-    private String name;
+    private final IOption option;
+    private final String name;
 
     public GenericOption(String name, IOption option) {
         this.name = name;

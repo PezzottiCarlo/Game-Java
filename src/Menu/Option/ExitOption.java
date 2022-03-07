@@ -2,7 +2,7 @@ package Menu.Option;
 import GameEngine.GameLogic;
 
 public class ExitOption extends Option {
-    private GameLogic logic;
+    private final GameLogic logic;
 
 
     public ExitOption(GameLogic logic){

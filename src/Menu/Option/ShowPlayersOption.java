@@ -12,8 +12,8 @@ public class ShowPlayersOption extends Option {
     @Override
     public void execute(int choice){
         Player[] players = logic.getPlayers();
-        for(int i = 0; i < players.length; i++){
-            System.out.println(players[i]);
+        for (Player player : players) {
+            System.out.println(player);
         }
     }
 

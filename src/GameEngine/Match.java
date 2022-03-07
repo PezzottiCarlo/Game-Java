@@ -7,7 +7,7 @@ package GameEngine;
  * @author Carlo Pezzotti
  */
 public class Match {
-    private GameBoard gameBoard;
+    private final GameBoard gameBoard;
 
     public Match(int sizeX, int sizeY){
         gameBoard = new GameBoard(sizeX, sizeY);

@@ -8,8 +8,8 @@ import Menu.Option.IOption;
 
 public class Menu {
     public static Scanner scanner;
-    private List<IOption> menuItems;
-    private boolean inline;
+    private final List<IOption> menuItems;
+    private final boolean inline;
 
     static {
         scanner = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class Menu {
                 for (int i = 0; i < menuItems.size(); i++) {
                     if (i == 0)
                         System.out.print("[");
-                    if (i >= 0 && i < menuItems.size() - 1)
+                    if (i < menuItems.size() - 1)
                         System.out.print(i + ": "+ menuItems.get(i) + ", ");
                     if (i == menuItems.size()-1)
                         System.out.print(i + ": "+menuItems.get(i)+"]: ");

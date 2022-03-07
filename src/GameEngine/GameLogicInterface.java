@@ -7,5 +7,5 @@ package GameEngine;
  * @author Carlo Pezzotti
  */
 public interface GameLogicInterface {
-    public void showGrid();
+    void showGrid();
 }

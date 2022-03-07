@@ -22,7 +22,7 @@ public class Color {
     public static final String ANSI_RESET = "\u001B[0m";
 
 
-    private String color;
+    private final String color;
 
     public Color(String color) {
         this.color = color;

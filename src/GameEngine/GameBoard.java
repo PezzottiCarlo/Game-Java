@@ -98,16 +98,16 @@ public class GameBoard implements GameLogicInterface{
         Coin[] coins = gameLogic.getCoins();
 
 
-        for(int i = 0; i < players.length; i++){
-            if(players[i].getPosition().equals(point)){
-                return players[i].getColor().toString()+players[i].getCharacter()+Color.ANSI_RESET;
+        for (Player player : players) {
+            if (player.getPosition().equals(point)) {
+                return player.getColor().toString() + player.getCharacter() + Color.ANSI_RESET;
             }
         }
 
-        for(int i = 0; i < coins.length; i++){
-            if(coins[i] != null){
-                if(coins[i].getPosition().equals(point)){
-                    return Color.ANSI_YELLOW+coins[i].getCharacter()+Color.ANSI_RESET;
+        for (Coin coin : coins) {
+            if (coin != null) {
+                if (coin.getPosition().equals(point)) {
+                    return Color.ANSI_YELLOW + coin.getCharacter() + Color.ANSI_RESET;
                 }
             }
 

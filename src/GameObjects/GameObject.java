@@ -4,7 +4,7 @@ import General.Point;
 
 public abstract class GameObject{
     public Point position;
-    private char character;
+    private final char character;
 
     public GameObject(Point position, char character) {
         this.position = position;
