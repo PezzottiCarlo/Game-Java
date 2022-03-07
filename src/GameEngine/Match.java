@@ -1,5 +1,11 @@
 package GameEngine;
 
+/**
+ * Rappresentazione della partita.
+ *
+ * @author Matteo Arena
+ * @author Carlo Pezzotti
+ */
 public class Match {
     private GameBoard gameBoard;
 

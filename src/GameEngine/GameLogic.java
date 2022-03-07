@@ -7,7 +7,12 @@ import General.Point;
 import GameObjects.Player;
 import GameObjects.Coin;
 import General.Util;
-
+/**
+ * Logica del gioco.
+ *
+ * @author Matteo Arena
+ * @author Carlo Pezzotti
+ */
 public class GameLogic {
 
     public static final int NUMBER_OF_COINS = 10;
@@ -19,7 +24,7 @@ public class GameLogic {
     private final TextualRappresentation options;
     private final int sizeX;
     private final int sizeY;
-    private GameLogicInterface gameBoard;
+    private final GameLogicInterface gameBoard;
 
     public GameLogic(int sizeX, int sizeY, GameLogicInterface gameBoard) {
         this.sizeX = sizeX;
