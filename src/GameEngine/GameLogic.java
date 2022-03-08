@@ -15,35 +15,45 @@ import GameObjects.*;
  */
 public class GameLogic {
 
+    //==================== Attributes ===================
+
     /**
-     * Numero di default per le monete.
+     * Default coins number.
      */
     public static final int NUMBER_OF_COINS = 10;
 
     /**
-     * Flag per capire quando il gioco è finito.
+     * Flag true when the game is ended.
      */
     private boolean gameOver = false;
 
+    /**
+     * List with all the objects of the game.
+     */
     private final List<GameObject> gameObjects;
 
     /**
-     * Colonne della tavola da gioco.
+     * Board width.
      */
     private final int sizeX;
 
     /**
-     * Righe della tavola da gioco.
+     * Board height.
      */
     private final int sizeY;
 
+    /**
+     * Current player (the one who is playing).
+     */
     private Player currentPlayer;
 
+    // ==================== Constructors ====================
+
     /**
-     * Metodo costruttore.
+     * Constructor.
      *
-     * @param sizeX     Colonne della tavola da gioco.
-     * @param sizeY     Righe della tavola da gioco.
+     * @param sizeX Board width.
+     * @param sizeY Board height.
      */
     public GameLogic(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -53,8 +63,30 @@ public class GameLogic {
         generateCoins();
     }
 
+    // ==================== Getters and Setters ====================
+
     /**
-     * Metodo per generare i giocatori.
+     * Get the full list of game objects.
+     *
+     * @return The list of game objects.
+     */
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    /**
+     * Get the current player.
+     *
+     * @return The current player.
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    //==================== private methods ====================
+
+    /**
+     * Method used to generate players.
      */
     private void generatePlayers() {
 
@@ -65,17 +97,22 @@ public class GameLogic {
         gameObjects.add(new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
-                'Y'));  
+                'Y'));
     }
 
     /**
-     * Metodo che genera e posiziona in ordine casuale le monete.
+     * Method used to generate coins.
      */
     private void generateCoins() {
         for (int i = 0; i < NUMBER_OF_COINS; i++)
             gameObjects.add(new Coin(getRandomFreeCell()));
     }
 
+    /**
+     * Generate a random free cell.
+     *
+     * @return A random free cell.
+     */
     private Point getRandomFreeCell() {
         int x;
         int y;
@@ -86,6 +123,12 @@ public class GameLogic {
         return new Point(x, y);
     }
 
+    /**
+     * Check if a cell is free.
+     *
+     * @param point Cell to check.
+     * @return true if the cell is free, false otherwise.
+     */
     private boolean isFreeCell(Point point) {
         for (GameObject gameObject : gameObjects) {
             if (gameObject.getPosition().equals(point))
@@ -95,26 +138,9 @@ public class GameLogic {
     }
 
     /**
-     * Permette di spostare un giocatore di una sola casella.
+     * Check if the player is on a coin.
      *
-     * @param direction Direzione in cui si vuole spostare.
-     */
-    public void movePlayer(Player player, Direction direction) {
-        int x = player.getXPosition();
-        int y = player.getYPosition();
-        switch (direction) {
-            case NORTH -> player.setYPosition(checkPosition(--y, sizeY));
-            case SOUTH -> player.setYPosition(checkPosition(++y, sizeY));
-            case EAST -> player.setXPosition(checkPosition(++x, sizeX));
-            case WEST -> player.setXPosition(checkPosition(--x, sizeX));
-        }
-        checkCoins(player);
-        checkPlayers(player);
-    }
-
-    /**
-     * Controlla se su un determinato index è presente una moneta.
-     *
+     * @param player Player to check.
      */
     private void checkCoins(Player player) {
         boolean found = false;
@@ -122,7 +148,6 @@ public class GameLogic {
             if (gameObject instanceof Coin) {
                 found = true;
                 if (player.getPosition().equals(gameObject.getPosition())) {
-                    //gameObject = null;
                     player.incrementCoins();
                 }
             }
@@ -132,10 +157,10 @@ public class GameLogic {
     }
 
     /**
-     * Controllo se due giocatori si trovano sulla stessa casella.
+     * Check if the player is on another player.
      *
+     * @param player Player to check (the one who is playing).
      */
-
     private void checkPlayers(Player player) {
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Player) {
@@ -148,6 +173,12 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Fight between two players.
+     *
+     * @param player1 Player 1.
+     * @param player2 Player 2.
+     */
     private void fight(Player player1, Player player2) {
         int a = Dice.throwDice();
         int b = Dice.throwDice();
@@ -173,12 +204,11 @@ public class GameLogic {
     }
 
     /**
-     * Controllo se un numero oltrepassa un altro numero, usato per fare l'effetto
-     * 'Pacman'.
+     * Method used to check if a number is over another number, used to make the 'Pacman' effect.
      *
-     * @param n    Numero che si vuole controllare.
-     * @param size Dimensione che non si vuole oltrepassare.
-     * @return Il nuovo numero (lo stesso se andava già bene).
+     * @param n Number to check.
+     * @param size Size that we don't want to go over.
+     * @return The new number (the same if it was already good).
      */
     private int checkPosition(int n, int size) {
         if (n >= 0)
@@ -187,30 +217,46 @@ public class GameLogic {
             return size + n % size;
     }
 
+    //==================== public methods ====================
+
     /**
-     * Imposta il gioco come finito.
+     * Move the player passed as parameter.
+     *
+     * @param player Player to move.
+     * @param direction Direction to move (North, South, East or West).
+     */
+    public void movePlayer(Player player, Direction direction) {
+        int x = player.getXPosition();
+        int y = player.getYPosition();
+        switch (direction) {
+            case NORTH -> player.setYPosition(checkPosition(--y, sizeY));
+            case SOUTH -> player.setYPosition(checkPosition(++y, sizeY));
+            case EAST -> player.setXPosition(checkPosition(++x, sizeX));
+            case WEST -> player.setXPosition(checkPosition(--x, sizeX));
+        }
+        checkCoins(player);
+        checkPlayers(player);
+    }
+
+    /**
+     * Set the game as over.
      */
     public void gameOver() {
         gameOver = true;
     }
 
     /**
-     * Permette di sapere se il gioco è finito oppure no.
+     * Check if the game is over.
      *
-     * @return true se il gioco è finito, altrimenti false.
+     * @return true if the game is over, false otherwise.
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
-    public List<GameObject> getGameObjects() {
-        return gameObjects;
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
+    /**
+     * Play the next turn, showing the available options.
+     */
     public void nextTurn() {
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Player) {
