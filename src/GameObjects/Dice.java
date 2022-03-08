@@ -20,7 +20,7 @@ public class Dice {
         System.out.print("0");
         while (end - start < 2000) {
             end = System.currentTimeMillis();
-            movement = Util.getRandomNumber(1, 6);
+            movement = Util.randomNumber(1, 6);
             System.out.print("\b" + movement);
         }
         System.out.println("\b" + movement);
