@@ -2,6 +2,7 @@
 ## Allievi:
 - Carlo Pezzotti
 - Matteo Arena
+- Sheila Camponovo 
 
 ## Scopo del progetto
     Realizzare un piccolo videogioco in Java 
