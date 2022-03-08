@@ -1,13 +1,13 @@
 package Menu.Option;
 
-import GameEngine.GameLogic;
+import GameEngine.GameBoard;
 
 public class Option implements IOption {
 
-    GameLogic logic;
+    GameBoard board;
 
-    public Option(GameLogic logic) {
-        this.logic = logic;
+    public Option(GameBoard board) {
+        this.board = board;
     }   
     public Option() {}
 

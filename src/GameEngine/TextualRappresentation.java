@@ -21,16 +21,16 @@ public class TextualRappresentation {
     /**
      * Metodo costruttore.
      *
-     * @param gameLogic Logica del gioco che si vuole giocare.
+     * @param board la tavola da gioco.
      */
-    public TextualRappresentation(GameLogic gameLogic) {
+    public TextualRappresentation(GameBoard board) {
         menu = new Menu(false);
 
         //Aggiunta dei menu
-        menu.addMenu(new ShowGridOption(gameLogic));
-        menu.addMenu(new MovePlayersOption(gameLogic));
-        menu.addMenu(new ExitOption(gameLogic));
-        menu.addMenu(new ShowPlayersOption(gameLogic));
+        menu.addMenu(new ShowGridOption(board));
+        menu.addMenu(new MovePlayersOption(board));
+        menu.addMenu(new ExitOption(board));
+        menu.addMenu(new ShowPlayersOption(board));
     }
 
     /**

@@ -1,5 +1,6 @@
 package Menu.Option;
 
+import GameEngine.GameBoard;
 import GameEngine.GameLogic;
 import GameObjects.Dice;
 import GameObjects.GameObject;
@@ -9,27 +10,33 @@ import Menu.Menu;
 
 public class MovePlayersOption extends Option {
 
-    public MovePlayersOption(GameLogic logic) {
-        super(logic);
+    public MovePlayersOption(GameBoard board) {
+        super(board);
     }
 
     @Override
     public void execute(int choice) {
-        for (GameObject gameObject : logic.getGameObjects()) {
-            if (gameObject instanceof Player) {
-                int movement = Dice.throwDice();
-                Menu menu = new Menu(true);
-                GenericOption north = new GenericOption("U", (n) -> logic.movePlayer((Player)gameObject, Direction.NORTH));
-                GenericOption south = new GenericOption("D", (n) -> logic.movePlayer((Player)gameObject, Direction.SOUTH));
-                GenericOption east = new GenericOption("R", (n) -> logic.movePlayer((Player)gameObject, Direction.EAST));
-                GenericOption west = new GenericOption("L", (n) -> logic.movePlayer((Player)gameObject, Direction.WEST));
-                menu.addMenu(north);
-                menu.addMenu(south);
-                menu.addMenu(east);
-                menu.addMenu(west);
-                for (int j = 0; j < movement; j++) menu.ask();
-            }
-        }
+        System.out.print(board.getGameLogic().getCurrentPlayer().getUsername()+" roll the dice: ");
+        int movement = Dice.throwDice();
+        Menu menu = new Menu(true);
+        GenericOption north = new GenericOption("U",
+                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                        Direction.NORTH));
+        GenericOption south = new GenericOption("D",
+                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                        Direction.SOUTH));
+        GenericOption east = new GenericOption("R",
+                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                        Direction.EAST));
+        GenericOption west = new GenericOption("L",
+                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                        Direction.WEST));
+        menu.addMenu(north);
+        menu.addMenu(south);
+        menu.addMenu(east);
+        menu.addMenu(west);
+        for (int j = 0; j < movement; j++)
+            menu.ask();
     }
 
     @Override

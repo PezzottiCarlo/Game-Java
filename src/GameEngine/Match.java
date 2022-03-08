@@ -20,7 +20,10 @@ public class Match {
     public void play(){
         System.out.println("Let's play!");
         while(!gameBoard.isGameOver()){
+            //inizio turno
             gameBoard.showOptions();
+            gameBoard.getGameLogic().nextTurn();
+            //fine turno
         }
         System.out.println("Thanks for playing");
     }

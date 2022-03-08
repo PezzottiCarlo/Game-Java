@@ -6,7 +6,6 @@ public class Dice {
 
     public static int throwDice() {
         int movement = 0;
-        System.out.print("Dice result: ");
         long start = System.currentTimeMillis();
         long end = 0L;
         System.out.print("0");

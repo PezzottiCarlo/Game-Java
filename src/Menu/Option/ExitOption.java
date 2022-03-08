@@ -1,16 +1,16 @@
 package Menu.Option;
-import GameEngine.GameLogic;
+import GameEngine.GameBoard;
 
 public class ExitOption extends Option {
-    private final GameLogic logic;
+    private final GameBoard board;
 
 
-    public ExitOption(GameLogic logic){
-        this.logic = logic;
+    public ExitOption(GameBoard board){
+        this.board = board;
     }
     @Override
     public void execute(int choice){
-        logic.gameOver();
+        board.getGameLogic().gameOver();
     }
 
     @Override

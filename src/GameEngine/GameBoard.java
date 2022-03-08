@@ -11,7 +11,7 @@ import General.Point;
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
-public class GameBoard implements GameLogicInterface{
+public class GameBoard{
 
     /**
      * Righe di default della tavola da gioco.
@@ -38,6 +38,8 @@ public class GameBoard implements GameLogicInterface{
      */
     private int boardSizeY = DEFAULT_ROWS;
 
+    private TextualRappresentation options;
+   
     /**
      * Metodo costruttore con grandezze della tavola.
      *
@@ -45,11 +47,12 @@ public class GameBoard implements GameLogicInterface{
      * @param sizeY Righe della tavola da gioco.
      */
     public GameBoard(int sizeX, int sizeY){
-        gameLogic = new GameLogic(sizeX, sizeY, this);
+        gameLogic = new GameLogic(sizeX, sizeY);
         if(sizeX > 0 && sizeY > 0){
             this.boardSizeX = sizeX;
             this.boardSizeY = sizeY;
         }
+        options = new TextualRappresentation(this);
     }
 
     /**
@@ -59,6 +62,10 @@ public class GameBoard implements GameLogicInterface{
         this(DEFAULT_COLUMNS, DEFAULT_ROWS);
     }
 
+
+    public GameLogic getGameLogic() {
+        return gameLogic;
+    }
     /**
      * Metodo per mostrare la tavola da gioco su terminale.
      */
@@ -85,7 +92,7 @@ public class GameBoard implements GameLogicInterface{
      * Permette di mostrare le scelte al giocatore.
      */
     public void showOptions(){
-        gameLogic.showOptions();
+        options.ask();
     }
 
     /**
@@ -112,11 +119,4 @@ public class GameBoard implements GameLogicInterface{
         return gameLogic.isGameOver();
     }
 
-    /**
-     * Metodo richiamato quando bisogna stampare la tavola da gioco.
-     */
-    @Override
-    public void showGrid() {
-        show();
-    }
 }

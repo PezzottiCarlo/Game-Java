@@ -33,11 +33,6 @@ public class GameLogic {
     private List<GameObject> gameObjects;
 
     /**
-     * Rappresentazione testuale delle opzioni.
-     */
-    private final TextualRappresentation options;
-
-    /**
      * Colonne della tavola da gioco.
      */
     private final int sizeX;
@@ -47,10 +42,7 @@ public class GameLogic {
      */
     private final int sizeY;
 
-    /**
-     * Logica legata al gioco.
-     */
-    private final GameLogicInterface gameBoard;
+    private Player currentPlayer;
 
     /**
      * Metodo costruttore.
@@ -59,30 +51,28 @@ public class GameLogic {
      * @param sizeY     Righe della tavola da gioco.
      * @param gameBoard Interfaccia tavola da gioco.
      */
-    public GameLogic(int sizeX, int sizeY, GameLogicInterface gameBoard) {
+    public GameLogic(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
-        this.gameBoard = gameBoard;
         gameObjects = new ArrayList<>();
         generatePlayers();
         generateCoins();
-        options = new TextualRappresentation(this);
     }
 
     /**
      * Metodo per generare i giocatori.
      */
     private void generatePlayers() {
-        gameObjects.add(new Player(
-                new Point(0, 0),
-                "Player0",
-                'X'));
+        currentPlayer = new Player(
+            new Point(0, 0),
+            "Player0",
+            'X');
 
+        gameObjects.add(currentPlayer);
         gameObjects.add(new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
-                'Y'));
+                'Y'));  
     }
 
     /**
@@ -109,13 +99,6 @@ public class GameLogic {
                 return false;
         }
         return true;
-    }
-
-    /**
-     * Chiede al menu di stampare le opzioni.
-     */
-    public void showOptions() {
-        options.ask();
     }
 
     /**
@@ -223,13 +206,6 @@ public class GameLogic {
     }
 
     /**
-     * Dice alla tavola da gioco di stamparsi.
-     */
-    public void showGrid() {
-        gameBoard.showGrid();
-    }
-
-    /**
      * Permette di sapere se il gioco è finito oppure no.
      *
      * @return true se il gioco è finito, altrimenti false.
@@ -240,5 +216,20 @@ public class GameLogic {
 
     public List<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void nextTurn() {
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Player) {
+                if (!gameObject.equals(currentPlayer)) {
+                    currentPlayer = (Player) gameObject;
+                    return;
+                }
+            }
+        }
     }
 }

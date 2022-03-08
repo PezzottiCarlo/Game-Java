@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import General.Color;
 import Menu.Option.IOption;
 
 public class Menu {
@@ -25,7 +26,7 @@ public class Menu {
         while (choice != 0) {
             if (!inline) {
                 for (int i = 0; i < menuItems.size(); i++) {
-                    System.out.println(i + ":\t" + menuItems.get(i).toString());
+                    System.out.println(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ":\t" + menuItems.get(i).toString());
                 }
                 System.out.print("Scelta: ");
             } else {
@@ -34,9 +35,9 @@ public class Menu {
                     if (i == 0)
                         System.out.print("[");
                     if (i < menuItems.size() - 1)
-                        System.out.print(i + ": "+ menuItems.get(i) + ", ");
+                        System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+ menuItems.get(i) + ", ");
                     if (i == menuItems.size()-1)
-                        System.out.print(i + ": "+menuItems.get(i)+"]: ");
+                        System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+menuItems.get(i)+"]: ");
                 }
             }
             while (!scanner.hasNextInt()) {
