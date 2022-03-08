@@ -8,7 +8,7 @@ import java.util.List;
 import GameObjects.*;
 
 /**
- * Logica del gioco.
+ * Logic for the game.
  *
  * @author Matteo Arena
  * @author Carlo Pezzotti
