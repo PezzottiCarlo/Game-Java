@@ -13,28 +13,34 @@ import Menu.Option.ExitOption;
  */
 public class TextualRappresentation {
 
+    //==================== Attributes ===================
+
     /**
-     * Menu contenente le scelte che può fare l'utente.
+     * Menu containing the options.
      */
     private final Menu menu;
 
+    // ==================== Constructors ====================
+
     /**
-     * Metodo costruttore.
+     * Constructor.
      *
-     * @param board la tavola da gioco.
+     * @param board Game board.
      */
     public TextualRappresentation(GameBoard board) {
         menu = new Menu(false);
 
-        //Aggiunta dei menu
+        //Add options
         menu.addMenu(new ShowGridOption(board));
         menu.addMenu(new MovePlayersOption(board));
         menu.addMenu(new ExitOption(board));
         menu.addMenu(new ShowPlayersOption(board));
     }
 
+    //==================== public methods ====================
+
     /**
-     * Richiesta all'utente della prossima scelta che vuole fare.
+     * Prints the menu.
      */
     public void ask(){
         menu.ask();

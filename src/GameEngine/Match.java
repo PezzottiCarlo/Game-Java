@@ -1,7 +1,7 @@
 package GameEngine;
 
 /**
- * Rappresentazione della partita.
+ * Represents the match.
  *
  * @author Matteo Arena
  * @author Carlo Pezzotti
