@@ -1,5 +1,11 @@
 package General;
 
+/**
+ * Class for representing a color.
+ *
+ * @author Matteo Arena
+ * @author Carlo Pezzotti
+ */
 public class Color {
 
     //==================== Attributes ===================
