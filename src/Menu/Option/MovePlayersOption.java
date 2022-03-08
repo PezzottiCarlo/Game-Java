@@ -8,12 +8,31 @@ import GameObjects.Player;
 import General.Direction;
 import Menu.Menu;
 
+/**
+ * This class represents the option to move players.
+ *
+ * @author Matteo Arena
+ * @author Carlo Pezzotti
+ */
 public class MovePlayersOption extends Option {
 
-    public MovePlayersOption(GameBoard board) {
-        super(board);
-    }
+    // ==================== Constructors ====================
 
+    /**
+     * Constructor for MovePlayersOption.
+     *
+     * @param board the board.
+     */
+    public MovePlayersOption(GameBoard board) {
+    super(board);
+}
+    //==================== public methods ====================
+
+    /**
+     * The code to execute when this option is chosen (it moves a player).
+     *
+     * @param choice the choice.
+     */
     @Override
     public void execute(int choice) {
         System.out.print(board.getGameLogic().getCurrentPlayer().getUsername()+" roll the dice: ");
@@ -39,6 +58,11 @@ public class MovePlayersOption extends Option {
             menu.ask();
     }
 
+    /**
+     * Returns the name of this option.
+     *
+     * @return the name of this option.
+     */
     @Override
     public String toString() {
         return "Move players";
