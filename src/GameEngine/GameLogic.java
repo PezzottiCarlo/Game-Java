@@ -21,16 +21,11 @@ public class GameLogic {
     public static final int NUMBER_OF_COINS = 10;
 
     /**
-     * Numero default di giocatori.
-     */
-    public static final int NUMBER_OF_PLAYERS = 2;
-
-    /**
      * Flag per capire quando il gioco è finito.
      */
     private boolean gameOver = false;
 
-    private List<GameObject> gameObjects;
+    private final List<GameObject> gameObjects;
 
     /**
      * Colonne della tavola da gioco.
@@ -49,7 +44,6 @@ public class GameLogic {
      *
      * @param sizeX     Colonne della tavola da gioco.
      * @param sizeY     Righe della tavola da gioco.
-     * @param gameBoard Interfaccia tavola da gioco.
      */
     public GameLogic(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -63,12 +57,11 @@ public class GameLogic {
      * Metodo per generare i giocatori.
      */
     private void generatePlayers() {
-        currentPlayer = new Player(
-            new Point(0, 0),
-            "Player0",
-            'X');
 
-        gameObjects.add(currentPlayer);
+        gameObjects.add(new Player(
+                new Point(0, 0),
+                "Player0",
+                'X'));
         gameObjects.add(new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
@@ -84,8 +77,8 @@ public class GameLogic {
     }
 
     private Point getRandomFreeCell() {
-        int x =0;
-        int y =0;
+        int x;
+        int y;
         do {
             x = (int) (Math.random() * sizeX);
             y = (int) (Math.random() * sizeY);
@@ -104,7 +97,6 @@ public class GameLogic {
     /**
      * Permette di spostare un giocatore di una sola casella.
      *
-     * @param index     Indice del giocatore.
      * @param direction Direzione in cui si vuole spostare.
      */
     public void movePlayer(Player player, Direction direction) {
@@ -123,7 +115,6 @@ public class GameLogic {
     /**
      * Controlla se su un determinato index è presente una moneta.
      *
-     * @param index Index che si vuole controllare.
      */
     private void checkCoins(Player player) {
         boolean found = false;
@@ -131,7 +122,7 @@ public class GameLogic {
             if (gameObject instanceof Coin) {
                 found = true;
                 if (player.getPosition().equals(gameObject.getPosition())) {
-                    gameObject = null;
+                    //gameObject = null;
                     player.incrementCoins();
                 }
             }
@@ -143,11 +134,9 @@ public class GameLogic {
     /**
      * Controllo se due giocatori si trovano sulla stessa casella.
      *
-     * @param index Index che si vuole controllare.
      */
 
     private void checkPlayers(Player player) {
-        boolean found = false;
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Player) {
                 if (!gameObject.equals(player)) {

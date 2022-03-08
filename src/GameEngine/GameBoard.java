@@ -1,50 +1,52 @@
 package GameEngine;
-import GameObjects.Coin;
 import GameObjects.GameObject;
-import GameObjects.Player;
 import General.Color;
 import General.Point;
 
 /**
- * Tavola da gioco.
+ * Game Board.
  *
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
 public class GameBoard{
 
+    //==================== Attributes ===================
     /**
-     * Righe di default della tavola da gioco.
+     * Default game board's rows.
      */
     public static final int DEFAULT_ROWS = 10;
 
     /**
-     * Colonne di default della tavola da gioco.
+     * Default game board's rows.
      */
     public static final int DEFAULT_COLUMNS = 10;
 
     /**
-     * Logica legata al gioco.
+     * Logic of the game.
      */
     private final GameLogic gameLogic;
 
     /**
-     * Dimensione orizzontale (colonne) della tavola da gioco.
+     * Game Board columns.
      */
     private int boardSizeX = DEFAULT_COLUMNS;
 
     /**
-     * Dimensione verticale (righe) della tavola da gioco.
+     * Game board rows.
      */
     private int boardSizeY = DEFAULT_ROWS;
 
-    private TextualRappresentation options;
-   
     /**
-     * Metodo costruttore con grandezze della tavola.
-     *
-     * @param sizeX Colonne della tavola da gioco.
-     * @param sizeY Righe della tavola da gioco.
+     * Textual rappresentation of the options.
+     */
+    private final TextualRappresentation options;
+
+    // ==================== Constructors ====================
+    /**
+     * Constructor.
+     * @param sizeX Game board columns.
+     * @param sizeY Game board rows.
      */
     public GameBoard(int sizeX, int sizeY){
         gameLogic = new GameLogic(sizeX, sizeY);
@@ -56,18 +58,45 @@ public class GameBoard{
     }
 
     /**
-     * Costruttore di default, imposta come grandezza della tavola i valori di default.
+     * Default constructor. The number of rows and columns are set to default values.
      */
     public GameBoard(){
         this(DEFAULT_COLUMNS, DEFAULT_ROWS);
     }
 
 
+    // ==================== Getters and Setters ====================
+
+    /**
+     * Get the game board's rows.
+     *
+     * @return Game board's rows.
+     */
     public GameLogic getGameLogic() {
         return gameLogic;
     }
+
+    //==================== private methods ====================
+
     /**
-     * Metodo per mostrare la tavola da gioco su terminale.
+     * Given a point, return the character rappresentation of the cell.
+     *
+     * @param point Point to check.
+     * @return Character rappresentation of the cell.
+     */
+    private String getCellChar(Point point){
+        for(GameObject gameObject : gameLogic.getGameObjects()){
+            if(gameObject.getPosition().equals(point)){
+                return gameObject.getColor()+""+gameObject.getCharacter()+Color.ANSI_RESET;
+            }
+        }
+        return " ";
+    }
+
+    //==================== public methods ====================
+
+    /**
+     * Show the game board on the terminal.
      */
     public void show(){
         for(int i = 0; i < boardSizeY*6+1; i++){
@@ -89,31 +118,16 @@ public class GameBoard{
     }
 
     /**
-     * Permette di mostrare le scelte al giocatore.
+     * Show the options on the terminal.
      */
     public void showOptions(){
         options.ask();
     }
 
     /**
-     * In base ad un punto (coordinate sulla tavola da gioco) ritorna il carattere che va stampato in quella cella.
+     * Check if the game is over.
      *
-     * @param point Punto del quale si vuole sapere il carattere.
-     * @return Il carattere da stampare a terminale che rappresenta l'oggetto da stampare.
-     */
-    public String getCellChar(Point point){
-        for(GameObject gameObject : gameLogic.getGameObjects()){
-            if(gameObject.getPosition().equals(point)){
-                return gameObject.getColor()+""+gameObject.getCharacter()+Color.ANSI_RESET;
-            }
-        }
-        return " ";
-    }
-
-    /**
-     * Controlla se il gioco è terminato.
-     *
-     * @return true se il gioco è finito, altrimenti false.
+     * @return True if the game is over, false otherwise.
      */
     public boolean isGameOver(){
         return gameLogic.isGameOver();
