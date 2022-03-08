@@ -2,8 +2,17 @@ package GameObjects;
 
 import General.Util;
 
+/**
+ * Dice class.
+ */
 public class Dice {
+    //==================== public methods ====================
 
+    /**
+     * Rolls the dice and returns the result.
+     *
+     * @return The result of the dice roll.
+     */
     public static int throwDice() {
         int movement = 0;
         long start = System.currentTimeMillis();

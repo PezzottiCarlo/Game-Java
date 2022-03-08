@@ -2,6 +2,12 @@ package GameObjects;
 
 import General.*;
 
+/**
+ * Coin class.
+ *
+ * @author Matteo Arena
+ * @author Carlo Pezzotti
+ */
 public class Coin extends GameObject{
 
     //==================== Attributes ===================
