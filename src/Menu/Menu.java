@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import General.Color;
+import General.Util;
 import Menu.Option.IOption;
 
 /**
@@ -50,6 +51,25 @@ public class Menu {
 
     // ==================== Getters and Setters ====================
     //==================== private methods ====================
+
+    private void printMenu() {
+        if (!inline) {
+            for (int i = 0; i < menuItems.size(); i++) {
+                System.out.println(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ":\t" + menuItems.get(i).toString());
+            }
+            System.out.print("Choose: ");
+        } else {
+            System.out.print("Choose an option: ");
+            for (int i = 0; i < menuItems.size(); i++) {
+                if (i == 0)
+                    System.out.print("[");
+                if (i < menuItems.size() - 1)
+                    System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+ menuItems.get(i) + ", ");
+                if (i == menuItems.size()-1)
+                    System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+menuItems.get(i)+"]: ");
+            }
+        }
+    }
     //==================== public methods ====================
 
     /**
@@ -58,28 +78,16 @@ public class Menu {
     public void ask() {
         int choice = -1;
         while (choice != 0) {
-            if (!inline) {
-                for (int i = 0; i < menuItems.size(); i++) {
-                    System.out.println(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ":\t" + menuItems.get(i).toString());
-                }
-                System.out.print("Choose: ");
-            } else {
-                System.out.print("Choose an option: ");
-                for (int i = 0; i < menuItems.size(); i++) {
-                    if (i == 0)
-                        System.out.print("[");
-                    if (i < menuItems.size() - 1)
-                        System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+ menuItems.get(i) + ", ");
-                    if (i == menuItems.size()-1)
-                        System.out.print(Color.ANSI_PURPLE +i+Color.ANSI_RESET + ": "+menuItems.get(i)+"]: ");
-                }
-            }
+            printMenu();
             while (!scanner.hasNextInt()) {
                 System.out.println("Invalid input");
-                scanner.nextLine();
+                printMenu();
+                scanner.next();
+
             }
             choice = scanner.nextInt();
             scanner.nextLine();
+
             if (choice >= 0 && choice < menuItems.size()) {
                 menuItems.get(choice).execute(choice);
                 return;
