@@ -13,7 +13,7 @@ public class Dice {
      *
      * @return The result of the dice roll.
      */
-    public static int throwDice() {
+    public static int throwDice(int max) {
         int movement = 0;
         long start = System.currentTimeMillis();
         long end = 0L;
@@ -25,5 +25,14 @@ public class Dice {
         }
         System.out.println("\b" + movement);
         return movement;
+    }
+
+    /**
+     * Rolls the default dice (1 to 6) and returns the result.
+     *
+     * @return The result of the dice roll.
+     */
+    public static int throwDice(){
+        return throwDice(6);
     }
 }
