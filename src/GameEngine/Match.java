@@ -40,10 +40,8 @@ public class Match {
     public void play(){
         System.out.println("Let's play!");
         while(!gameBoard.isGameOver()){
-            //Start turn
+            System.out.println("\n"+gameBoard.getGameLogic().getCurrentPlayer().getUsername()+"'s turn!");
             gameBoard.showOptions();
-            gameBoard.getGameLogic().nextTurn();
-            //End turn
         }
         System.out.println("Thanks for playing");
     }

@@ -15,7 +15,7 @@ import GameObjects.*;
  */
 public class GameLogic {
 
-    //==================== Attributes ===================
+    // ==================== Attributes ===================
 
     /**
      * Default coins number.
@@ -83,17 +83,17 @@ public class GameLogic {
         return currentPlayer;
     }
 
-    //==================== private methods ====================
+    // ==================== private methods ====================
 
     /**
      * Method used to generate players.
      */
     private void generatePlayers() {
-
-        gameObjects.add(new Player(
-                new Point(0, 0),
-                "Player0",
-                'X'));
+        currentPlayer = new Player(
+            new Point(0, 0),
+            "Player0",
+            'X');
+        gameObjects.add(currentPlayer);
         gameObjects.add(new Player(
                 new Point(sizeX - 1, sizeY - 1),
                 "Player1",
@@ -204,9 +204,10 @@ public class GameLogic {
     }
 
     /**
-     * Method used to check if a number is over another number, used to make the 'Pacman' effect.
+     * Method used to check if a number is over another number, used to make the
+     * 'Pacman' effect.
      *
-     * @param n Number to check.
+     * @param n    Number to check.
      * @param size Size that we don't want to go over.
      * @return The new number (the same if it was already good).
      */
@@ -217,12 +218,12 @@ public class GameLogic {
             return size + n % size;
     }
 
-    //==================== public methods ====================
+    // ==================== public methods ====================
 
     /**
      * Move the player passed as parameter.
      *
-     * @param player Player to move.
+     * @param player    Player to move.
      * @param direction Direction to move (North, South, East or West).
      */
     public void movePlayer(Player player, Direction direction) {
