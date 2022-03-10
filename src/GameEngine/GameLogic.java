@@ -144,18 +144,16 @@ public class GameLogic {
      */
     private void checkCoins(Player player) {
         boolean found = false;
-        GameObject toRemove = null;
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Coin) {
                 found = true;
                 if (player.getPosition().equals(gameObject.getPosition())) {
-                    toRemove = gameObject;
+                    gameObjects.remove(gameObject);
                     player.incrementCoins();
                     break;
                 }
             }
         }
-        gameObjects.remove(toRemove);
         if (!found)
             gameOver();
     }
