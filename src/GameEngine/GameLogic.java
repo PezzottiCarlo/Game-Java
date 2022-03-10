@@ -180,7 +180,10 @@ public class GameLogic {
      * @param player2 Player 2.
      */
     private void fight(Player player1, Player player2) {
+        System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
+        System.out.print(player1.getUsername()+"'s result: ");
         int a = Dice.throwDice();
+        System.out.print(player2.getUsername()+"'s result: ");
         int b = Dice.throwDice();
         if (a > b) {
             if (player1.getCoins() == 0) {
@@ -200,6 +203,9 @@ public class GameLogic {
                 player2.decrementCoins();
                 System.out.println(player1.getUsername() + " wins the match!!");
             }
+        }
+        else {
+            System.out.println("Draw!");
         }
     }
 

@@ -54,8 +54,10 @@ public class MovePlayersOption extends Option {
                 menu.addMenu(south);
                 menu.addMenu(east);
                 menu.addMenu(west);
-                for (int j = 0; j < movement; j++)
+                for (int j = 0; j < movement; j++){
                         menu.ask();
+                        board.show();
+                }
 
                 board.getGameLogic().nextTurn();
         }

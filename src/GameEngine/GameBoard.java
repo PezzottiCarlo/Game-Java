@@ -2,6 +2,7 @@ package GameEngine;
 import GameObjects.GameObject;
 import General.Color;
 import General.Point;
+import General.Util;
 
 /**
  * Game Board.
@@ -99,6 +100,7 @@ public class GameBoard{
      * Show the game board on the terminal.
      */
     public void show(){
+        Util.clearScreen();
         for(int i = 0; i < boardSizeY*6+1; i++){
             System.out.print("-");
         }
