@@ -148,6 +148,7 @@ public class GameLogic {
             if (gameObject instanceof Coin) {
                 found = true;
                 if (player.getPosition().equals(gameObject.getPosition())) {
+                    gameObjects.remove(gameObject);
                     player.incrementCoins();
                 }
             }
