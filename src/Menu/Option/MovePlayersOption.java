@@ -6,6 +6,7 @@ import GameObjects.Dice;
 import GameObjects.GameObject;
 import GameObjects.Player;
 import General.Direction;
+import General.Util;
 import Menu.Menu;
 
 /**
@@ -39,17 +40,17 @@ public class MovePlayersOption extends Option {
                 int movement = Dice.throwDice();
                 Menu menu = new Menu(true);
                 GenericOption north = new GenericOption("U",
-                                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
-                                                Direction.NORTH));
+                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                                Direction.NORTH));
                 GenericOption south = new GenericOption("D",
-                                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
-                                                Direction.SOUTH));
+                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                                Direction.SOUTH));
                 GenericOption east = new GenericOption("R",
-                                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
-                                                Direction.EAST));
+                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                                Direction.EAST));
                 GenericOption west = new GenericOption("L",
-                                (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
-                                                Direction.WEST));
+                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                                Direction.WEST));
                 menu.addMenu(north);
                 menu.addMenu(south);
                 menu.addMenu(east);

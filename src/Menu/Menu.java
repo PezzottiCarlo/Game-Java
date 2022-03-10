@@ -95,6 +95,7 @@ public class Menu {
                 System.out.println("Value out of range [0," + menuItems.size() + "] ");
             }
         }
+        Util.clearScreen();
     }
 
     /**
