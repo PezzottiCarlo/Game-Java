@@ -19,7 +19,7 @@ public class GameBoard{
     public static final int DEFAULT_ROWS = 10;
 
     /**
-     * Default game board's rows.
+     * Default game board's columns.
      */
     public static final int DEFAULT_COLUMNS = 10;
 
@@ -69,9 +69,9 @@ public class GameBoard{
     // ==================== Getters and Setters ====================
 
     /**
-     * Get the game board's rows.
+     * Get the logic of the game.
      *
-     * @return Game board's rows.
+     * @return The logic of the game.
      */
     public GameLogic getGameLogic() {
         return gameLogic;
