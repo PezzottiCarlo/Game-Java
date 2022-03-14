@@ -151,12 +151,18 @@ public class Menu {
             choice = input.charAt(0);
             scanner.nextLine();
             int optionIndex = getOptionIndex(choice);
-            if (optionIndex != -1) {
-                menuItems.get(optionIndex).execute(optionIndex);
-                return;
-            } else {
-                System.out.println(getError(""+(char)choice));
+            if(optionIndex < menuItems.size()){
+                if (optionIndex != -1) {
+                    menuItems.get(optionIndex).execute(optionIndex);
+                    return;
+                } else {
+                    System.out.println(getError(""+(char)choice));
+                }
+            }else{
+                System.out.println(getError((char)choice+" "));
             }
+
+
         }
         Util.clearScreen();
     }
