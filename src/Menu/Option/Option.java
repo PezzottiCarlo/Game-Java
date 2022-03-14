@@ -41,6 +41,9 @@ public abstract class Option implements ExecuteOption {
     @Override
     public void execute(int choice) {}
 
+    /**
+     * Get key of the option. Default is '0'.
+     */
     @Override
     public char getKeyOption() {
         return 0;

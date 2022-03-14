@@ -54,6 +54,7 @@ public class Menu {
 
     /**
      * Prints the menu on the console.
+     * TODO: modificare il metodo per stampare il menu in modo più elegante
      */
     private void printMenu() {
         if (!inline) {
@@ -89,28 +90,37 @@ public class Menu {
         }
     }
 
+    /**
+     * Return true if input is a char
+     * @param input the input
+     * @return true if input is a char
+     */
     private boolean isChar(String input) {
-        try {
-            Integer.parseInt(input);
-            return false;
-        } catch (NumberFormatException e) {
-            return true;
-        }
+        return input.length() == 1;
     }
 
-    private String getError(final int value){
-        String error = Color.ANSI_RED+"Error: "+Color.ANSI_RESET+(char)value+" is not a valid option. Choose:[";
+    /**
+     * Return the correnct error message
+     * @param value the value
+     * @return the correnct error message
+     */
+    private String getError(final String value){
+        String error = Color.ANSI_RED+"Error: "+Color.ANSI_RESET+"\'"+value+"\' is not a valid option. Choose:[";
         for(int i =0; i<menuItems.size();i++){
             if(menuItems.get(i).getKeyOption() != 0){
-                error += menuItems.get(i).getKeyOption() + " ";
+                error += Color.ANSI_PURPLE+menuItems.get(i).getKeyOption()+Color.ANSI_RESET + (i == menuItems.size()-1 ? "]" : ", ");
             }else{
-                error += i + " ";
+                error += Color.ANSI_PURPLE+i+Color.ANSI_RESET + (i == menuItems.size()-1 ? "]" : ",");
             }
         }
-        error += "\b]";
         return error;
     }
 
+    /**
+     * Method that returns the index of the choice according to the passed character if it does not find any correspondence it returns -1
+     * @param choice the choice character
+     * @return index of the choice
+     */
     private int getOptionIndex(final int choice){
         //check if value is a char number
         if(choice-48>=0 && choice-48<=9){
@@ -132,20 +142,20 @@ public class Menu {
         int choice = -1;
         while (choice != 0) {
             printMenu();
-            String input="  ";
-            while (!isChar(input) && !scanner.hasNextInt()) {
-                System.out.println("Invalid input");
+            String input = scanner.next();
+            while(!isChar(input)){
+                System.out.println(getError(input));
                 printMenu();
                 input = scanner.next();
             }
-            choice = scanner.next().charAt(0);
+            choice = input.charAt(0);
             scanner.nextLine();
             int optionIndex = getOptionIndex(choice);
             if (optionIndex != -1) {
                 menuItems.get(optionIndex).execute(optionIndex);
                 return;
             } else {
-                System.out.println(getError(choice));
+                System.out.println(getError(""+(char)choice));
             }
         }
         Util.clearScreen();

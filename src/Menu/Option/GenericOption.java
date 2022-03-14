@@ -20,6 +20,9 @@ public class GenericOption implements ExecuteOption {
      */
     private final String name;
 
+    /**
+     * The key of the option.
+     */
     private final char keyOption;
 
     // ==================== Constructors ====================
