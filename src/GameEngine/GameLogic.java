@@ -20,7 +20,7 @@ public class GameLogic {
     /**
      * Default coins number.
      */
-    public static final int NUMBER_OF_COINS = 1;
+    public static final int NUMBER_OF_COINS = 10;
 
     /**
      * Default number of players.
