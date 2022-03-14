@@ -228,6 +228,7 @@ public class GameLogic {
         }
         else {
             System.out.println("Draw!");
+            fight(player1, player2);
         }
     }
 
