@@ -1,5 +1,7 @@
 package GameEngine;
 
+import GameObjects.Player;
+
 /**
  * Represents the match.
  *
@@ -43,6 +45,8 @@ public class Match {
             System.out.println("\n"+gameBoard.getGameLogic().getCurrentPlayer().getUsername()+"'s turn!");
             gameBoard.showOptions();
         }
+        Player winner = gameBoard.getGameLogic().getWinner();
+        System.out.println(winner.getUsername()+" won!");
         System.out.println("Thanks for playing");
     }
 

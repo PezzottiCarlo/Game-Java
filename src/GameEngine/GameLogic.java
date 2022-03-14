@@ -83,6 +83,22 @@ public class GameLogic {
         return currentPlayer;
     }
 
+    public Player getWinner(){
+        Player bestPlayer = null;
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Player) {
+                if(bestPlayer == null){
+                    bestPlayer = (Player) gameObject;
+                }else{
+                    if(bestPlayer.getCoins() < ((Player) gameObject).getCoins()){
+                        bestPlayer = (Player) gameObject;
+                    }
+                }
+            }
+        }
+        return bestPlayer;
+    }
+
     // ==================== private methods ====================
 
     /**
@@ -189,7 +205,6 @@ public class GameLogic {
         int b = Dice.throwDice();
         if (a > b) {
             if (player1.getCoins() == 0) {
-                System.out.println(player2.getUsername() + " wins the game!!");
                 gameOver();
             } else {
                 player2.incrementCoins();
@@ -198,7 +213,6 @@ public class GameLogic {
             }
         } else if (a < b) {
             if (player2.getCoins() == 0) {
-                System.out.println(player2.getUsername() + " wins the game!!");
                 gameOver();
             } else {
                 player1.incrementCoins();
