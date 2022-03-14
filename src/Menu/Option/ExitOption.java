@@ -8,13 +8,6 @@ import GameEngine.GameBoard;
  * @author Carlo Pezzotti
  */
 public class ExitOption extends Option {
-    //==================== Attributes ===================
-
-    /**
-     * The game board.
-     */
-    private final GameBoard board;
-
     // ==================== Constructors ====================
 
     /**
@@ -23,7 +16,7 @@ public class ExitOption extends Option {
      * @param board The game board.
      */
     public ExitOption(GameBoard board){
-        this.board = board;
+        super(board);
     }
     //==================== public methods ====================
 
