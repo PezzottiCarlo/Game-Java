@@ -159,7 +159,7 @@ public class Menu {
                     System.out.println(getError(""+(char)choice));
                 }
             }else{
-                System.out.println(getError((char)choice+""));
+                System.out.println(getError((char)choice+" "));
             }
 
 
