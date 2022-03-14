@@ -20,7 +20,12 @@ public class GameLogic {
     /**
      * Default coins number.
      */
-    public static final int NUMBER_OF_COINS = 10;
+    public static final int NUMBER_OF_COINS = 1;
+
+    /**
+     * Default number of players.
+     */
+    public static final int NUMBER_OF_PLAYERS = 2;
 
     /**
      * Flag true when the game is ended.
@@ -81,6 +86,22 @@ public class GameLogic {
      */
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public Player getWinner(){
+        Player bestPlayer = null;
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Player) {
+                if(bestPlayer == null){
+                    bestPlayer = (Player) gameObject;
+                }else{
+                    if(bestPlayer.getCoins() < ((Player) gameObject).getCoins()){
+                        bestPlayer = (Player) gameObject;
+                    }
+                }
+            }
+        }
+        return bestPlayer;
     }
 
     // ==================== private methods ====================
@@ -154,8 +175,9 @@ public class GameLogic {
                 }
             }
         }
-        if (!found)
+        if(gameObjects.size() == NUMBER_OF_PLAYERS){
             gameOver();
+        }
     }
 
     /**
@@ -189,7 +211,6 @@ public class GameLogic {
         int b = Dice.throwDice();
         if (a > b) {
             if (player1.getCoins() == 0) {
-                System.out.println(player2.getUsername() + " wins the game!!");
                 gameOver();
             } else {
                 player2.incrementCoins();
@@ -198,7 +219,6 @@ public class GameLogic {
             }
         } else if (a < b) {
             if (player2.getCoins() == 0) {
-                System.out.println(player2.getUsername() + " wins the game!!");
                 gameOver();
             } else {
                 player1.incrementCoins();

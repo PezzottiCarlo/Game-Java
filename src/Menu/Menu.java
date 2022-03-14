@@ -52,6 +52,9 @@ public class Menu {
     // ==================== Getters and Setters ====================
     //==================== private methods ====================
 
+    /**
+     * Prints the menu on the console.
+     */
     private void printMenu() {
         if (!inline) {
             for (int i = 0; i < menuItems.size(); i++) {

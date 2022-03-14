@@ -56,8 +56,10 @@ public class MovePlayersOption extends Option {
                 menu.addMenu(east);
                 menu.addMenu(west);
                 for (int j = 0; j < movement; j++){
-                        menu.ask();
-                        board.show();
+                        if(!board.isGameOver()){
+                                menu.ask();
+                                board.show();
+                        }
                 }
 
                 board.getGameLogic().nextTurn();
