@@ -39,17 +39,17 @@ public class MovePlayersOption extends Option {
                 System.out.print(board.getGameLogic().getCurrentPlayer().getUsername() + " roll the dice: ");
                 int movement = Dice.throwDice();
                 Menu menu = new Menu(true);
-                GenericOption north = new GenericOption("U",
-                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                GenericOption north = new GenericOption("North",'w',
+                        () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                 Direction.NORTH));
-                GenericOption south = new GenericOption("D",
-                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                GenericOption south = new GenericOption("South",'s',
+                        () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                 Direction.SOUTH));
-                GenericOption east = new GenericOption("R",
-                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                GenericOption east = new GenericOption("East",'d',
+                        () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                 Direction.EAST));
-                GenericOption west = new GenericOption("L",
-                        (n) -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                GenericOption west = new GenericOption("West",'a',
+                        () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                 Direction.WEST));
                 menu.addMenu(north);
                 menu.addMenu(south);

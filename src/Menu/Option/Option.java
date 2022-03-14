@@ -8,7 +8,7 @@ import GameEngine.GameBoard;
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
-public class Option implements OptionExecute {
+public abstract class Option implements ExecuteOption {
 
     //==================== Attributes ===================
 
@@ -40,4 +40,9 @@ public class Option implements OptionExecute {
      */
     @Override
     public void execute(int choice) {}
+
+    @Override
+    public char getKeyOption() {
+        return 0;
+    }
 }
