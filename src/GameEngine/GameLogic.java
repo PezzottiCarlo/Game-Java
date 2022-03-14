@@ -88,14 +88,14 @@ public class GameLogic {
         return currentPlayer;
     }
 
-    public Player getWinner(){
+    public Player getWinner() {
         Player bestPlayer = null;
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Player) {
-                if(bestPlayer == null){
+                if (bestPlayer == null) {
                     bestPlayer = (Player) gameObject;
-                }else{
-                    if(bestPlayer.getCoins() < ((Player) gameObject).getCoins()){
+                } else {
+                    if (bestPlayer.getCoins() < ((Player) gameObject).getCoins()) {
                         bestPlayer = (Player) gameObject;
                     }
                 }
@@ -111,9 +111,9 @@ public class GameLogic {
      */
     private void generatePlayers() {
         currentPlayer = new Player(
-            new Point(0, sizeY - 1),
-            "Player0",
-            'X');
+                new Point(0, sizeY - 1),
+                "Player0",
+                'X');
         gameObjects.add(currentPlayer);
         gameObjects.add(new Player(
                 new Point(sizeX - 1, 0),
@@ -175,7 +175,7 @@ public class GameLogic {
                 }
             }
         }
-        if(gameObjects.size() == NUMBER_OF_PLAYERS && player.getCoins() == NUMBER_OF_COINS){
+        if (gameObjects.size() == NUMBER_OF_PLAYERS && player.getCoins() == NUMBER_OF_COINS) {
             gameOver();
         }
     }
@@ -206,9 +206,9 @@ public class GameLogic {
     private void fight(Player player1, Player player2) {
         
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
-        System.out.print(player1.getUsername()+"'s result: ");
+        System.out.print(player1.getUsername() + "'s result: ");
         int a = Dice.throwDice();
-        System.out.print(player2.getUsername()+"'s result: ");
+        System.out.print(player2.getUsername() + "'s result: ");
         int b = Dice.throwDice();
         if (a > b) {
             if (player1.getCoins() == 0) {
@@ -228,8 +228,7 @@ public class GameLogic {
                 System.out.println(player1.getUsername() + " wins the match!!");
                 movePlayerToInitialPosition(gameObjects.indexOf(player2));
             }
-        }
-        else {
+        } else {
             System.out.println("Draw!");
             fight(player1, player2);
         }
@@ -275,10 +274,18 @@ public class GameLogic {
         int x = player.getXPosition();
         int y = player.getYPosition();
         switch (direction) {
-            case NORTH -> player.setYPosition(checkPosition(--y, sizeY));
-            case SOUTH -> player.setYPosition(checkPosition(++y, sizeY));
-            case EAST -> player.setXPosition(checkPosition(++x, sizeX));
-            case WEST -> player.setXPosition(checkPosition(--x, sizeX));
+            case NORTH:
+                player.setYPosition(checkPosition(--y, sizeY));
+                break;
+            case SOUTH:
+                player.setYPosition(checkPosition(++y, sizeY));
+                break;
+            case EAST:
+                player.setXPosition(checkPosition(++x, sizeX));
+                break;
+            case WEST:
+                player.setXPosition(checkPosition(--x, sizeX));
+                break;
         }
         checkCoins(player);
         checkPlayers(player);
