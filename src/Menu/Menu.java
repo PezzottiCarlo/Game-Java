@@ -105,7 +105,7 @@ public class Menu {
      * @return the correnct error message
      */
     private String getError(final String value){
-        String error = Color.ANSI_RED+"Error: "+Color.ANSI_RESET+"\'"+value+"\' is not a valid option. Choose:[";
+        String error = Color.ANSI_RED+"Error: "+Color.ANSI_RESET+"\'"+value+"\' is not a valid option. Choose between [";
         for(int i =0; i<menuItems.size();i++){
             if(menuItems.get(i).getKeyOption() != 0){
                 error += Color.ANSI_PURPLE+menuItems.get(i).getKeyOption()+Color.ANSI_RESET + (i == menuItems.size()-1 ? "]" : ", ");
