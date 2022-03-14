@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import General.Color;
 import General.Util;
-import Menu.Option.IOption;
+import Menu.Option.OptionExecute;
 
 /**
  * Menu class.
@@ -26,7 +26,7 @@ public class Menu {
     /**
      * The list of the options.
      */
-    private final List<IOption> menuItems;
+    private final List<OptionExecute> menuItems;
 
     /**
      * Flag used to print on the same line.
@@ -106,7 +106,7 @@ public class Menu {
      *
      * @param menuItem the option to add.
      */
-    public void addMenu(IOption menuItem) {
+    public void addMenu(OptionExecute menuItem) {
         menuItems.add(menuItem);
     }
 
@@ -115,7 +115,7 @@ public class Menu {
      *
      * @param menuItem the option to remove.
      */
-    public void removeMenu(IOption menuItem) {
+    public void removeMenu(OptionExecute menuItem) {
         menuItems.remove(menuItem);
     }
 }
