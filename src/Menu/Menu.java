@@ -123,10 +123,10 @@ public class Menu {
      */
     private int getOptionIndex(final int choice){
         //check if value is a char number
-        if(choice-48>=0 && choice-48<=9){
+        if(choice-48>=0 && choice-48<menuItems.size()){
             return choice-48;
         }
-        for(int i =0; i<menuItems.size();i++){
+        for(int i = 0; i < menuItems.size();i++){
             if(menuItems.get(i).getKeyOption() == choice){
                 return i;
             }
@@ -151,15 +151,11 @@ public class Menu {
             choice = input.charAt(0);
             scanner.nextLine();
             int optionIndex = getOptionIndex(choice);
-            if(optionIndex < menuItems.size()){
-                if (optionIndex != -1) {
-                    menuItems.get(optionIndex).execute(optionIndex);
-                    return;
-                } else {
-                    System.out.println(getError(""+(char)choice));
-                }
-            }else{
-                System.out.println(getError((char)choice+" "));
+            if (optionIndex != -1) {
+                menuItems.get(optionIndex).execute(optionIndex);
+                return;
+            } else {
+                System.out.println(getError(""+(char)choice));
             }
 
 
