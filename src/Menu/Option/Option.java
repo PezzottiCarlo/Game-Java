@@ -8,7 +8,7 @@ import GameEngine.GameBoard;
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
-public class Option implements IOption {
+public class Option implements OptionExecute {
 
     //==================== Attributes ===================
 

@@ -3,7 +3,7 @@ package Menu.Option;
 /**
  * Interface for the Option class.
  */
-public interface IOption{
+public interface OptionExecute{
     /**
      * Gets the name of the option.
      *

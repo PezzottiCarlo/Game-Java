@@ -6,14 +6,14 @@ package Menu.Option;
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
-public class GenericOption implements IOption {
+public class GenericOption implements OptionExecute {
 
     //==================== Attributes ===================
 
     /**
      * Interface to implement.
      */
-    private final IOption option;
+    private final OptionExecute option;
 
     /**
      * The name of the option.
@@ -28,7 +28,7 @@ public class GenericOption implements IOption {
      * @param name The name of the option.
      * @param option The interface to implement.
      */
-    public GenericOption(String name, IOption option) {
+    public GenericOption(String name, OptionExecute option) {
         this.name = name;
         this.option = option;
     }
