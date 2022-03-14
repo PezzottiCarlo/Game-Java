@@ -190,7 +190,11 @@ public class GameLogic {
             if (gameObject instanceof Player) {
                 if (!gameObject.equals(player)) {
                     if (player.getPosition().equals(gameObject.getPosition())) {
-                        fight(player, (Player) gameObject);
+                        try {
+                            fight(player, (Player) gameObject);
+                        } catch (InterruptedException e) {
+                            gameOver();
+                        }
                     }
                 }
             }
@@ -202,8 +206,9 @@ public class GameLogic {
      *
      * @param player1 Player 1.
      * @param player2 Player 2.
+     * @throws InterruptedException
      */
-    private void fight(Player player1, Player player2) {
+    private void fight(Player player1, Player player2) throws InterruptedException {
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
         System.out.print(player1.getUsername() + "'s result: ");
         int a = Dice.throwDice();
@@ -229,6 +234,7 @@ public class GameLogic {
             System.out.println("Draw!");
             fight(player1, player2);
         }
+        Thread.sleep(1000);
     }
 
     /**
