@@ -1,6 +1,9 @@
 package Menu.Option;
 
 import GameEngine.GameBoard;
+import GameObjects.GameObject;
+import GameObjects.Player;
+import General.Color;
 
 /**
  * This class represents the option to show the grid.

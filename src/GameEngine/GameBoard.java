@@ -1,5 +1,6 @@
 package GameEngine;
 import GameObjects.GameObject;
+import GameObjects.Player;
 import General.Color;
 import General.Point;
 import General.Util;
@@ -117,6 +118,15 @@ public class GameBoard{
             }
             System.out.println();
         }
+
+        //Print players coins 
+        for(GameObject gameObject : getGameLogic().getGameObjects()){
+            if(gameObject instanceof Player){
+                Player p = (Player) gameObject;
+                System.out.print(p.getColor()+""+p.getCharacter()+Color.ANSI_RESET+ " -> " + p.getCoins()+"\t");
+            }
+        }
+        System.out.println();
     }
 
     /**

@@ -111,12 +111,12 @@ public class GameLogic {
      */
     private void generatePlayers() {
         currentPlayer = new Player(
-            new Point(0, 0),
+            new Point(0, sizeY - 1),
             "Player0",
             'X');
         gameObjects.add(currentPlayer);
         gameObjects.add(new Player(
-                new Point(sizeX - 1, sizeY - 1),
+                new Point(sizeX - 1, 0),
                 "Player1",
                 'Y'));
     }
