@@ -175,7 +175,7 @@ public class GameLogic {
                 }
             }
         }
-        if(gameObjects.size() == NUMBER_OF_PLAYERS){
+        if(gameObjects.size() == NUMBER_OF_PLAYERS && player.getCoins() == NUMBER_OF_COINS){
             gameOver();
         }
     }
