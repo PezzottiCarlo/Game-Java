@@ -31,9 +31,9 @@ public class TextualRappresentation {
         menu = new Menu(false);
 
         //Add options
+        menu.addMenu(new ExitOption(board));
         menu.addMenu(new ShowGridOption(board));
         menu.addMenu(new MovePlayersOption(board));
-        menu.addMenu(new ExitOption(board));
         menu.addMenu(new ShowPlayersOption(board));
     }
 
