@@ -39,6 +39,10 @@ public class GenericOption implements ExecuteOption {
         this.keyOption = keyOption;
     }
 
+    public GenericOption(String name, GenericExecuteOption option) {
+        this(name, (char)0, option);
+    }
+
 
     //==================== public methods ====================
 
