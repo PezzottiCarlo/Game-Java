@@ -20,7 +20,12 @@ public class GameLogic {
     /**
      * Default coins number.
      */
-    public static final int NUMBER_OF_COINS = 10;
+    public static final int NUMBER_OF_COINS = 1;
+
+    /**
+     * Default number of players.
+     */
+    public static final int NUMBER_OF_PLAYERS = 2;
 
     /**
      * Flag true when the game is ended.
@@ -170,8 +175,9 @@ public class GameLogic {
                 }
             }
         }
-        if (!found)
+        if(gameObjects.size() == NUMBER_OF_PLAYERS){
             gameOver();
+        }
     }
 
     /**
