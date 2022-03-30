@@ -107,4 +107,5 @@ public class Player extends GameObject {
                 "Position : " + position.toString() + "\n" +
                 "====================";
     }
+
 }

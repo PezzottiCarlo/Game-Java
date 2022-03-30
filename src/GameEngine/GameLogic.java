@@ -26,6 +26,10 @@ public class GameLogic {
      * Default number of players.
      */
     public static final int NUMBER_OF_PLAYERS = 2;
+    /**
+     * Default number of gems.
+     */
+    public static final int NUMBER_OF_GEMS = 5;
 
     /**
      * Flag true when the game is ended.
@@ -66,6 +70,7 @@ public class GameLogic {
         gameObjects = new ArrayList<>();
         generatePlayers();
         generateCoins();
+        generateGems();
     }
 
     // ==================== Getters and Setters ====================
@@ -105,6 +110,16 @@ public class GameLogic {
     }
 
     // ==================== private methods ====================
+
+    /**
+     * Generate gems.
+     */
+
+    private void generateGems() {
+        for (int i = 0; i < NUMBER_OF_GEMS; i++) {
+            gameObjects.add(new Gem(getRandomFreeCell()));
+        }   
+    }
 
     /**
      * Method used to generate players.
@@ -208,7 +223,7 @@ public class GameLogic {
      * @param player2 Player 2.
      * @throws InterruptedException
      */
-    private void fight(Player player1, Player player2)throws InterruptedException {
+    private void fight(Player player1, Player player2) throws InterruptedException {
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
         System.out.print(player1.getUsername() + "'s result: ");
         int a = Dice.throwDice();
@@ -259,10 +274,10 @@ public class GameLogic {
      *
      * @param playerIndex Index of the player to move.
      */
-    private void movePlayerToInitialPosition(int playerIndex){
+    private void movePlayerToInitialPosition(int playerIndex) {
         if (playerIndex == 0) {
             gameObjects.get(playerIndex).setPosition(new Point(0, sizeY - 1));
-        }else if (playerIndex == 1) {
+        } else if (playerIndex == 1) {
             gameObjects.get(playerIndex).setPosition(new Point(sizeX - 1, 0));
         }
     }
