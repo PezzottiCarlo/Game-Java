@@ -17,12 +17,12 @@ public class GameBoard{
     /**
      * Default game board's rows.
      */
-    public static final int DEFAULT_ROWS = 10;
+    public static final int DEFAULT_ROWS = 15;
 
     /**
      * Default game board's columns.
      */
-    public static final int DEFAULT_COLUMNS = 10;
+    public static final int DEFAULT_COLUMNS = 15;
 
     /**
      * Logic of the game.
