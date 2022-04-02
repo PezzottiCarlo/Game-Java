@@ -17,6 +17,7 @@ public class GameLogic {
 
     // ==================== Attributes ===================
 
+    public static final int NUMBER_OF_POTIONS = 3;
     /**
      * Default coins number.
      */
@@ -68,9 +69,7 @@ public class GameLogic {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         gameObjects = new ArrayList<>();
-        generatePlayers();
-        generateCoins();
-        generateGems();
+        generateItems();
     }
 
     // ==================== Getters and Setters ====================
@@ -111,10 +110,25 @@ public class GameLogic {
 
     // ==================== private methods ====================
 
+    private void generateItems(){
+        generatePlayers();
+        generateCoins();
+        generateGems();
+        generatePotions();
+    }
+
+    /**
+     * Generate potions.
+     */
+    private void generatePotions(){
+        for(int i = 0; i < NUMBER_OF_POTIONS; i++){
+            gameObjects.add(new Potion(getRandomFreeCell()));
+        }
+    }
+
     /**
      * Generate gems.
      */
-
     private void generateGems() {
         for (int i = 0; i < NUMBER_OF_GEMS; i++) {
             gameObjects.add(new Gem(getRandomFreeCell()));
