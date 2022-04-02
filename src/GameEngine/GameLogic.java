@@ -174,46 +174,23 @@ public class GameLogic {
     }
 
     /**
-     * Check if the player is on a coin.
+     * Check if the player is on an other object.
      *
      * @param player Player to check.
+     * @return If the player is on an other object returns the object, otherwise null.
      */
-    private void checkCoins(Player player) {
-        boolean found = false;
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject instanceof Coin) {
-                found = true;
-                if (player.getPosition().equals(gameObject.getPosition())) {
-                    gameObjects.remove(gameObject);
-                    player.incrementCoins();
-                    break;
-                }
-            }
-        }
-        if (gameObjects.size() == NUMBER_OF_PLAYERS && player.getCoins() == NUMBER_OF_COINS) {
-            gameOver();
-        }
-    }
-
-    /**
-     * Check if the player is on another player.
-     *
-     * @param player Player to check (the one who is playing).
-     */
-    private void checkPlayers(Player player) {
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject instanceof Player) {
-                if (!gameObject.equals(player)) {
-                    if (player.getPosition().equals(gameObject.getPosition())) {
-                        try {
-                            fight(player, (Player) gameObject);
-                        } catch (InterruptedException e) {
-                            gameOver();
-                        }
+    private GameObject isOver(Player player) {
+        Point position = player.getPosition();
+        for(GameObject object : gameObjects){
+            if(!object.equals(player)){
+                if(object.getXPosition() == player.getXPosition()){
+                    if(object.getYPosition() == player.getYPosition()){
+                        return object;
                     }
                 }
             }
         }
+        return null;
     }
 
     /**
@@ -221,7 +198,7 @@ public class GameLogic {
      *
      * @param player1 Player 1.
      * @param player2 Player 2.
-     * @throws InterruptedException
+     * @throws InterruptedException If the thread is interrupted.
      */
     private void fight(Player player1, Player player2) throws InterruptedException {
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
@@ -307,8 +284,19 @@ public class GameLogic {
                 player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
-        checkCoins(player);
-        checkPlayers(player);
+        GameObject over = isOver(player);
+        if(over != null){
+            if(over instanceof Player) {
+                try{
+                    fight(player, (Player) over);
+                }catch (InterruptedException e){
+                    System.out.println("Error while fighting");
+                }
+            }else if(over instanceof Coin) {
+                player.incrementCoins();
+                gameObjects.remove(over);
+            }
+        }
     }
 
     /**

@@ -42,16 +42,16 @@ public class MovePlayersOption extends Option {
                 GenericOption south = new GenericOption("South", 's',
                                 () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                                 Direction.SOUTH));
+                GenericOption west = new GenericOption("West", 'a',
+                        () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
+                                Direction.WEST));
                 GenericOption east = new GenericOption("East", 'd',
                                 () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
                                                 Direction.EAST));
-                GenericOption west = new GenericOption("West", 'a',
-                                () -> board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),
-                                                Direction.WEST));
                 menu.addMenu(north);
                 menu.addMenu(south);
-                menu.addMenu(east);
                 menu.addMenu(west);
+                menu.addMenu(east);
                 for (int j = 0; j < movement; j++) {
                         if (!board.isGameOver()) {
                                 menu.ask();
