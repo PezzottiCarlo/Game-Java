@@ -137,7 +137,6 @@ public class GameLogic {
      */
     private void generateRocks(){
         for(int i = 0; i < NUMBER_OF_ROCKS; i++){
-            System.out.println("generateRocks");
             gameObjects.add(new Rocks(getRandomFreeCell()));
         }
     }
@@ -196,11 +195,7 @@ public class GameLogic {
      * @return true if the cell is free, false otherwise.
      */
     private boolean isFreeCell(Point point) {
-        for (GameObject gameObject : gameObjects) {
-            if (gameObject.getPosition().equals(point))
-                return false;
-        }
-        return true;
+        return getGameObjectAtPosition(point) == null;
     }
 
     /**
@@ -227,7 +222,7 @@ public class GameLogic {
      * @param point Cell to check.
      * @return The content of the cell.
      */
-    private GameObject getCellGameObject(Point point){
+    private GameObject getGameObjectAtPosition(Point point){
         for(GameObject object : gameObjects){
             if(object.getPosition().equals(point)){
                 return object;
@@ -315,25 +310,25 @@ public class GameLogic {
         int y = player.getYPosition();
         switch (direction) {
             case NORTH:
-                if(getCellGameObject(new Point(x, y - 1)) instanceof Rocks)
+                if(getGameObjectAtPosition(new Point(x, y - 1)) instanceof Rocks)
                     return false;
                 else
                     player.setYPosition(checkPosition(--y, sizeY));
                 break;
             case SOUTH:
-                if(getCellGameObject(new Point(x, y + 1)) instanceof Rocks)
+                if(getGameObjectAtPosition(new Point(x, y + 1)) instanceof Rocks)
                 return false;
                 else
                     player.setYPosition(checkPosition(++y, sizeY));
                 break;
             case EAST:
-                if(getCellGameObject(new Point(x + 1, y)) instanceof Rocks)
+                if(getGameObjectAtPosition(new Point(x + 1, y)) instanceof Rocks)
                     return false;
                 else
                     player.setXPosition(checkPosition(++x, sizeX));
                 break;
             case WEST:
-                if(getCellGameObject(new Point(x - 1, y)) instanceof Rocks)
+                if(getGameObjectAtPosition(new Point(x - 1, y)) instanceof Rocks)
                     return false;
                 else
                     player.setXPosition(checkPosition(--x, sizeX));
