@@ -210,7 +210,6 @@ public class GameLogic {
      * @return If the player is on an other object returns the object, otherwise null.
      */
     private GameObject isOver(Player player) {
-        Point position = player.getPosition();
         for(GameObject object : gameObjects){
             if(!object.equals(player)){
                 if(object.getXPosition() == player.getXPosition()){
@@ -218,6 +217,20 @@ public class GameLogic {
                         return object;
                     }
                 }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Return content of the cell.
+     * @param point Cell to check.
+     * @return The content of the cell.
+     */
+    private GameObject getCellGameObject(Point point){
+        for(GameObject object : gameObjects){
+            if(object.getPosition().equals(point)){
+                return object;
             }
         }
         return null;
@@ -297,27 +310,40 @@ public class GameLogic {
      * @param player    Player to move.
      * @param direction Direction to move (North, South, East or West).
      */
-    public void movePlayer(Player player, Direction direction) {
+    public boolean movePlayer(Player player, Direction direction) {
         int x = player.getXPosition();
         int y = player.getYPosition();
         switch (direction) {
             case NORTH:
-                player.setYPosition(checkPosition(--y, sizeY));
+                if(getCellGameObject(new Point(x, y - 1)) instanceof Rocks)
+                    return false;
+                else
+                    player.setYPosition(checkPosition(--y, sizeY));
                 break;
             case SOUTH:
-                player.setYPosition(checkPosition(++y, sizeY));
+                if(getCellGameObject(new Point(x, y + 1)) instanceof Rocks)
+                return false;
+                else
+                    player.setYPosition(checkPosition(++y, sizeY));
                 break;
             case EAST:
-                player.setXPosition(checkPosition(++x, sizeX));
+                if(getCellGameObject(new Point(x + 1, y)) instanceof Rocks)
+                    return false;
+                else
+                    player.setXPosition(checkPosition(++x, sizeX));
                 break;
             case WEST:
-                player.setXPosition(checkPosition(--x, sizeX));
+                if(getCellGameObject(new Point(x - 1, y)) instanceof Rocks)
+                    return false;
+                else
+                    player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
         GameObject over = isOver(player);
         if(over != null){
             overEvent(player,over);
         }
+        return true;
     }
 
     /**
