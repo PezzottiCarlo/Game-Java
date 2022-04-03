@@ -31,6 +31,10 @@ public class GameLogic {
      * Default number of gems.
      */
     public static final int NUMBER_OF_GEMS = 5;
+    /**
+     * Default number of gems.
+     */
+    public static final int NUMBER_OF_ROCKS = 5;
 
     /**
      * Flag true when the game is ended.
@@ -115,6 +119,8 @@ public class GameLogic {
         generateCoins();
         generateGems();
         generatePotions();
+        generateRocks();
+        //sistemare metodi di generazione codice troppo ripetitivo
     }
 
     /**
@@ -123,6 +129,16 @@ public class GameLogic {
     private void generatePotions(){
         for(int i = 0; i < NUMBER_OF_POTIONS; i++){
             gameObjects.add(new Potion(getRandomFreeCell()));
+        }
+    }
+
+    /**
+     * Generate potions.
+     */
+    private void generateRocks(){
+        for(int i = 0; i < NUMBER_OF_ROCKS; i++){
+            System.out.println("generateRocks");
+            gameObjects.add(new Rocks(getRandomFreeCell()));
         }
     }
 
@@ -300,16 +316,29 @@ public class GameLogic {
         }
         GameObject over = isOver(player);
         if(over != null){
-            if(over instanceof Player) {
-                try{
-                    fight(player, (Player) over);
-                }catch (InterruptedException e){
-                    System.out.println("Error while fighting");
-                }
-            }else if(over instanceof Coin) {
-                player.incrementCoins();
-                gameObjects.remove(over);
+            overEvent(player,over);
+        }
+    }
+
+    /**
+     * Method called when a player is over an object.
+     * @param object
+     * @param gameObject
+     */
+    private void overEvent(Player player,GameObject gameObject){
+        if(gameObject instanceof Player){
+            try{
+                fight(player,(Player) gameObject);
+            }catch (InterruptedException e){
+                System.out.println("Error while fighting");
             }
+        }else if(gameObject instanceof Coin){
+            player.incrementCoins();
+            gameObjects.remove(gameObject);
+        }else if(gameObject instanceof Potion){
+            gameObjects.remove(gameObject);
+        }else if(gameObject instanceof Gem){
+            gameObjects.remove(gameObject);
         }
     }
 
