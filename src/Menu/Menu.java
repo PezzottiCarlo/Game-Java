@@ -70,7 +70,7 @@ public class Menu {
      */
     private void printMenu() {
         if (!inline) {
-            System.out.println(title);
+            if(!title.equals(""))System.out.println(title);
             for (int i = 0; i < menuItems.size(); i++) {
                 if (menuItems.get(i).getKeyOption() != 0) {
                     System.out.println(Color.ANSI_PURPLE + menuItems.get(i).getKeyOption() + Color.ANSI_RESET + ":\t" + menuItems.get(i).toString());
@@ -80,7 +80,7 @@ public class Menu {
             }
             System.out.print("Choose: ");
         } else {
-            System.out.println(title);
+            if(!title.equals(""))System.out.println(title);
             System.out.print("Choose an option: ");
             for (int i = 0; i < menuItems.size(); i++) {
                 if (i == 0)
