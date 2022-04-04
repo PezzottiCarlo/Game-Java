@@ -259,29 +259,18 @@ public class GameLogic {
             }
         }
 
-        System.out.print(player1.getUsername() + "'s result: ");
-        int a = Dice.throwDice();
-        System.out.print(player2.getUsername() + "'s result: ");
-        int b = Dice.throwDice();
-        if (a > b) {
-            if (player1.getCoins() == 0) {
-                gameOver();
-            } else {
-                player2.incrementCoins();
-                player1.decrementCoins();
-                System.out.println(player2.getUsername() + " wins the match!!");
-                movePlayerToInitialPosition(gameObjects.indexOf(player1));
-            }
-        } else if (a < b) {
-            if (player2.getCoins() == 0) {
-                gameOver();
-            } else {
-                player1.incrementCoins();
-                player2.decrementCoins();
-                System.out.println(player1.getUsername() + " wins the match!!");
-                movePlayerToInitialPosition(gameObjects.indexOf(player2));
-            }
-        } else {
+        System.out.println("Let's throw the dices!");
+        int throw1 = throwPlayerDice(player1);
+        int throw2 = throwPlayerDice(player2);
+        Player winner = null;
+        Player loser = null;
+        if(throw1 > throw2){
+            winner = player1;
+            loser = player2;
+        }else if(throw2 > throw1){
+            winner = player2;
+            loser = player1;
+        }else{
             System.out.println("Draw!");
             fight(player1, player2);
         }
