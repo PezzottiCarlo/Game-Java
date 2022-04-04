@@ -33,6 +33,8 @@ public class Menu {
      */
     private final boolean inline;
 
+    private final String title;
+
     // ==================== Constructors ====================
 
     static {
@@ -45,7 +47,17 @@ public class Menu {
      * @param inline flag used to print on the same line.
      */
     public Menu(boolean inline) {
+        this(inline, "");
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param inline flag used to print on the same line.
+     */
+    public Menu(boolean inline, String title) {
         this.inline = inline;
+        this.title = title;
         menuItems = new ArrayList<>();
     }
 
@@ -58,6 +70,7 @@ public class Menu {
      */
     private void printMenu() {
         if (!inline) {
+            System.out.println(title);
             for (int i = 0; i < menuItems.size(); i++) {
                 if (menuItems.get(i).getKeyOption() != 0) {
                     System.out.println(Color.ANSI_PURPLE + menuItems.get(i).getKeyOption() + Color.ANSI_RESET + ":\t" + menuItems.get(i).toString());
@@ -67,6 +80,7 @@ public class Menu {
             }
             System.out.print("Choose: ");
         } else {
+            System.out.println(title);
             System.out.print("Choose an option: ");
             for (int i = 0; i < menuItems.size(); i++) {
                 if (i == 0)
@@ -138,7 +152,7 @@ public class Menu {
     /**
      * Prints the menu on the console.
      */
-    public void ask() {
+    public int ask() {
         int choice = -1;
         while (choice != 0) {
             printMenu();
@@ -153,12 +167,13 @@ public class Menu {
             int optionIndex = getOptionIndex(choice);
             if (optionIndex != -1) {
                 menuItems.get(optionIndex).execute(optionIndex);
-                return;
+                return optionIndex;
             } else {
                 System.out.println(getError(""+(char)choice));
             }
         }
         Util.clearScreen();
+        return -1;
     }
 
     /**

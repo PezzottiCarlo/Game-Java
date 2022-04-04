@@ -1,6 +1,8 @@
 package GameEngine;
 
 import General.*;
+import Menu.Menu;
+import Menu.Option.GenericOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,14 +128,12 @@ public class GameLogic {
         generate(Object.Rock, NUMBER_OF_ROCKS);
         generate(Object.Potion, NUMBER_OF_POTIONS);
         generate(Object.Tree, NUMBER_OF_TREES);
-        gameObjects.add(new Rock(new Point(0, 0)));
     }
-
 
     /**
      * Generate objects.
      */
-    private void generate(Object obj,int quantity) {
+    private void generate(Object obj, int quantity) {
         for (int i = 0; i < quantity; i++) {
             switch (obj) {
                 case Gem:
@@ -154,7 +154,6 @@ public class GameLogic {
             }
         }
     }
-
 
     /**
      * Method used to generate players.
@@ -231,6 +230,15 @@ public class GameLogic {
         return null;
     }
 
+    private boolean askForGem(Player player) {
+        Menu menu = new Menu(true,player.getUsername() + " use gem to escape?");
+        GenericOption useGem = new GenericOption("Yes use gem", 'y', () -> player.setPosition(getRandomFreeCell()));
+        GenericOption back = new GenericOption("Don't use gem", 'n', () -> {});
+        menu.addMenu(useGem);
+        menu.addMenu(back);
+        return menu.ask()==0;
+    }
+                    
     /**
      * Fight between two players.
      *
@@ -240,6 +248,17 @@ public class GameLogic {
      */
     private void fight(Player player1, Player player2) throws InterruptedException {
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
+        if(player1.getGems() > 0){
+            if(askForGem(player1)){
+                return;
+            }
+        }
+        if(player2.getGems() > 0){
+            if(askForGem(player2)){
+                return;
+            }
+        }
+
         System.out.print(player1.getUsername() + "'s result: ");
         int a = Dice.throwDice();
         System.out.print(player2.getUsername() + "'s result: ");
@@ -300,7 +319,7 @@ public class GameLogic {
     private GameObject collideCheck(int x, int y) {
         Point tmp = new Point(x, y);
         GameObject object = getGameObjectAtPosition(tmp);
-        if (object != null && object.canCollide()) 
+        if (object != null && object.canCollide())
             return object;
         return null;
     }
@@ -340,9 +359,9 @@ public class GameLogic {
                     player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
-        if(obj != null)
+        if (obj != null)
             return obj;
-        
+
         GameObject over = isOver(player);
         if (over != null) {
             overEvent(player, over);
@@ -367,9 +386,10 @@ public class GameLogic {
             player.incrementCoins();
             gameObjects.remove(gameObject);
         } else if (gameObject instanceof Potion) {
-            // TODO 
+            player.incrementPotions();
             gameObjects.remove(gameObject);
         } else if (gameObject instanceof Gem) {
+            player.incrementGems();
             gameObjects.remove(gameObject);
         }
     }
