@@ -157,8 +157,6 @@ public class Menu {
             } else {
                 System.out.println(getError(""+(char)choice));
             }
-
-
         }
         Util.clearScreen();
     }
