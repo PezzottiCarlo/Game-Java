@@ -26,7 +26,7 @@ public class Player extends GameObject {
     /**
      * The number of gems;
      */
-    private int gems = 1;
+    private int gems = 0;
 
     /**
      * The number of potions the player has.
