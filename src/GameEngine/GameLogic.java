@@ -298,13 +298,9 @@ public class GameLogic {
     }
 
     private boolean collideCheck(int x, int y) {
-        System.out.println("Collide check at " + x + " " + y);
-        if (getGameObjectAtPosition(new Point(x, y)) != null) {
-            System.out.println("Object found " + getGameObjectAtPosition(new Point(x, y)).getClass().getSimpleName());
-            System.out.println("Can collide with " + getGameObjectAtPosition(new Point(x, y)).canCollide());
-        }
-        return (getGameObjectAtPosition(new Point(x, y)) != null
-                && getGameObjectAtPosition(new Point(x, y)).canCollide());
+        Point tmp = new Point(x, y);
+        return (getGameObjectAtPosition(tmp) != null
+                && getGameObjectAtPosition(tmp).canCollide());
     }
 
     // ==================== public methods ====================
@@ -314,6 +310,9 @@ public class GameLogic {
      *
      * @param player    Player to move.
      * @param direction Direction to move (North, South, East or West).
+     * 
+     * to-do: returns the type of the affected object so you can use it 
+     * in movePlayerOption and then handle the collision with trees
      */
     public boolean movePlayer(Player player, Direction direction) {
         int x = player.getXPosition();
