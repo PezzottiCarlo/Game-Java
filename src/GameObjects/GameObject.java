@@ -45,6 +45,7 @@ public abstract class GameObject{
         this.position = position;
         this.character = character;
         this.color = color;
+        this.canCollide = canCollide;
     }
 
     // ==================== Getters and Setters ====================

@@ -114,20 +114,20 @@ public class GameLogic {
 
     // ==================== private methods ====================
 
-    private void generateItems(){
+    private void generateItems() {
         generatePlayers();
         generateCoins();
         generateGems();
         generatePotions();
         generateRocks();
-        //sistemare metodi di generazione codice troppo ripetitivo
+        // sistemare metodi di generazione codice troppo ripetitivo
     }
 
     /**
      * Generate potions.
      */
-    private void generatePotions(){
-        for(int i = 0; i < NUMBER_OF_POTIONS; i++){
+    private void generatePotions() {
+        for (int i = 0; i < NUMBER_OF_POTIONS; i++) {
             gameObjects.add(new Potion(getRandomFreeCell()));
         }
     }
@@ -135,8 +135,8 @@ public class GameLogic {
     /**
      * Generate potions.
      */
-    private void generateRocks(){
-        for(int i = 0; i < NUMBER_OF_ROCKS; i++){
+    private void generateRocks() {
+        for (int i = 0; i < NUMBER_OF_ROCKS; i++) {
             gameObjects.add(new Rocks(getRandomFreeCell()));
         }
     }
@@ -147,7 +147,7 @@ public class GameLogic {
     private void generateGems() {
         for (int i = 0; i < NUMBER_OF_GEMS; i++) {
             gameObjects.add(new Gem(getRandomFreeCell()));
-        }   
+        }
     }
 
     /**
@@ -202,13 +202,14 @@ public class GameLogic {
      * Check if the player is on an other object.
      *
      * @param player Player to check.
-     * @return If the player is on an other object returns the object, otherwise null.
+     * @return If the player is on an other object returns the object, otherwise
+     *         null.
      */
     private GameObject isOver(Player player) {
-        for(GameObject object : gameObjects){
-            if(!object.equals(player)){
-                if(object.getXPosition() == player.getXPosition()){
-                    if(object.getYPosition() == player.getYPosition()){
+        for (GameObject object : gameObjects) {
+            if (!object.equals(player)) {
+                if (object.getXPosition() == player.getXPosition()) {
+                    if (object.getYPosition() == player.getYPosition()) {
                         return object;
                     }
                 }
@@ -219,12 +220,13 @@ public class GameLogic {
 
     /**
      * Return content of the cell.
+     * 
      * @param point Cell to check.
      * @return The content of the cell.
      */
-    private GameObject getGameObjectAtPosition(Point point){
-        for(GameObject object : gameObjects){
-            if(object.getPosition().equals(point)){
+    private GameObject getGameObjectAtPosition(Point point) {
+        for (GameObject object : gameObjects) {
+            if (object.getPosition().equals(point)) {
                 return object;
             }
         }
@@ -297,6 +299,16 @@ public class GameLogic {
         }
     }
 
+    private boolean collideCheck(int x, int y) {
+        System.out.println("Collide check at " + x + " " + y);
+        if (getGameObjectAtPosition(new Point(x, y)) != null) {
+            System.out.println("Object found " + getGameObjectAtPosition(new Point(x, y)).getClass().getSimpleName());
+            System.out.println("Can collide with " + getGameObjectAtPosition(new Point(x, y)).canCollide());
+        }
+        return (getGameObjectAtPosition(new Point(x, y)) != null
+                && getGameObjectAtPosition(new Point(x, y)).canCollide());
+    }
+
     // ==================== public methods ====================
 
     /**
@@ -310,55 +322,56 @@ public class GameLogic {
         int y = player.getYPosition();
         switch (direction) {
             case NORTH:
-                if(getGameObjectAtPosition(new Point(x, y - 1)) instanceof Rocks)
+                if (collideCheck(x, checkPosition(y - 1, sizeY)))
                     return false;
                 else
                     player.setYPosition(checkPosition(--y, sizeY));
                 break;
             case SOUTH:
-                if(getGameObjectAtPosition(new Point(x, y + 1)) instanceof Rocks)
-                return false;
+                if (collideCheck(x, checkPosition(y + 1, sizeY)))
+                    return false;
                 else
                     player.setYPosition(checkPosition(++y, sizeY));
                 break;
             case EAST:
-                if(getGameObjectAtPosition(new Point(x + 1, y)) instanceof Rocks)
+                if (collideCheck(checkPosition(x + 1, sizeX), y))
                     return false;
                 else
                     player.setXPosition(checkPosition(++x, sizeX));
                 break;
             case WEST:
-                if(getGameObjectAtPosition(new Point(x - 1, y)) instanceof Rocks)
+                if (collideCheck(checkPosition(x - 1, sizeX), y))
                     return false;
                 else
                     player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
         GameObject over = isOver(player);
-        if(over != null){
-            overEvent(player,over);
+        if (over != null) {
+            overEvent(player, over);
         }
         return true;
     }
 
     /**
      * Method called when a player is over an object.
+     * 
      * @param object
      * @param gameObject
      */
-    private void overEvent(Player player,GameObject gameObject){
-        if(gameObject instanceof Player){
-            try{
-                fight(player,(Player) gameObject);
-            }catch (InterruptedException e){
+    private void overEvent(Player player, GameObject gameObject) {
+        if (gameObject instanceof Player) {
+            try {
+                fight(player, (Player) gameObject);
+            } catch (InterruptedException e) {
                 System.out.println("Error while fighting");
             }
-        }else if(gameObject instanceof Coin){
+        } else if (gameObject instanceof Coin) {
             player.incrementCoins();
             gameObjects.remove(gameObject);
-        }else if(gameObject instanceof Potion){
+        } else if (gameObject instanceof Potion) {
             gameObjects.remove(gameObject);
-        }else if(gameObject instanceof Gem){
+        } else if (gameObject instanceof Gem) {
             gameObjects.remove(gameObject);
         }
     }
