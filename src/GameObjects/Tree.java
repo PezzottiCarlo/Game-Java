@@ -22,4 +22,9 @@ public class Tree extends GameObject {
     public void hit(){
         this.health--;
     }
+
+    @Override
+    public Object getType() {
+        return Object.Tree;
+    }
 }

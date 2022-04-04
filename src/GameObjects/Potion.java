@@ -15,4 +15,9 @@ public class Potion extends GameObject{
     public Potion(Point position){
         super(position, POTION_CHARACTER, new Color(Color.ANSI_PURPLE),false);
     }
+
+    @Override
+    public Object getType() {
+        return Object.Potion;
+    }
 }

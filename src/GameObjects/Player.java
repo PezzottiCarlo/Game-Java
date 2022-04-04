@@ -108,4 +108,9 @@ public class Player extends GameObject {
                 "====================";
     }
 
+    @Override
+    public Object getType() {
+        return Object.Player;
+    }
+
 }

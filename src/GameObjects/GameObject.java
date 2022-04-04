@@ -150,4 +150,6 @@ public abstract class GameObject{
     public void setColor(Color color){
         this.color = color;
     }
+
+    public abstract Object getType();
 }

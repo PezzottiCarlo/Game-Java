@@ -38,4 +38,9 @@ public class Coin extends GameObject{
         super(new Point(x,y),COIN_CHARACTER,new Color(Color.ANSI_YELLOW),false);
     }
 
+    @Override
+    public Object getType() {
+        return Object.Coin;
+    }
+
 }

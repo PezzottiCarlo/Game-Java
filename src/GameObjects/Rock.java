@@ -16,5 +16,10 @@ public class Rock extends GameObject {
     public Rock(Point position) {
         super(position, WALL_CHARACTER, new Color(Color.ANSI_RED_BACKGROUND),true);
     }
+
+    @Override
+    public Object getType() {
+        return Object.Rock;
+    }
     
 }
