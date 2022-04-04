@@ -5,6 +5,8 @@ import Menu.Menu;
 import Menu.Option.GenericOption;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import GameObjects.*;
@@ -238,7 +240,7 @@ public class GameLogic {
         menu.addMenu(back);
         return menu.ask()==0;
     }
-                    
+
     /**
      * Fight between two players.
      *
@@ -248,28 +250,28 @@ public class GameLogic {
      */
     private void fight(Player player1, Player player2) throws InterruptedException{
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
-        if(player1.getGems() > 0){
-            if(askForGem(player1)){
-                return;
+
+        Player[] players = {player1, player2};
+        int[] playerThrows = new int[2];
+
+        for(int i = 0; i < players.length; i++){
+            if(players[i].getGems() > 0){
+                if(askForGem(players[i])){
+                    return;
+                }
             }
-        }
-        if(player2.getGems() > 0){
-            if(askForGem(player2)){
-                return;
-            }
+            playerThrows[i] = throwPlayerDice(players[i]);
         }
 
-        System.out.println("Let's throw the dices!");
-        int throw1 = throwPlayerDice(player1);
-        int throw2 = throwPlayerDice(player2);
         Player winner = null;
         Player loser = null;
-        if(throw1 > throw2){
-            winner = player1;
-            loser = player2;
-        }else if(throw2 > throw1){
-            winner = player2;
-            loser = player1;
+
+        if(playerThrows[0] > playerThrows[1]){
+            winner = players[0];
+            loser = players[1];
+        }else if(playerThrows[1] > playerThrows[0]){
+            winner = players[1];
+            loser = players[0];
         }else{
             System.out.println("Draw!");
             fight(player1, player2);
