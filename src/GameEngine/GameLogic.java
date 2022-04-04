@@ -131,7 +131,7 @@ public class GameLogic {
 
 
     /**
-     * Generate potions.
+     * Generate objects.
      */
     private void generate(Object obj,int quantity) {
         for (int i = 0; i < quantity; i++) {
