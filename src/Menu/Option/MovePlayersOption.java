@@ -2,7 +2,9 @@ package Menu.Option;
 
 import GameEngine.GameBoard;
 import GameObjects.Dice;
-import GameObjects.Player;
+import GameObjects.GameObject;
+import GameObjects.Object;
+import GameObjects.Tree;
 import General.Direction;
 import Menu.Menu;
 
@@ -24,6 +26,21 @@ public class MovePlayersOption extends Option {
         public MovePlayersOption(GameBoard board) {
                 super(board);
         }
+        // ==================== private methods ====================
+        private void moveAction(GameObject movingObj,Menu menu){
+                if(movingObj!=null){
+                        if(movingObj.getType() == Object.Tree){
+                                ((Tree)movingObj).hit();
+                                if(((Tree)movingObj).getHealth()==0){
+                                        board.getGameLogic().getGameObjects().remove(movingObj);
+                                }
+                        }else{
+                                board.show();
+                                menu.ask();
+                        }
+                }
+        }
+
         // ==================== public methods ====================
 
         /**
@@ -40,31 +57,23 @@ public class MovePlayersOption extends Option {
                 Menu menu = new Menu(true);
                 GenericOption north = new GenericOption("North", 'w',
                 () -> {
-                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.NORTH)!=null){
-                                board.show();
-                                menu.ask();
-                        }
+                        GameObject obj = board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.NORTH);
+                        moveAction(obj,menu);
                 });
                 GenericOption south = new GenericOption("South", 's',
                 () -> {
-                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.SOUTH)!=null){
-                                board.show();
-                                menu.ask();
-                        }
+                        GameObject obj = board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.SOUTH);
+                        moveAction(obj,menu);
                 });
                 GenericOption west = new GenericOption("West", 'a',
                 () -> {
-                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.WEST)!=null){
-                                board.show();
-                                menu.ask();
-                        }
+                        GameObject obj = board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.WEST);
+                        moveAction(obj,menu);
                 });
                 GenericOption east = new GenericOption("East", 'd',
                 () -> {
-                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.EAST)!=null){
-                                board.show();
-                                menu.ask();
-                        }
+                        GameObject obj = board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.EAST);
+                        moveAction(obj,menu);
                 });
                 menu.addMenu(north);
                 menu.addMenu(south);

@@ -20,6 +20,7 @@ public class Tree extends GameObject {
     }
 
     public void hit(){
+        setColor(new Color(Color.ANSI_YELLOW_BACKGROUND));
         this.health--;
     }
 

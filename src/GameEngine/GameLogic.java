@@ -126,7 +126,7 @@ public class GameLogic {
         generate(Object.Rock, NUMBER_OF_ROCKS);
         generate(Object.Potion, NUMBER_OF_POTIONS);
         generate(Object.Tree, NUMBER_OF_TREES);
-        // sistemare metodi di generazione codice troppo ripetitivo
+        gameObjects.add(new Rock(new Point(0, 0)));
     }
 
 
@@ -314,34 +314,34 @@ public class GameLogic {
      * @param direction Direction to move (North, South, East or West).
      * @return returns the object it collides with if it collides otherwise null
      */
-    public Object movePlayer(Player player, Direction direction) {
+    public GameObject movePlayer(Player player, Direction direction) {
         int x = player.getXPosition();
         int y = player.getYPosition();
         GameObject obj = null;
         switch (direction) {
             case NORTH:
-                obj = collideCheck(x, y - 1);
+                obj = collideCheck(x, checkPosition(y - 1, sizeY));
                 if (obj == null)
                     player.setYPosition(checkPosition(--y, sizeY));
                 break;
             case SOUTH:
-                obj = collideCheck(x, y + 1);
+                obj = collideCheck(x, checkPosition(y + 1, sizeY));
                 if (obj == null)
                     player.setYPosition(checkPosition(++y, sizeY));
                 break;
             case EAST:
-                obj = collideCheck(x + 1, y);
+                obj = collideCheck(checkPosition(x + 1, sizeX), y);
                 if (obj == null)
                     player.setXPosition(checkPosition(++x, sizeX));
                 break;
             case WEST:
-                obj = collideCheck(x - 1, y);
+                obj = collideCheck(checkPosition(x - 1, sizeX), y);
                 if (obj == null)
                     player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
         if(obj != null)
-            return obj.getType();
+            return obj;
         
         GameObject over = isOver(player);
         if (over != null) {
