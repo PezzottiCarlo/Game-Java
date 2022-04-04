@@ -241,6 +241,15 @@ public class GameLogic {
         return menu.ask()==0;
     }
 
+    private boolean askForPotion(Player player){
+        Menu menu = new Menu(true, player.getUsername() + " use potion to win?");
+        GenericOption usePotion = new GenericOption("Yes use the potion", 'y', () -> {});
+        GenericOption back = new GenericOption("Don't use the potion", 'n', () -> {});
+        menu.addMenu(usePotion);
+        menu.addMenu(back);
+        return menu.ask()==0;
+    }
+
     /**
      * Fight between two players.
      *
@@ -254,17 +263,27 @@ public class GameLogic {
         Player[] players = {player1, player2};
         int[] playerThrows = new int[2];
 
+        Player winner = null;
+        Player loser = null;
+
         for(int i = 0; i < players.length; i++){
             if(players[i].getGems() > 0){
                 if(askForGem(players[i])){
                     return;
                 }
             }
+
+            if(players[i].getPotions() > 0){
+                if(askForPotion(players[i])){
+                    winner = players[i];
+                    loser = players[(i + 1) % 2];
+                    break;
+                }
+            }
+
             playerThrows[i] = throwPlayerDice(players[i]);
         }
 
-        Player winner = null;
-        Player loser = null;
 
         if(playerThrows[0] > playerThrows[1]){
             winner = players[0];
