@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GameObjects.*;
+import GameObjects.Object;
 
 /**
  * Logic for the game.
@@ -32,9 +33,13 @@ public class GameLogic {
      */
     public static final int NUMBER_OF_GEMS = 5;
     /**
-     * Default number of gems.
+     * Default number of rocks.
      */
     public static final int NUMBER_OF_ROCKS = 5;
+    /**
+     * Default number of trees.
+     */
+    public static final int NUMBER_OF_TREES = 7;
 
     /**
      * Flag true when the game is ended.
@@ -116,39 +121,40 @@ public class GameLogic {
 
     private void generateItems() {
         generatePlayers();
-        generateCoins();
-        generateGems();
-        generatePotions();
-        generateRocks();
+        generate(Object.Coin, NUMBER_OF_COINS);
+        generate(Object.Gem, NUMBER_OF_GEMS);
+        generate(Object.Rock, NUMBER_OF_ROCKS);
+        generate(Object.Potion, NUMBER_OF_POTIONS);
+        generate(Object.Tree, NUMBER_OF_TREES);
         // sistemare metodi di generazione codice troppo ripetitivo
     }
 
-    /**
-     * Generate potions.
-     */
-    private void generatePotions() {
-        for (int i = 0; i < NUMBER_OF_POTIONS; i++) {
-            gameObjects.add(new Potion(getRandomFreeCell()));
-        }
-    }
 
     /**
      * Generate potions.
      */
-    private void generateRocks() {
-        for (int i = 0; i < NUMBER_OF_ROCKS; i++) {
-            gameObjects.add(new Rocks(getRandomFreeCell()));
+    private void generate(Object obj,int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            switch (obj) {
+                case Gem:
+                    gameObjects.add(new Gem(getRandomFreeCell()));
+                    break;
+                case Potion:
+                    gameObjects.add(new Potion(getRandomFreeCell()));
+                    break;
+                case Rock:
+                    gameObjects.add(new Rock(getRandomFreeCell()));
+                    break;
+                case Tree:
+                    gameObjects.add(new Tree(getRandomFreeCell()));
+                    break;
+                case Coin:
+                    gameObjects.add(new Coin(getRandomFreeCell()));
+                    break;
+            }
         }
     }
 
-    /**
-     * Generate gems.
-     */
-    private void generateGems() {
-        for (int i = 0; i < NUMBER_OF_GEMS; i++) {
-            gameObjects.add(new Gem(getRandomFreeCell()));
-        }
-    }
 
     /**
      * Method used to generate players.
@@ -163,14 +169,6 @@ public class GameLogic {
                 new Point(sizeX - 1, 0),
                 "Player1",
                 'Y'));
-    }
-
-    /**
-     * Method used to generate coins.
-     */
-    private void generateCoins() {
-        for (int i = 0; i < NUMBER_OF_COINS; i++)
-            gameObjects.add(new Coin(getRandomFreeCell()));
     }
 
     /**
