@@ -24,6 +24,16 @@ public class Player extends GameObject {
     private int coins = 0;
 
     /**
+     * The number of gems;
+     */
+    private int gems = 0;
+
+    /**
+     * The number of potions the player has.
+     */
+    private int potions = 0;
+
+    /**
      * The default id for the player if the username is not specified or unacceptable.
      */
     private static int defaultId = 100;
@@ -66,6 +76,13 @@ public class Player extends GameObject {
         return coins;
     }
 
+    public int getGems() {
+        return gems;
+    }
+
+    public int getPotions() {
+        return potions;
+    }
     /**
      * Returns the player's username.
      *
@@ -86,11 +103,43 @@ public class Player extends GameObject {
     }
 
     /**
+     * Adds a gem to the player.
+     */
+    public void incrementGems(){
+        gems++;
+    }
+
+    /**
+     * Adds a potion to the player.
+     */
+    public void incrementPotions(){
+        potions++;
+    }
+
+    /**
      * Removes a coin from the player.
      */
     public void decrementCoins(){
         if(coins > 0){
             coins--;
+        }
+    }
+
+    /**
+     * Removes a gem from the player.
+     */
+    public void decrementGems(){
+        if(gems > 0){
+            gems--;
+        }
+    }
+
+    /**
+     * Removes a potion from the player.
+     */
+    public void decrementPotions(){
+        if(potions > 0){
+            potions--;
         }
     }
 
