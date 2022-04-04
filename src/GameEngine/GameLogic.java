@@ -246,7 +246,7 @@ public class GameLogic {
      * @param player2 Player 2.
      * @throws InterruptedException If the thread is interrupted.
      */
-    private void fight(Player player1, Player player2) throws InterruptedException {
+    private void fight(Player player1, Player player2) throws InterruptedException{
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
         if(player1.getGems() > 0){
             if(askForGem(player1)){
@@ -285,7 +285,26 @@ public class GameLogic {
             System.out.println("Draw!");
             fight(player1, player2);
         }
+
+        winner.incrementCoins();
+        loser.decrementCoins();
+        movePlayerToInitialPosition(loser);
+
+        System.out.println(winner.getUsername() + " wins the match!!");
         Thread.sleep(1000);
+
+    }
+
+    /**
+     * Throws the dice for a player.
+     *
+     * @param player Player who wants to throw the dice.
+     *
+     * @return The result of the throw.
+     */
+    private int throwPlayerDice(Player player){
+        System.out.print(player.getUsername() + "'s result: ");
+        return Dice.throwDice();
     }
 
     /**
@@ -308,7 +327,8 @@ public class GameLogic {
      *
      * @param playerIndex Index of the player to move.
      */
-    private void movePlayerToInitialPosition(int playerIndex) {
+    private void movePlayerToInitialPosition(Player player) {
+        int playerIndex = gameObjects.indexOf(player);
         if (playerIndex == 0) {
             gameObjects.get(playerIndex).setPosition(new Point(0, sizeY - 1));
         } else if (playerIndex == 1) {
