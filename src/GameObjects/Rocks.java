@@ -14,7 +14,7 @@ public class Rocks extends GameObject {
      * The initial position of the game object.
      */
     public Rocks(Point position) {
-        super(position, WALL_CHARACTER, new Color(Color.ANSI_RED_BACKGROUND));
+        super(position, WALL_CHARACTER, new Color(Color.ANSI_RED_BACKGROUND),true);
     }
     
 }

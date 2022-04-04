@@ -38,7 +38,7 @@ public class Player extends GameObject {
      * @param marker the player's marker (the character who will be printed on the terminal).
      */
     public Player(Point position, String username, char marker) {
-        super(position,marker,new Color(Color.ANSI_CYAN));
+        super(position,marker,new Color(Color.ANSI_CYAN),false);
         setUsername(username);
     }
 

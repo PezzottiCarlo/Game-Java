@@ -13,6 +13,6 @@ public class Potion extends GameObject{
      * @param position  The initial position of the game object.
      */
     public Potion(Point position){
-        super(position, POTION_CHARACTER, new Color(Color.ANSI_PURPLE));
+        super(position, POTION_CHARACTER, new Color(Color.ANSI_PURPLE),false);
     }
 }

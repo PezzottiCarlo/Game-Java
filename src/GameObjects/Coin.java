@@ -25,7 +25,7 @@ public class Coin extends GameObject{
      * @param position The position of the coin.
      */
     public Coin(Point position) {
-        super(position, COIN_CHARACTER, new Color(Color.ANSI_YELLOW));
+        super(position, COIN_CHARACTER, new Color(Color.ANSI_YELLOW),false);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Coin extends GameObject{
      * @param y The y coordinate of the coin.
      */
     public Coin(int x, int y){
-        super(new Point(x,y),COIN_CHARACTER,new Color(Color.ANSI_YELLOW));
+        super(new Point(x,y),COIN_CHARACTER,new Color(Color.ANSI_YELLOW),false);
     }
 
 }
