@@ -367,6 +367,7 @@ public class GameLogic {
             player.incrementCoins();
             gameObjects.remove(gameObject);
         } else if (gameObject instanceof Potion) {
+            // TODO 
             gameObjects.remove(gameObject);
         } else if (gameObject instanceof Gem) {
             gameObjects.remove(gameObject);
