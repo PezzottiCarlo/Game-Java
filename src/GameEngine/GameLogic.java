@@ -199,25 +199,6 @@ public class GameLogic {
     }
 
     /**
-     * Check if the player is on an other object.
-     *
-     * @param player Player to check.
-     * @return If the player is on an other object returns the object, otherwise null.
-     */
-    private GameObject isOver(Player player) {
-        for(GameObject object : gameObjects){
-            if(!object.equals(player)){
-                if(object.getXPosition() == player.getXPosition()){
-                    if(object.getYPosition() == player.getYPosition()){
-                        return object;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
      * Return content of the cell.
      * @param point Cell to check.
      * @return The content of the cell.
@@ -334,7 +315,7 @@ public class GameLogic {
                     player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
-        GameObject over = isOver(player);
+        GameObject over = getGameObjectAtPosition(player.getPosition());
         if(over != null){
             overEvent(player,over);
         }
@@ -343,8 +324,8 @@ public class GameLogic {
 
     /**
      * Method called when a player is over an object.
-     * @param object
-     * @param gameObject
+     * @param player The player interested.
+     * @param gameObject Game object interested.
      */
     private void overEvent(Player player,GameObject gameObject){
         if(gameObject instanceof Player){
