@@ -30,6 +30,8 @@ public class MovePlayersOption extends Option {
          * The code to execute when this option is chosen (it moves a player).
          *
          * @param choice the choice.
+         * 
+         * todo: add dynamic trees 
          */
         @Override
         public void execute(int choice) {
@@ -38,28 +40,28 @@ public class MovePlayersOption extends Option {
                 Menu menu = new Menu(true);
                 GenericOption north = new GenericOption("North", 'w',
                 () -> {
-                        if(!board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),Direction.NORTH)){
+                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.NORTH)!=null){
                                 board.show();
                                 menu.ask();
                         }
                 });
                 GenericOption south = new GenericOption("South", 's',
                 () -> {
-                        if(!board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),Direction.SOUTH)){
+                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.SOUTH)!=null){
                                 board.show();
                                 menu.ask();
                         }
                 });
                 GenericOption west = new GenericOption("West", 'a',
                 () -> {
-                        if(!board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),Direction.WEST)){
+                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.WEST)!=null){
                                 board.show();
                                 menu.ask();
                         }
                 });
                 GenericOption east = new GenericOption("East", 'd',
                 () -> {
-                        if(!board.getGameLogic().movePlayer((Player) board.getGameLogic().getCurrentPlayer(),Direction.EAST)){
+                        if(board.getGameLogic().movePlayer(board.getGameLogic().getCurrentPlayer(),Direction.EAST)!=null){
                                 board.show();
                                 menu.ask();
                         }

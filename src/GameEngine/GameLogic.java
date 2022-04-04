@@ -297,10 +297,12 @@ public class GameLogic {
         }
     }
 
-    private boolean collideCheck(int x, int y) {
+    private GameObject collideCheck(int x, int y) {
         Point tmp = new Point(x, y);
-        return (getGameObjectAtPosition(tmp) != null
-                && getGameObjectAtPosition(tmp).canCollide());
+        GameObject object = getGameObjectAtPosition(tmp);
+        if (object != null && object.canCollide()) 
+            return object;
+        return null;
     }
 
     // ==================== public methods ====================
@@ -310,44 +312,42 @@ public class GameLogic {
      *
      * @param player    Player to move.
      * @param direction Direction to move (North, South, East or West).
-     * 
-     * to-do: returns the type of the affected object so you can use it 
-     * in movePlayerOption and then handle the collision with trees
+     * @return returns the object it collides with if it collides otherwise null
      */
-    public boolean movePlayer(Player player, Direction direction) {
+    public Object movePlayer(Player player, Direction direction) {
         int x = player.getXPosition();
         int y = player.getYPosition();
+        GameObject obj = null;
         switch (direction) {
             case NORTH:
-                if (collideCheck(x, checkPosition(y - 1, sizeY)))
-                    return false;
-                else
+                obj = collideCheck(x, y - 1);
+                if (obj == null)
                     player.setYPosition(checkPosition(--y, sizeY));
                 break;
             case SOUTH:
-                if (collideCheck(x, checkPosition(y + 1, sizeY)))
-                    return false;
-                else
+                obj = collideCheck(x, y + 1);
+                if (obj == null)
                     player.setYPosition(checkPosition(++y, sizeY));
                 break;
             case EAST:
-                if (collideCheck(checkPosition(x + 1, sizeX), y))
-                    return false;
-                else
+                obj = collideCheck(x + 1, y);
+                if (obj == null)
                     player.setXPosition(checkPosition(++x, sizeX));
                 break;
             case WEST:
-                if (collideCheck(checkPosition(x - 1, sizeX), y))
-                    return false;
-                else
+                obj = collideCheck(x - 1, y);
+                if (obj == null)
                     player.setXPosition(checkPosition(--x, sizeX));
                 break;
         }
+        if(obj != null)
+            return obj.getType();
+        
         GameObject over = isOver(player);
         if (over != null) {
             overEvent(player, over);
         }
-        return true;
+        return null;
     }
 
     /**
