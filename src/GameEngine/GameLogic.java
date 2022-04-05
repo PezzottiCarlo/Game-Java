@@ -284,17 +284,18 @@ public class GameLogic {
             playerThrows[i] = throwPlayerDice(players[i]);
         }
 
-
-        if(playerThrows[0] > playerThrows[1]){
-            winner = players[0];
-            loser = players[1];
-        }else if(playerThrows[1] > playerThrows[0]){
-            winner = players[1];
-            loser = players[0];
-        }else{
-            System.out.println("Draw!");
-            fight(player1, player2);
-            return;
+        if(winner == null && loser == null){
+            if(playerThrows[0] > playerThrows[1]){
+                winner = players[0];
+                loser = players[1];
+            }else if(playerThrows[1] > playerThrows[0]){
+                winner = players[1];
+                loser = players[0];
+            }else{
+                System.out.println("Draw!");
+                fight(player1, player2);
+                return;
+            }
         }
 
         winner.incrementCoins();
