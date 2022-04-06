@@ -6,7 +6,7 @@ package menu.option;
  * @author Matteo Arena
  * @author Carlo Pezzotti
  */
-public class GenericOption implements ExecuteOption {
+public class GenericOption extends Option {
 
     //==================== Attributes ===================
 
