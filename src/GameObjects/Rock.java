@@ -10,7 +10,9 @@ public class Rock extends GameObject {
     /**
      * Character representing the rock.
      */
-    public static final char WALL_CHARACTER = '@';
+    public static final String ROCK_CHARACTER = "@ ";
+
+    public static final String ROCK_EMOJI = "🪨 ";
 
     /**
      * Color rappresentation of the rock.
@@ -22,8 +24,8 @@ public class Rock extends GameObject {
      * @param position
      * The initial position of the game object.
      */
-    public Rock(Point position) {
-        super(position, WALL_CHARACTER, WALL_COLOR,true);
+    public Rock(Point position, boolean useEmoji) {
+        super(position, (useEmoji? ROCK_EMOJI : ROCK_CHARACTER), WALL_COLOR,true);
     }
 
     /**
