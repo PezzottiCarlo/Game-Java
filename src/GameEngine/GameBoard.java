@@ -1,12 +1,6 @@
-package GameEngine;
-import GameObjects.Coin;
-import GameObjects.GameObject;
-import GameObjects.Gem;
-import GameObjects.Player;
-import GameObjects.Potion;
-import General.Color;
-import General.Point;
-import General.Util;
+package gameEngine;
+import general.*;
+import gameObjects.*;
 
 /**
  * Game Board.

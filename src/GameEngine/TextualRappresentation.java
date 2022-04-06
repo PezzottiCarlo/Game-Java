@@ -1,9 +1,6 @@
-package GameEngine;
-import Menu.*;
-import Menu.Option.MovePlayersOption;
-import Menu.Option.ShowGridOption;
-import Menu.Option.ShowPlayersOption;
-import Menu.Option.ExitOption;
+package gameEngine;
+import menu.*;
+import menu.option.*;
 
 /**
  * Rappresentazione testuale del menu di scelta del gioco.

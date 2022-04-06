@@ -1,12 +1,8 @@
-package Menu;
+package menu;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import General.Color;
-import General.Util;
-import Menu.Option.ExecuteOption;
+import java.util.*;
+import general.*;
+import menu.option.*;
 
 /**
  * Menu class.

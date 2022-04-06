@@ -1,7 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.Color;
-import General.Point;
+import general.*;
 
 public class Gem extends GameObject {
 
@@ -14,8 +13,8 @@ public class Gem extends GameObject {
     }
 
     @Override
-    public Object getType() {
-        return Object.Gem;
+    public ObjectName getType() {
+        return ObjectName.Gem;
     }
 
 }

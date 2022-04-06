@@ -1,12 +1,9 @@
-package Menu.Option;
+package menu.option;
 
-import GameEngine.GameBoard;
-import GameObjects.Dice;
-import GameObjects.GameObject;
-import GameObjects.Object;
-import GameObjects.Tree;
-import General.Direction;
-import Menu.Menu;
+import gameEngine.GameBoard;
+import general.Direction;
+import gameObjects.*;
+import menu.Menu;
 
 /**
  * This class represents the option to move players.
@@ -29,7 +26,7 @@ public class MovePlayersOption extends Option {
         // ==================== private methods ====================
         private void moveAction(GameObject movingObj,Menu menu){
                 if(movingObj!=null){
-                        if(movingObj.getType() == Object.Tree){
+                        if(movingObj.getType() == ObjectName.Tree){
                                 ((Tree)movingObj).hit();
                                 if(((Tree)movingObj).getHealth()==0){
                                         board.getGameLogic().getGameObjects().remove(movingObj);

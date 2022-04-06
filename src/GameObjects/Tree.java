@@ -1,7 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.Color;
-import General.Point;
+import general.*;
 
 public class Tree extends GameObject {
 
@@ -27,7 +26,7 @@ public class Tree extends GameObject {
     }
 
     @Override
-    public Object getType() {
-        return Object.Tree;
+    public ObjectName getType() {
+        return ObjectName.Tree;
     }
 }

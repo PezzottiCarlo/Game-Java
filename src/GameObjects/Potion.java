@@ -1,7 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.Color;
-import General.Point;
+import general.*;
 
 public class Potion extends GameObject{
 
@@ -18,7 +17,7 @@ public class Potion extends GameObject{
     }
 
     @Override
-    public Object getType() {
-        return Object.Potion;
+    public ObjectName getType() {
+        return ObjectName.Potion;
     }
 }

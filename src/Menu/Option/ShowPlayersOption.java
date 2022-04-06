@@ -1,7 +1,7 @@
-package Menu.Option;
+package menu.option;
 
-import GameEngine.GameBoard;
-import GameObjects.*;
+import gameEngine.GameBoard;
+import gameObjects.*;
 
 /**
  * This class represents the option to show the players on the game board.

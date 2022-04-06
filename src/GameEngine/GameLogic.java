@@ -1,16 +1,10 @@
-package GameEngine;
+package gameEngine;
 
-import General.*;
-import Menu.Menu;
-import Menu.Option.GenericOption;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import GameObjects.*;
-import GameObjects.Object;
+import menu.Menu;
+import menu.option.GenericOption;
+import gameObjects.*;
+import general.*;
+import java.util.*;
 
 /**
  * Logic for the game.
@@ -125,17 +119,17 @@ public class GameLogic {
 
     private void generateItems() {
         generatePlayers();
-        generate(Object.Coin, NUMBER_OF_COINS);
-        generate(Object.Gem, NUMBER_OF_GEMS);
-        generate(Object.Rock, NUMBER_OF_ROCKS);
-        generate(Object.Potion, NUMBER_OF_POTIONS);
-        generate(Object.Tree, NUMBER_OF_TREES);
+        generate(ObjectName.Coin, NUMBER_OF_COINS);
+        generate(ObjectName.Gem, NUMBER_OF_GEMS);
+        generate(ObjectName.Rock, NUMBER_OF_ROCKS);
+        generate(ObjectName.Potion, NUMBER_OF_POTIONS);
+        generate(ObjectName.Tree, NUMBER_OF_TREES);
     }
 
     /**
      * Generate objects.
      */
-    private void generate(Object obj, int quantity) {
+    private void generate(ObjectName obj, int quantity) {
         for (int i = 0; i < quantity; i++) {
             switch (obj) {
                 case Gem:
