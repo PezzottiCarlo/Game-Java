@@ -32,6 +32,7 @@ public class GenericOption implements ExecuteOption {
      *
      * @param name The name of the option.
      * @param option The interface to implement.
+     * @param keyOption The key of the option.
      */
     public GenericOption(String name,char keyOption, GenericExecuteOption option) {
         this.name = name;
@@ -39,6 +40,11 @@ public class GenericOption implements ExecuteOption {
         this.keyOption = keyOption;
     }
 
+    /**
+     * Constructor of the class.
+     * @param name The name of the option.
+     * @param option The interface to implement.
+     */
     public GenericOption(String name, GenericExecuteOption option) {
         this(name, (char)0, option);
     }
@@ -68,6 +74,9 @@ public class GenericOption implements ExecuteOption {
     }
 
     //==================== getter ====================
+    /**
+     * Get the key of the option.
+     */
     public char getKeyOption() {
         return keyOption;
     }

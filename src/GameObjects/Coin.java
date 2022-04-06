@@ -43,6 +43,10 @@ public class Coin extends GameObject{
         super(new Point(x,y),COIN_CHARACTER,new Color(Color.ANSI_YELLOW),false);
     }
 
+    /**
+     * method used to return the name of the object
+     * @return the name of the object
+     */
     @Override
     public ObjectName getType() {
         return ObjectName.Coin;

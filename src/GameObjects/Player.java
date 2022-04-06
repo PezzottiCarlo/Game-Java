@@ -76,10 +76,18 @@ public class Player extends GameObject {
         return coins;
     }
 
+    /**
+     * Returns the number of gems the player has.
+     * @return the number of gems the player has.
+     */
     public int getGems() {
         return gems;
     }
 
+    /**
+     * Returns the number of potions the player has.
+     * @return the number of potions the player has.
+     */
     public int getPotions() {
         return potions;
     }
@@ -157,6 +165,11 @@ public class Player extends GameObject {
                 "====================";
     }
 
+    /**
+     * method used to return the name of the object
+     * 
+     * @return the name of the object
+     */
     @Override
     public ObjectName getType() {
         return ObjectName.Player;

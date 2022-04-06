@@ -29,6 +29,9 @@ public class Menu {
      */
     private final boolean inline;
 
+    /**
+     * The title of the menu.
+     */
     private final String title;
 
     // ==================== Constructors ====================
@@ -50,6 +53,7 @@ public class Menu {
      * Constructor.
      *
      * @param inline flag used to print on the same line.
+     * @param title the title of the menu.
      */
     public Menu(boolean inline, String title) {
         this.inline = inline;
@@ -62,7 +66,6 @@ public class Menu {
 
     /**
      * Prints the menu on the console.
-     * TODO: modificare il metodo per stampare il menu in modo più elegante
      */
     private void printMenu() {
         if (!inline) {

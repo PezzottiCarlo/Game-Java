@@ -99,6 +99,10 @@ public class GameLogic {
         return currentPlayer;
     }
 
+    /**
+     * Method that returns the winner
+     * @return the winning player
+     */
     public Player getWinner() {
         Player bestPlayer = null;
         for (GameObject gameObject : gameObjects) {
@@ -116,7 +120,9 @@ public class GameLogic {
     }
 
     // ==================== private methods ====================
-
+    /**
+     * Generate all the objects of the game.
+     */
     private void generateItems() {
         generatePlayers();
         generate(ObjectName.Coin, NUMBER_OF_COINS);
@@ -127,7 +133,9 @@ public class GameLogic {
     }
 
     /**
-     * Generate objects.
+     * Method that generates an object based on the objectname parameter
+     * @param objectName the object name
+     * @param quantity the number of objects to generate
      */
     private void generate(ObjectName obj, int quantity) {
         for (int i = 0; i < quantity; i++) {
@@ -146,6 +154,8 @@ public class GameLogic {
                     break;
                 case Coin:
                     gameObjects.add(new Coin(getRandomFreeCell()));
+                    break;
+                default:
                     break;
             }
         }
@@ -226,6 +236,11 @@ public class GameLogic {
         return null;
     }
 
+    /**
+     * Method used to ask the user if he wants to use a gem in case of fight
+     * @param player the player who is using the gem
+     * @return true if the player wants to use the gem, false otherwise
+     */
     private boolean askForGem(Player player) {
         Menu menu = new Menu(true,player.getUsername() + " use gem to escape?");
         GenericOption useGem = new GenericOption("Yes use gem", 'y', () -> player.setPosition(getRandomFreeCell()));
@@ -235,6 +250,11 @@ public class GameLogic {
         return menu.ask()==0;
     }
 
+    /**
+     * Method used to ask the user if he wants to use a potion in case of fight
+     * @param player the player who is using the potion
+     * @return true if the player wants to use the potion, false otherwise
+     */
     private boolean askForPotion(Player player){
         Menu menu = new Menu(true, player.getUsername() + " use potion to win?");
         GenericOption usePotion = new GenericOption("Yes use the potion", 'y', () -> {});
@@ -331,7 +351,7 @@ public class GameLogic {
     /**
      * Method used to move the player to his starting position.
      *
-     * @param playerIndex Index of the player to move.
+     * @param player player to move.
      */
     private void movePlayerToInitialPosition(Player player) {
         int playerIndex = gameObjects.indexOf(player);
@@ -342,6 +362,12 @@ public class GameLogic {
         }
     }
 
+    /**
+     * Method used to check whether an object with collisions is present at a position
+     * @param x the x position
+     * @param y the y position
+     * @return return the object otherwise null
+     */
     private GameObject collideCheck(int x, int y) {
         Point tmp = new Point(x, y);
         GameObject object = getGameObjectAtPosition(tmp);
@@ -398,8 +424,8 @@ public class GameLogic {
     /**
      * Method called when a player is over an object.
      * 
-     * @param object
-     * @param gameObject
+     * @param player the player who is over the object
+     * @param gameObject the object that the player is over
      */
     private void overEvent(Player player, GameObject gameObject) {
         if (gameObject instanceof Player) {
