@@ -1,4 +1,4 @@
-package General;
+package general;
 
 /**
  * Class for representing a color.

@@ -1,5 +1,5 @@
-package Menu.Option;
-import GameEngine.GameBoard;
+package menu.option;
+import gameEngine.GameBoard;
 
 /**
  * ExitOption is an option that exits the game.

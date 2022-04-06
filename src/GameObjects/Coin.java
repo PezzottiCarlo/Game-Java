@@ -1,6 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.*;
+import general.*;
 
 /**
  * Coin class.
@@ -44,8 +44,8 @@ public class Coin extends GameObject{
     }
 
     @Override
-    public Object getType() {
-        return Object.Coin;
+    public ObjectName getType() {
+        return ObjectName.Coin;
     }
 
 }

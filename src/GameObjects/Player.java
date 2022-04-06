@@ -1,7 +1,7 @@
-package GameObjects;
+package gameObjects;
 
-import General.Color;
-import General.Point;
+import general.Color;
+import general.Point;
 
 /**
  * The Player class is a subclass of the GameObject class.
@@ -158,8 +158,8 @@ public class Player extends GameObject {
     }
 
     @Override
-    public Object getType() {
-        return Object.Player;
+    public ObjectName getType() {
+        return ObjectName.Player;
     }
 
 }

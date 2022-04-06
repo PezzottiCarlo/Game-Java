@@ -1,6 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.Util;
+import general.Util;
 
 /**
  * Dice class.

@@ -1,6 +1,6 @@
-package GameEngine;
+package gameEngine;
 
-import GameObjects.Player;
+import gameObjects.Player;
 
 /**
  * Represents the match.

@@ -1,4 +1,4 @@
-package Menu.Option;
+package menu.option;
 
 /**
  * This class represents a generic option.

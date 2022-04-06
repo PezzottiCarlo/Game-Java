@@ -1,4 +1,4 @@
-package General;
+package general;
 
 /**
  * A point in 2D space.

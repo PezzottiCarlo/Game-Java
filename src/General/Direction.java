@@ -1,4 +1,4 @@
-package General;
+package general;
 
 /**
  * Enum for the direction of the player.

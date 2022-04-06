@@ -1,4 +1,4 @@
-package Menu.Option;
+package menu.option;
 
 /**
  * Interface for the Option class.

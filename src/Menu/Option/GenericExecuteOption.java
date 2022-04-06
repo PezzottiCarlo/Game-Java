@@ -1,4 +1,4 @@
-package Menu.Option;
+package menu.option;
 
 /**
  * Interface used for lambda management 

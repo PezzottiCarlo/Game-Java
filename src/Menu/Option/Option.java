@@ -1,6 +1,6 @@
-package Menu.Option;
+package menu.option;
 
-import GameEngine.GameBoard;
+import gameEngine.GameBoard;
 
 /**
  * This class represents an option in the menu.

@@ -1,6 +1,6 @@
-package GameObjects;
+package gameObjects;
 
-import General.*;
+import general.*;
 
 /**
  * This class represents a game object.
@@ -151,5 +151,5 @@ public abstract class GameObject{
         this.color = color;
     }
 
-    public abstract Object getType();
+    public abstract ObjectName getType();
 }

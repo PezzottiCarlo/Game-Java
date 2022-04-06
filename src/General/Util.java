@@ -1,4 +1,4 @@
-package General;
+package general;
 
 /**
  * This class contains some utility methods.
