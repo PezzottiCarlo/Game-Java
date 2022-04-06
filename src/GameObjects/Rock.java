@@ -7,6 +7,7 @@ public class Rock extends GameObject {
 
     public static final char WALL_CHARACTER = '@';
 
+    public static final Color WALL_COLOR = new Color(Color.ANSI_RED_BACKGROUND);
     /**
      * Constructor.
      * 
@@ -14,7 +15,7 @@ public class Rock extends GameObject {
      * The initial position of the game object.
      */
     public Rock(Point position) {
-        super(position, WALL_CHARACTER, new Color(Color.ANSI_RED_BACKGROUND),true);
+        super(position, WALL_CHARACTER, WALL_COLOR,true);
     }
 
     @Override

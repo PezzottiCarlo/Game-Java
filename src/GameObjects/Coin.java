@@ -16,6 +16,11 @@ public class Coin extends GameObject{
      * Character representing the coin.
      */
     public static final char COIN_CHARACTER = '$';
+    /**
+     * Color rappresentation of the coin.
+     */
+    public static final Color COIN_COLOR = new Color(Color.ANSI_YELLOW);
+
 
     // ==================== Constructors ====================
 
@@ -25,7 +30,7 @@ public class Coin extends GameObject{
      * @param position The position of the coin.
      */
     public Coin(Point position) {
-        super(position, COIN_CHARACTER, new Color(Color.ANSI_YELLOW),false);
+        super(position, COIN_CHARACTER, COIN_COLOR,false);
     }
 
     /**

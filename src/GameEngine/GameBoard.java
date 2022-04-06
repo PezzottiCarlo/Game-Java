@@ -1,6 +1,9 @@
 package GameEngine;
+import GameObjects.Coin;
 import GameObjects.GameObject;
+import GameObjects.Gem;
 import GameObjects.Player;
+import GameObjects.Potion;
 import General.Color;
 import General.Point;
 import General.Util;
@@ -119,11 +122,15 @@ public class GameBoard{
             System.out.println();
         }
 
-        //Print players coins 
+        //Print players info 
         for(GameObject gameObject : getGameLogic().getGameObjects()){
             if(gameObject instanceof Player){
                 Player p = (Player) gameObject;
-                System.out.print(p.getColor()+""+p.getCharacter()+Color.ANSI_RESET+ " -> " + p.getCoins()+"\t");
+                System.out.print(p.getColor()+""+p.getCharacter()+Color.ANSI_RESET+"\t");
+                System.out.print(Coin.COIN_COLOR+""+Coin.COIN_CHARACTER+p.getCoins()+Color.ANSI_RESET+"\t");
+                System.out.print(Gem.GEM_COLOR+""+Gem.GEM_CHARACTER+" "+p.getGems()+Color.ANSI_RESET+"\t");
+                System.out.print(Potion.POTION_COLOR+""+Potion.POTION_CHARACTER+" "+p.getPotions()+Color.ANSI_RESET+"\t");
+                System.out.println();
             }
         }
         System.out.println();
