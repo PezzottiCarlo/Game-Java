@@ -13,7 +13,9 @@ public class Potion extends GameObject{
     /**
      * Character representing the potion.
      */
-    public static final char POTION_CHARACTER = '&';
+    public static final String POTION_CHARACTER = "& ";
+
+    public static final String POTION_EMOJI = "🧪";
 
     /**
      * Color rappresentation of the potion.
@@ -24,8 +26,8 @@ public class Potion extends GameObject{
      *
      * @param position  The initial position of the game object.
      */
-    public Potion(Point position){
-        super(position, POTION_CHARACTER, POTION_COLOR,false);
+    public Potion(Point position, boolean useEmoji){
+        super(position, (useEmoji? POTION_EMOJI : POTION_CHARACTER), POTION_COLOR,false);
     }
 
     /**

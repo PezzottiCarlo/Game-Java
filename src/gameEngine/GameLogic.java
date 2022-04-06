@@ -64,6 +64,8 @@ public class GameLogic {
      */
     private Player currentPlayer;
 
+    private boolean useEmoji;
+
     // ==================== Constructors ====================
 
     /**
@@ -73,6 +75,18 @@ public class GameLogic {
      * @param sizeY Board height.
      */
     public GameLogic(int sizeX, int sizeY) {
+        this(sizeX, sizeY, false);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param sizeX Board width.
+     * @param sizeY Board height.
+     * @param useEmoji True when the player wants to use emoji.
+     */
+    public GameLogic(int sizeX, int sizeY, boolean useEmoji) {
+        this.useEmoji = useEmoji;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         gameObjects = new ArrayList<>();
@@ -141,19 +155,19 @@ public class GameLogic {
         for (int i = 0; i < quantity; i++) {
             switch (obj) {
                 case Gem:
-                    gameObjects.add(new Gem(getRandomFreeCell()));
+                    gameObjects.add(new Gem(getRandomFreeCell(), useEmoji));
                     break;
                 case Potion:
-                    gameObjects.add(new Potion(getRandomFreeCell()));
+                    gameObjects.add(new Potion(getRandomFreeCell(), useEmoji));
                     break;
                 case Rock:
-                    gameObjects.add(new Rock(getRandomFreeCell()));
+                    gameObjects.add(new Rock(getRandomFreeCell(), useEmoji));
                     break;
                 case Tree:
-                    gameObjects.add(new Tree(getRandomFreeCell()));
+                    gameObjects.add(new Tree(getRandomFreeCell(), useEmoji));
                     break;
                 case Coin:
-                    gameObjects.add(new Coin(getRandomFreeCell()));
+                    gameObjects.add(new Coin(getRandomFreeCell(), useEmoji));
                     break;
                 default:
                     break;
@@ -168,12 +182,12 @@ public class GameLogic {
         currentPlayer = new Player(
                 new Point(0, sizeY - 1),
                 "Player0",
-                'X');
+                "X ");
         gameObjects.add(currentPlayer);
         gameObjects.add(new Player(
                 new Point(sizeX - 1, 0),
                 "Player1",
-                'Y'));
+                "Y "));
     }
 
     /**

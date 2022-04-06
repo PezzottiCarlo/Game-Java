@@ -16,7 +16,9 @@ public class Tree extends GameObject {
     /**
      * Character representing the tree.
      */
-    public static final char TREE_CHARACTER = '#';
+    public static final String TREE_CHARACTER = "# ";
+
+    public static final String TREE_EMOJI = "🌲";
     /**
      * Color rappresentation of the tree.
      */
@@ -30,8 +32,8 @@ public class Tree extends GameObject {
      * Constructor.
      * @param position The initial position of the game object.
      */
-    public Tree(Point position) {
-        super(position, TREE_CHARACTER, TREE_COLORS[TREE_COLORS.length-1],true);
+    public Tree(Point position, boolean useEmoji) {
+        super(position, (useEmoji? TREE_EMOJI : TREE_CHARACTER), TREE_COLORS[TREE_COLORS.length-1],true);
         this.health = MAX_HEALTH;
     }
 

@@ -25,12 +25,14 @@ public abstract class GameObject{
     /**
      * The character representing the game object (is the same who will be printed).
      */
-    private final char character;
+    private final String character;
 
     /**
      * Possible to collide or not
      */
     private boolean canCollide;
+
+    private boolean useEmoji;
 
     // ==================== Constructors ====================
 
@@ -41,7 +43,7 @@ public abstract class GameObject{
      * @param character The character representing the game object.
      * @param color The color of the game object.
      */
-    public GameObject(Point position, char character,Color color,boolean canCollide) {
+    public GameObject(Point position, String character,Color color,boolean canCollide) {
         this.position = position;
         this.character = character;
         this.color = color;
@@ -82,7 +84,7 @@ public abstract class GameObject{
      *
      * @return The character representing the game object.
      */
-    public char getCharacter(){
+    public String getCharacter(){
         return character;
     }
 

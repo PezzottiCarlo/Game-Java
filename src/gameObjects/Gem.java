@@ -11,7 +11,9 @@ public class Gem extends GameObject {
     /**
      * Character representing the gem.
      */
-    public static final char GEM_CHARACTER = '%';
+    public static final String GEM_CHARACTER = "% ";
+
+    public static final String GEM_EMOJI = "💎";
     /**
      * Color rappresentation of the gem.
      */
@@ -21,8 +23,8 @@ public class Gem extends GameObject {
      * Constructor for the gem.
      * @param position The position of the gem.
      */
-    public Gem(Point position) {
-        super(position, GEM_CHARACTER, GEM_COLOR,false);
+    public Gem(Point position, boolean useEmoji) {
+        super(position, (useEmoji? GEM_EMOJI : GEM_CHARACTER), GEM_COLOR,false);
     }
 
     /**

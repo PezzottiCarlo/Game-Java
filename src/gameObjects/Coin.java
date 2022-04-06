@@ -15,7 +15,9 @@ public class Coin extends GameObject{
     /**
      * Character representing the coin.
      */
-    public static final char COIN_CHARACTER = '$';
+    public static final String COIN_CHARACTER = "$ ";
+
+    public static final String COIN_EMOJI = "💰";
     /**
      * Color rappresentation of the coin.
      */
@@ -29,8 +31,8 @@ public class Coin extends GameObject{
      *
      * @param position The position of the coin.
      */
-    public Coin(Point position) {
-        super(position, COIN_CHARACTER, COIN_COLOR,false);
+    public Coin(Point position, boolean useEmoji) {
+        super(position,(useEmoji? COIN_EMOJI : COIN_CHARACTER), COIN_COLOR,false);
     }
 
     /**

@@ -1,6 +1,8 @@
 package gameEngine;
 
 import gameObjects.Player;
+import menu.Menu;
+import menu.option.GenericOption;
 
 /**
  * Represents the match.
@@ -22,16 +24,17 @@ public class Match {
      *
      * @param sizeX Board size X.
      * @param sizeY Board size Y.
+     * @param useEmoji True if the player wants to use emoji.
      */
     public Match(int sizeX, int sizeY){
-        gameBoard = new GameBoard(sizeX, sizeY);
+        gameBoard = new GameBoard(sizeX, sizeY, useEmoji());
     }
 
     /**
      * Defaults constructor.
      */
     public Match(){
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(useEmoji());
     }
 
     //==================== public methods ====================
@@ -50,5 +53,15 @@ public class Match {
         System.out.println("Thanks for playing");
     }
 
+    //==================== private methods ====================
+
+    private boolean useEmoji(){
+        Menu menu = new Menu(false, "Choose");
+        GenericOption useEmoji = new GenericOption("Use emoji", 'y',()->{});
+        GenericOption dontUseEmoji = new GenericOption("Don't use emoji", 'n',()->{});
+        menu.addMenu(useEmoji);
+        menu.addMenu(dontUseEmoji);
+        return menu.ask()==0;
+    }
     
 }

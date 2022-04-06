@@ -47,8 +47,8 @@ public class GameBoard{
      * @param sizeX Game board columns.
      * @param sizeY Game board rows.
      */
-    public GameBoard(int sizeX, int sizeY){
-        gameLogic = new GameLogic(sizeX, sizeY);
+    public GameBoard(int sizeX, int sizeY, boolean useEmoji){
+        gameLogic = new GameLogic(sizeX, sizeY, useEmoji);
         if(sizeX > 0 && sizeY > 0){
             this.boardSizeX = sizeX;
             this.boardSizeY = sizeY;
@@ -59,8 +59,12 @@ public class GameBoard{
     /**
      * Default constructor. The number of rows and columns are set to default values.
      */
+    public GameBoard(boolean useEmoji){
+        this(DEFAULT_COLUMNS, DEFAULT_ROWS, useEmoji);
+    }
+
     public GameBoard(){
-        this(DEFAULT_COLUMNS, DEFAULT_ROWS);
+        this(DEFAULT_COLUMNS, DEFAULT_ROWS, false);
     }
 
 
@@ -89,7 +93,7 @@ public class GameBoard{
                 return gameObject.getColor()+""+gameObject.getCharacter()+Color.ANSI_RESET;
             }
         }
-        return " ";
+        return "  ";
     }
 
     //==================== public methods ====================
@@ -99,7 +103,7 @@ public class GameBoard{
      */
     public void show(){
         Util.clearScreen();
-        for(int i = 0; i < boardSizeY*6+1; i++){
+        for(int i = 0; i < boardSizeY*7+1; i++){
             System.out.print("-");
         }
         System.out.println();
@@ -110,7 +114,7 @@ public class GameBoard{
                 System.out.print("  |  ");
             }
             System.out.println();
-            for(int j = 0; j < boardSizeY*6+1; j++){
+            for(int j = 0; j < boardSizeY*7+1; j++){
                 System.out.print("-");
             }
             System.out.println();
