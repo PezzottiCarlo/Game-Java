@@ -81,8 +81,8 @@ public class GameLogic {
     /**
      * Constructor.
      *
-     * @param sizeX Board width.
-     * @param sizeY Board height.
+     * @param sizeX    Board width.
+     * @param sizeY    Board height.
      * @param useEmoji True when the player wants to use emoji.
      */
     public GameLogic(int sizeX, int sizeY, boolean useEmoji) {
@@ -115,6 +115,7 @@ public class GameLogic {
 
     /**
      * Method that returns the winner
+     * 
      * @return the winning player
      */
     public Player getWinner() {
@@ -148,8 +149,9 @@ public class GameLogic {
 
     /**
      * Method that generates an object based on the objectname parameter
+     * 
      * @param objectName the object name
-     * @param quantity the number of objects to generate
+     * @param quantity   the number of objects to generate
      */
     private void generate(ObjectName obj, int quantity) {
         for (int i = 0; i < quantity; i++) {
@@ -252,30 +254,39 @@ public class GameLogic {
 
     /**
      * Method used to ask the user if he wants to use a gem in case of fight
+     * 
      * @param player the player who is using the gem
      * @return true if the player wants to use the gem, false otherwise
      */
     private boolean askForGem(Player player) {
-        Menu menu = new Menu(true,player.getUsername() + " use gem to escape?");
-        GenericOption useGem = new GenericOption("Yes use gem", 'y', () -> player.setPosition(getRandomFreeCell()));
-        GenericOption back = new GenericOption("Don't use gem", 'n', () -> {});
+        Menu menu = new Menu(true, player.getUsername() + " use gem to escape?");
+        GenericOption useGem = new GenericOption("Yes use gem", 'y', () -> {
+            player.setPosition(getRandomFreeCell());
+            player.decrementGems();
+        });
+        GenericOption back = new GenericOption("Don't use gem", 'n', () -> {
+        });
         menu.addMenu(useGem);
         menu.addMenu(back);
-        return menu.ask()==0;
+        return menu.ask() == 0;
     }
 
     /**
      * Method used to ask the user if he wants to use a potion in case of fight
+     * 
      * @param player the player who is using the potion
      * @return true if the player wants to use the potion, false otherwise
      */
-    private boolean askForPotion(Player player){
+    private boolean askForPotion(Player player) {
         Menu menu = new Menu(true, player.getUsername() + " use potion to win?");
-        GenericOption usePotion = new GenericOption("Yes use the potion", 'y', () -> {});
-        GenericOption back = new GenericOption("Don't use the potion", 'n', () -> {});
+        GenericOption usePotion = new GenericOption("Yes use the potion", 'y', () -> {
+            player.decrementPotions();
+        });
+        GenericOption back = new GenericOption("Don't use the potion", 'n', () -> {
+        });
         menu.addMenu(usePotion);
         menu.addMenu(back);
-        return menu.ask()==0;
+        return menu.ask() == 0;
     }
 
     /**
@@ -285,24 +296,24 @@ public class GameLogic {
      * @param player2 Player 2.
      * @throws InterruptedException If the thread is interrupted.
      */
-    private void fight(Player player1, Player player2) throws InterruptedException{
+    private void fight(Player player1, Player player2) throws InterruptedException {
         System.out.println("\n" + player1.getUsername() + " vs " + player2.getUsername());
 
-        Player[] players = {player1, player2};
+        Player[] players = { player1, player2 };
         int[] playerThrows = new int[2];
 
         Player winner = null;
         Player loser = null;
 
-        for(int i = 0; i < players.length; i++){
-            if(players[i].getGems() > 0){
-                if(askForGem(players[i])){
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].getGems() > 0) {
+                if (askForGem(players[i])) {
                     return;
                 }
             }
 
-            if(players[i].getPotions() > 0){
-                if(askForPotion(players[i])){
+            if (players[i].getPotions() > 0) {
+                if (askForPotion(players[i])) {
                     winner = players[i];
                     loser = players[(i + 1) % 2];
                     break;
@@ -312,27 +323,29 @@ public class GameLogic {
             playerThrows[i] = throwPlayerDice(players[i]);
         }
 
-        if(winner == null && loser == null){
-            if(playerThrows[0] > playerThrows[1]){
+        if (winner == null && loser == null) {
+            if (playerThrows[0] > playerThrows[1]) {
                 winner = players[0];
                 loser = players[1];
-            }else if(playerThrows[1] > playerThrows[0]){
+            } else if (playerThrows[1] > playerThrows[0]) {
                 winner = players[1];
                 loser = players[0];
-            }else{
+            } else {
                 System.out.println("Draw!");
                 fight(player1, player2);
                 return;
             }
         }
-
-        winner.incrementCoins();
-        loser.decrementCoins();
-        movePlayerToInitialPosition(loser);
-
-        System.out.println(winner.getUsername() + " wins the match!!");
+        if (loser.getCoins() > 0) {
+            winner.incrementCoins();
+            loser.decrementCoins();
+            movePlayerToInitialPosition(loser);
+            System.out.println(winner.getUsername() + " wins the match!!");
+        }else{
+            System.out.println(winner.getUsername() + " wins the game!!");
+            gameOver();
+        }
         Thread.sleep(1000);
-
     }
 
     /**
@@ -342,7 +355,7 @@ public class GameLogic {
      *
      * @return The result of the throw.
      */
-    private int throwPlayerDice(Player player){
+    private int throwPlayerDice(Player player) {
         System.out.print(player.getUsername() + "'s result: ");
         return Dice.throwDice();
     }
@@ -377,7 +390,9 @@ public class GameLogic {
     }
 
     /**
-     * Method used to check whether an object with collisions is present at a position
+     * Method used to check whether an object with collisions is present at a
+     * position
+     * 
      * @param x the x position
      * @param y the y position
      * @return return the object otherwise null
@@ -438,7 +453,7 @@ public class GameLogic {
     /**
      * Method called when a player is over an object.
      * 
-     * @param player the player who is over the object
+     * @param player     the player who is over the object
      * @param gameObject the object that the player is over
      */
     private void overEvent(Player player, GameObject gameObject) {
